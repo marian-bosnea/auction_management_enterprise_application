@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "Transilvania University of Brasov",
+      "copyrightText": "Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.",
+      "xmlHeader": true,
+      "fileNamingConvention": "metadata"
+    }
+  }
+}
