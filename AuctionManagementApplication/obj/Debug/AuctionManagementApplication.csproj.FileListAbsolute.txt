@@ -1,0 +1,7 @@
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\AuctionManagementApplication.exe.config
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\AuctionManagementApplication.exe
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\AuctionManagementApplication.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.AssemblyReference.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.CoreCompileInputs.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.exe
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.pdb
