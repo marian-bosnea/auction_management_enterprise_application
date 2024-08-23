@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Category.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System.Collections.Generic;
 
@@ -7,6 +11,17 @@
     /// </summary>
     public class Category
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Category"/> class.
+        /// </summary>
+        /// <param name="name">The name of the category.</param>
+        public Category(string name)
+        {
+            this.Name = name;
+            this.Parents = new List<Category>();
+            this.Subcategories = new List<Category>();
+        }
+
         /// <summary>
         /// Gets the name of the category.
         /// </summary>
@@ -21,17 +36,6 @@
         /// Gets the list of subcategories that belong to this category.
         /// </summary>
         public List<Category> Subcategories { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Category"/> class.
-        /// </summary>
-        /// <param name="name">The name of the category.</param>
-        public Category(string name)
-        {
-            this.Name = name;
-            this.Parents = new List<Category>();
-            this.Subcategories = new List<Category>();
-        }
 
         /// <summary>
         /// Adds a parent category to this category.
@@ -65,7 +69,7 @@
         /// <returns>A string that represents the current category.</returns>
         public override string ToString()
         {
-            return Name;
+            return this.Name;
         }
     }
 }

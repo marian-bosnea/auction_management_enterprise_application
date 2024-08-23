@@ -30,7 +30,7 @@
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/08/21 14:32:19.553</sourceFile>
+      <sourceFile>2024/08/23 16:03:11.383</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -47,46 +47,13 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
-        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
-        <line>1</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
-        <context>All properties must be placed after all constructors.</context>
-        <line>52</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to StartingPrice must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>94</line>
-        <index>3812</index>
-        <endIndex>3824</endIndex>
-        <startLine>94</startLine>
-        <startColumn>55</startColumn>
-        <endLine>94</endLine>
-        <endColumn>67</endColumn>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to Bids must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>100</line>
-        <index>4070</index>
-        <endIndex>4073</endIndex>
-        <startLine>100</startLine>
-        <startColumn>13</startColumn>
-        <endLine>100</endLine>
-        <endColumn>16</endColumn>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="Bid.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/08/21 14:32:37.499</sourceFile>
+      <sourceFile>2024/08/23 15:55:42.927</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -103,19 +70,13 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
-        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
-        <line>1</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="Category.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/08/21 14:29:52.597</sourceFile>
+      <sourceFile>2024/08/23 16:00:22.301</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -132,35 +93,13 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
-        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
-        <line>1</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
-        <context>All properties must be placed after all constructors.</context>
-        <line>29</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to Name must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>68</line>
-        <index>2311</index>
-        <endIndex>2314</endIndex>
-        <startLine>68</startLine>
-        <startColumn>20</startColumn>
-        <endLine>68</endLine>
-        <endColumn>23</endColumn>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="CategoryManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/08/21 14:30:56.404</sourceFile>
+      <sourceFile>2024/08/23 15:58:29.947</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -177,45 +116,13 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
-        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
-        <line>1</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
-        <context>All properties must be placed after all constructors.</context>
-        <line>23</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
-        <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
-        <line>40</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
-        <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
-        <line>64</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to CreateCategory must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>61</line>
-        <index>2318</index>
-        <endIndex>2331</endIndex>
-        <startLine>61</startLine>
-        <startColumn>39</startColumn>
-        <endLine>61</endLine>
-        <endColumn>52</endColumn>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="Product.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/08/21 14:31:31.834</sourceFile>
+      <sourceFile>2024/08/23 16:00:01.406</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -232,50 +139,6 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
-        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
-        <line>1</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
-        <context>All properties must be placed after all constructors.</context>
-        <line>24</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to Categories must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>38</line>
-        <index>1220</index>
-        <endIndex>1229</endIndex>
-        <startLine>38</startLine>
-        <startColumn>17</startColumn>
-        <endLine>38</endLine>
-        <endColumn>26</endColumn>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to Categories must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>36</line>
-        <index>1157</index>
-        <endIndex>1166</endIndex>
-        <startLine>36</startLine>
-        <startColumn>18</startColumn>
-        <endLine>36</endLine>
-        <endColumn>27</endColumn>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to Name must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>48</line>
-        <index>1534</index>
-        <endIndex>1537</endIndex>
-        <startLine>48</startLine>
-        <startColumn>20</startColumn>
-        <endLine>48</endLine>
-        <endColumn>23</endColumn>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
 </stylecopresultscache>

@@ -1,8 +1,5 @@
 <stylecopresultscache>
   <version>12</version>
-  <project key="267793149">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="Class1.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
@@ -52,4 +49,7 @@
       </violation>
     </violations>
   </sourcecode>
+  <project key="267793149">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

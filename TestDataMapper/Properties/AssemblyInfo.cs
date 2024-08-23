@@ -1,5 +1,8 @@
+// <copyright file="AssemblyInfo.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("TestDataMapper")]

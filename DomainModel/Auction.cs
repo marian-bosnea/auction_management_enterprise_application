@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Auction.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -8,36 +12,6 @@
     /// </summary>
     public class Auction
     {
-        /// <summary>
-        /// Gets the product associated with this auction.
-        /// </summary>
-        public Product Product { get; private set; }
-
-        /// <summary>
-        /// Gets the start date of the auction.
-        /// </summary>
-        public DateTime StartDate { get; private set; }
-
-        /// <summary>
-        /// Gets the end date of the auction.
-        /// </summary>
-        public DateTime EndDate { get; private set; }
-
-        /// <summary>
-        /// Gets the starting price of the auction.
-        /// </summary>
-        public decimal StartingPrice { get; private set; }
-
-        /// <summary>
-        /// Gets the currency in which the auction is conducted.
-        /// </summary>
-        public string Currency { get; private set; }
-
-        /// <summary>
-        /// Gets the list of bids made in this auction.
-        /// </summary>
-        public List<Bid> Bids { get; private set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Auction"/> class.
         /// </summary>
@@ -80,6 +54,36 @@
         }
 
         /// <summary>
+        /// Gets the product associated with this auction.
+        /// </summary>
+        public Product Product { get; private set; }
+
+        /// <summary>
+        /// Gets the start date of the auction.
+        /// </summary>
+        public DateTime StartDate { get; private set; }
+
+        /// <summary>
+        /// Gets the end date of the auction.
+        /// </summary>
+        public DateTime EndDate { get; private set; }
+
+        /// <summary>
+        /// Gets the starting price of the auction.
+        /// </summary>
+        public decimal StartingPrice { get; private set; }
+
+        /// <summary>
+        /// Gets the currency in which the auction is conducted.
+        /// </summary>
+        public string Currency { get; private set; }
+
+        /// <summary>
+        /// Gets the list of bids made in this auction.
+        /// </summary>
+        public List<Bid> Bids { get; private set; }
+
+        /// <summary>
         /// Adds a new bid to the auction.
         /// </summary>
         /// <param name="bid">The bid to add.</param>
@@ -91,13 +95,13 @@
                 throw new ArgumentException("Bid currency must match auction currency.");
             }
 
-            decimal minPrice = this.Bids.Count == 0 ? StartingPrice : this.Bids[this.Bids.Count - 1].Amount * 1.1m;
+            decimal minPrice = this.Bids.Count == 0 ? this.StartingPrice : this.Bids[this.Bids.Count - 1].Amount * 1.1m;
             if (bid.Amount < minPrice)
             {
                 throw new ArgumentException("Bid amount must be at least 10% higher than the previous bid.");
             }
 
-            Bids.Add(bid);
+            this.Bids.Add(bid);
         }
 
         /// <summary>
@@ -106,7 +110,7 @@
         /// <returns>A string that represents the current auction.</returns>
         public override string ToString()
         {
-            return $"Auction for {Product.Name} from {StartDate} to {EndDate} with starting price {StartingPrice} {Currency}";
+            return $"Auction for {this.Product.Name} from {this.StartDate} to {this.EndDate} with starting price {this.StartingPrice} {this.Currency}";
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="CategoryManager.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System.Collections.Generic;
 
@@ -8,6 +12,15 @@
     public class CategoryManager
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CategoryManager"/> class.
+        /// </summary>
+        public CategoryManager()
+        {
+            this.Categories = new Dictionary<string, Category>();
+            this.Products = new List<Product>();
+        }
+
+        /// <summary>
         /// Gets the dictionary of categories, keyed by their name.
         /// </summary>
         public Dictionary<string, Category> Categories { get; private set; }
@@ -16,15 +29,6 @@
         /// Gets the list of products managed by this CategoryManager.
         /// </summary>
         public List<Product> Products { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CategoryManager"/> class.
-        /// </summary>
-        public CategoryManager()
-        {
-            this.Categories = new Dictionary<string, Category>();
-            this.Products = new List<Product>();
-        }
 
         /// <summary>
         /// Creates a new category if it does not already exist.
@@ -38,6 +42,7 @@
                 var category = new Category(name);
                 this.Categories[name] = category;
             }
+
             return this.Categories[name];
         }
 
@@ -58,10 +63,11 @@
                 }
                 else
                 {
-                    var newCategory = CreateCategory(catName);
+                    var newCategory = this.CreateCategory(catName);
                     product.AddCategory(newCategory);
                 }
             }
+
             this.Products.Add(product);
             return product;
         }

@@ -1,2 +1,11 @@
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.csproj.AssemblyReference.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.csproj.CoreCompileInputs.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DataMapper.dll.config
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DataMapper.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DataMapper.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\StyleCop.CSharp.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\StyleCop.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.csproj.CopyComplete
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.pdb

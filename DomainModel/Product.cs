@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Product.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System.Collections.Generic;
 
@@ -7,16 +11,6 @@
     /// </summary>
     public class Product
     {
-        /// <summary>
-        /// Gets the name of the product.
-        /// </summary>
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Gets the list of categories associated with this product.
-        /// </summary>
-        public List<Category> Categories { get; private set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
@@ -28,14 +22,24 @@
         }
 
         /// <summary>
+        /// Gets the name of the product.
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the list of categories associated with this product.
+        /// </summary>
+        public List<Category> Categories { get; private set; }
+
+        /// <summary>
         /// Adds a category to the list of categories associated with this product.
         /// </summary>
         /// <param name="category">The category to add.</param>
         public void AddCategory(Category category)
         {
-            if (!Categories.Contains(category))
+            if (!this.Categories.Contains(category))
             {
-                Categories.Add(category);
+                this.Categories.Add(category);
             }
         }
 
@@ -45,7 +49,7 @@
         /// <returns>A string that represents the current product.</returns>
         public override string ToString()
         {
-            return Name;
+            return this.Name;
         }
     }
 }

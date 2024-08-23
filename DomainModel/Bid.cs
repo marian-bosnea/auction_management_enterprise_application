@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Bid.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System;
 
@@ -54,7 +58,7 @@
         /// <returns>A string that represents the current bid.</returns>
         public override string ToString()
         {
-            return $"{Amount} {Currency} at {BidTime}";
+            return $"{this.Amount} {this.Currency} at {this.BidTime}";
         }
     }
 }
