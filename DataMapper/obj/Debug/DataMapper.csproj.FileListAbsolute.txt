@@ -1,0 +1,2 @@
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.csproj.AssemblyReference.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.csproj.CoreCompileInputs.cache

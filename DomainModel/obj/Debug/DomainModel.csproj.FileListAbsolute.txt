@@ -1,0 +1,11 @@
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.AssemblyReference.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.CoreCompileInputs.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\DomainModel.dll.config
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\DomainModel.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\DomainModel.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\StyleCop.CSharp.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\StyleCop.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.CopyComplete
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.pdb
