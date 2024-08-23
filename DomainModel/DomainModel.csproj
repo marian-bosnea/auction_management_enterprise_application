@@ -51,12 +51,20 @@
     <Reference Include="StyleCop.CSharp, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
       <HintPath>..\packages\StyleCop.4.7.55\lib\net35\StyleCop.CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auction.cs" />
     <Compile Include="Bid.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryManager.cs" />
+    <Compile Include="Interfaces\IAuction.cs" />
+    <Compile Include="Interfaces\IBid.cs" />
+    <Compile Include="Interfaces\ICategory.cs" />
+    <Compile Include="Interfaces\IPerson.cs" />
+    <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Product.cs" />
   </ItemGroup>
   <ItemGroup>

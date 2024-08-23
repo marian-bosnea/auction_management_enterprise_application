@@ -1,4 +1,5 @@
 <StyleCopViolations>
   <Violation LineNumber="48" Source="D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Auction.cs" RuleNamespace="StyleCop.CSharp.CsParser" Rule="SyntaxException" RuleId="SA0102">A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Auction.cs on line 48.</Violation>
   <Violation LineNumber="30" Source="D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Bid.cs" RuleNamespace="StyleCop.CSharp.CsParser" Rule="SyntaxException" RuleId="SA0102">A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Bid.cs on line 30.</Violation>
+  <Violation LineNumber="29" Source="D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Person.cs" RuleNamespace="StyleCop.CSharp.CsParser" Rule="SyntaxException" RuleId="SA0102">A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Person.cs on line 29.</Violation>
 </StyleCopViolations>

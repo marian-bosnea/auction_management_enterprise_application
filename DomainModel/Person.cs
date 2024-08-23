@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Person.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -8,12 +12,31 @@
     /// <summary>
     /// Represents a person who can initiate and manage auctions, with a score reflecting their reliability.
     /// </summary>
-    public class Person
+    public class Person : IPerson
     {
+        /// <summary>
+        /// The maximum number of active auctions that a person can have at any given time.
+        /// </summary>
         private readonly int maxActiveAuctions;
+
+        /// <summary>
+        /// The maximum number of active auctions that a person can have within a single category.
+        /// </summary>
         private readonly int maxActiveAuctionsPerCategory;
+
+        /// <summary>
+        /// The threshold of seriousness score that determines the maximum number of items a person can list.
+        /// </summary>
         private readonly decimal seriousnessThreshold;
+
+        /// <summary>
+        /// The list of currently active auctions that this person is managing.
+        /// </summary>
         private readonly List<Auction> activeAuctions;
+
+        /// <summary>
+        /// The maximum number of items that a person can list for auction, based on their seriousness score.
+        /// </summary>
         private int maxItemsBasedOnScore;
 
         /// <summary>
@@ -34,7 +57,7 @@
             this.activeAuctions = new List<Auction>();
 
             // Initialize maxItemsBasedOnScore based on initial seriousnessThreshold.
-            UpdateMaxItemsBasedOnScore();
+            this.UpdateMaxItemsBasedOnScore();
         }
 
         /// <summary>
@@ -52,17 +75,7 @@
         /// </summary>
         public IReadOnlyList<Auction> ActiveAuctions => this.activeAuctions.AsReadOnly();
 
-        /// <summary>
-        /// Starts a new auction for the specified product.
-        /// </summary>
-        /// <param name="product">The product to be auctioned.</param>
-        /// <param name="startDate">The start date of the auction.</param>
-        /// <param name="endDate">The end date of the auction.</param>
-        /// <param name="startingPrice">The starting price of the auction.</param>
-        /// <param name="currency">The currency in which the auction is conducted.</param>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the person has reached the maximum number of active auctions or the maximum number of active auctions in the product's categories.
-        /// </exception>
+        /// <inheritdoc/>
         public void StartAuction(Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             // Ensure the person's seriousness score allows them to start a new auction.
@@ -92,11 +105,7 @@
             this.activeAuctions.Add(auction);
         }
 
-        /// <summary>
-        /// Finalizes the auction by marking it as closed and removing it from the active auctions list.
-        /// </summary>
-        /// <param name="auction">The auction to finalize.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the auction is not found in the active auctions list or if the person is not the initiator.</exception>
+        /// <inheritdoc/>
         public void FinalizeAuction(Auction auction)
         {
             if (!this.activeAuctions.Contains(auction))
@@ -110,7 +119,7 @@
             // Increase the score by 0.1 if the auction had at least one bid.
             if (auction.Bids.Any())
             {
-                AdjustScore(0.1m);
+                this.AdjustScore(0.1m);
             }
         }
 
@@ -130,16 +139,7 @@
             this.Score = Math.Max(0, Math.Min(10, this.Score + amount));
 
             // Recalculate maxItemsBasedOnScore based on the updated score.
-            UpdateMaxItemsBasedOnScore();
-        }
-
-        /// <summary>
-        /// Updates the maximum number of items that can be auctioned based on the current score.
-        /// </summary>
-        private void UpdateMaxItemsBasedOnScore()
-        {
-            // Calculate maxItemsBasedOnScore dynamically based on current seriousness score.
-            this.maxItemsBasedOnScore = (int)Math.Max(1, 10 - (10 - this.Score) * 0.5m);
+            this.UpdateMaxItemsBasedOnScore();
         }
 
         /// <summary>
@@ -148,7 +148,16 @@
         /// <param name="feedbackScore">The feedback score to add, between -0.1 and 0.1.</param>
         public void ReceiveFeedback(decimal feedbackScore)
         {
-            AdjustScore(feedbackScore);
+            this.AdjustScore(feedbackScore);
+        }
+
+        /// <summary>
+        /// Updates the maximum number of items that can be auctioned based on the current score.
+        /// </summary>
+        private void UpdateMaxItemsBasedOnScore()
+        {
+            // Calculate maxItemsBasedOnScore dynamically based on current seriousness score.
+            this.maxItemsBasedOnScore = (int)Math.Max(1, 10 - ((10 - this.Score) * 0.5m));
         }
     }
 }

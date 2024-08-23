@@ -9,7 +9,7 @@ namespace DomainModel
     /// <summary>
     /// Represents a product that can be associated with one or more categories.
     /// </summary>
-    public class Product
+    public class Product : IProduct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
@@ -18,7 +18,7 @@ namespace DomainModel
         public Product(string name)
         {
             this.Name = name;
-            this.Categories = new List<Category>();
+            this.Categories = new List<ICategory>();
         }
 
         /// <summary>
@@ -29,13 +29,10 @@ namespace DomainModel
         /// <summary>
         /// Gets the list of categories associated with this product.
         /// </summary>
-        public List<Category> Categories { get; private set; }
+        public List<ICategory> Categories { get; private set; }
 
-        /// <summary>
-        /// Adds a category to the list of categories associated with this product.
-        /// </summary>
-        /// <param name="category">The category to add.</param>
-        public void AddCategory(Category category)
+        /// <inheritdoc/>
+        public void AddCategory(ICategory category)
         {
             if (!this.Categories.Contains(category))
             {

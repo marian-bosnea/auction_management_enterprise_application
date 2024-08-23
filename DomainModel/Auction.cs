@@ -10,7 +10,7 @@ namespace DomainModel
     /// <summary>
     /// Represents an auction associated with a specific product.
     /// </summary>
-    public class Auction
+    public class Auction : IAuction
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Auction"/> class.
@@ -50,13 +50,13 @@ namespace DomainModel
             this.EndDate = endDate;
             this.StartingPrice = startingPrice;
             this.Currency = currency;
-            this.Bids = new List<Bid>();
+            this.Bids = new List<IBid>();
         }
 
         /// <summary>
         /// Gets the product associated with this auction.
         /// </summary>
-        public Product Product { get; private set; }
+        public IProduct Product { get; private set; }
 
         /// <summary>
         /// Gets the start date of the auction.
@@ -81,14 +81,10 @@ namespace DomainModel
         /// <summary>
         /// Gets the list of bids made in this auction.
         /// </summary>
-        public List<Bid> Bids { get; private set; }
+        public List<IBid> Bids { get; private set; }
 
-        /// <summary>
-        /// Adds a new bid to the auction.
-        /// </summary>
-        /// <param name="bid">The bid to add.</param>
-        /// <exception cref="ArgumentException">Thrown when the bid currency does not match the auction currency or when the bid amount is less than 10% higher than the last bid or starting price.</exception>
-        public void AddBid(Bid bid)
+        /// <inheritdoc/>
+        public void AddBid(IBid bid)
         {
             if (bid.Currency != this.Currency)
             {
@@ -104,10 +100,7 @@ namespace DomainModel
             this.Bids.Add(bid);
         }
 
-        /// <summary>
-        /// Returns a string representation of the auction.
-        /// </summary>
-        /// <returns>A string that represents the current auction.</returns>
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"Auction for {this.Product.Name} from {this.StartDate} to {this.EndDate} with starting price {this.StartingPrice} {this.Currency}";

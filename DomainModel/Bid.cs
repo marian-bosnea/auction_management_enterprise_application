@@ -8,8 +8,8 @@ namespace DomainModel
 
     /// <summary>
     /// Represents a bid made in an auction.
-    /// </summary>
-    public class Bid
+    /// </summary>;
+    public class Bid : IBid
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Bid"/> class.
@@ -28,7 +28,6 @@ namespace DomainModel
 
             this.Amount = amount;
             this.Currency = currency ?? throw new ArgumentNullException(nameof(currency));
-            this.Auction = auction ?? throw new ArgumentNullException(nameof(auction));
             this.BidTime = DateTime.Now;
         }
 
@@ -47,15 +46,7 @@ namespace DomainModel
         /// </summary>
         public DateTime BidTime { get; private set; }
 
-        /// <summary>
-        /// Gets the auction associated with this bid.
-        /// </summary>
-        public Auction Auction { get; private set; }
-
-        /// <summary>
-        /// Returns a string representation of the bid.
-        /// </summary>
-        /// <returns>A string that represents the current bid.</returns>
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"{this.Amount} {this.Currency} at {this.BidTime}";
