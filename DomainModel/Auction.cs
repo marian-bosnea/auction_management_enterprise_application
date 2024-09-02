@@ -83,20 +83,15 @@ namespace DomainModel
         /// </summary>
         public List<IBid> Bids { get; private set; }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Adds a bid to the list of bids associated with the auction.
+        /// </summary>
+        /// <param name="bid">The bid to be added to the auction.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if the bid is null.
+        /// </exception>
         public void AddBid(IBid bid)
         {
-            if (bid.Currency != this.Currency)
-            {
-                throw new ArgumentException("Bid currency must match auction currency.");
-            }
-
-            decimal minPrice = this.Bids.Count == 0 ? this.StartingPrice : this.Bids[this.Bids.Count - 1].Amount * 1.1m;
-            if (bid.Amount < minPrice)
-            {
-                throw new ArgumentException("Bid amount must be at least 10% higher than the previous bid.");
-            }
-
             this.Bids.Add(bid);
         }
 

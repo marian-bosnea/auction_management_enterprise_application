@@ -1,4 +1,4 @@
-﻿// <copyright file="CategoryManager.cs" company="Transilvania University of Brasov">
+﻿// <copyright file="CategoryService.cs" company="Transilvania University of Brasov">
 // Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
 // </copyright>
 
@@ -9,12 +9,12 @@ namespace DomainModel
     /// <summary>
     /// Manages categories and products, allowing creation and association of products with categories.
     /// </summary>
-    public class CategoryManager
+    public class CategoryService
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CategoryManager"/> class.
+        /// Initializes a new instance of the <see cref="CategoryService"/> class.
         /// </summary>
-        public CategoryManager()
+        public CategoryService()
         {
             this.Categories = new Dictionary<string, Category>();
             this.Products = new List<Product>();
@@ -26,7 +26,7 @@ namespace DomainModel
         public Dictionary<string, Category> Categories { get; private set; }
 
         /// <summary>
-        /// Gets the list of products managed by this CategoryManager.
+        /// Gets the list of products managed by this CategoryService.
         /// </summary>
         public List<Product> Products { get; private set; }
 
