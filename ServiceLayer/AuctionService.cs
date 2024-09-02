@@ -165,7 +165,7 @@ namespace Services
         /// The value is calculated such that a higher score allows more items to be listed, with a minimum of 1 item.
         /// </returns>
         /// <remarks>
-        /// The formula used for the calculation is: 
+        /// The formula used for the calculation is:
         /// <c>Max(1, 10 - ((10 - score) * 0.5m))</c>
         /// This ensures that the number of items decreases as the score decreases, with a minimum of 1 item.
         /// </remarks>

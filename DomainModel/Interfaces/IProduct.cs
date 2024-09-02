@@ -17,6 +17,11 @@ namespace DomainModel
         string Name { get; }
 
         /// <summary>
+        /// Gets the name of the product.
+        /// </summary>
+        string Description { get; }
+
+        /// <summary>
         /// Gets the list of categories the product belongs to.
         /// </summary>
         List<ICategory> Categories { get; }

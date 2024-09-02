@@ -15,9 +15,11 @@ namespace DomainModel
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         /// <param name="name">The name of the product.</param>
-        public Product(string name)
+        /// <param name="description">The description of the product.</param>
+        public Product(string name, string description)
         {
             this.Name = name;
+            this.Description = description;
             this.Categories = new List<ICategory>();
         }
 
@@ -30,6 +32,11 @@ namespace DomainModel
         /// Gets the list of categories associated with this product.
         /// </summary>
         public List<ICategory> Categories { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the product.
+        /// </summary>
+        public string Description { get; }
 
         /// <inheritdoc/>
         public void AddCategory(ICategory category)
