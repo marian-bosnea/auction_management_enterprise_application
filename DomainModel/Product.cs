@@ -5,6 +5,7 @@
 namespace DomainModel
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Represents a product that can be associated with one or more categories.
@@ -26,17 +27,22 @@ namespace DomainModel
         /// <summary>
         /// Gets the name of the product.
         /// </summary>
+        [Required(ErrorMessage = "Product name is required.")]
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "Product name must be between 1 and 200 characters long.")]
         public string Name { get; private set; }
 
         /// <summary>
         /// Gets the list of categories associated with this product.
         /// </summary>
+        [Required(ErrorMessage = "At least one category is required.")]
         public List<ICategory> Categories { get; private set; }
 
         /// <summary>
-        /// Gets the name of the product.
+        /// Gets the description of the product.
         /// </summary>
-        public string Description { get; }
+        [Required(ErrorMessage = "Description is required.")]
+        [StringLength(1000, ErrorMessage = "Description must not exceed 1000 characters.")]
+        public string Description { get; private set; }
 
         /// <inheritdoc/>
         public void AddCategory(ICategory category)

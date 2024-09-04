@@ -5,6 +5,7 @@
 namespace DomainModel
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Represents a category that can be part of a hierarchy, with parent and subcategory relationships.
@@ -23,19 +24,25 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets the name of the category.
+        /// Gets or sets the name of the category.
         /// </summary>
-        public string Name { get; private set; }
+        [Required(ErrorMessage = "Category name is required.")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Category name must be between 1 and 100 characters long.")]
+        public string Name { get;  set; }
 
         /// <summary>
-        /// Gets the list of parent categories to which this category belongs.
+        /// Gets or sets the list of parent categories to which this category belongs.
         /// </summary>
-        public List<ICategory> Parents { get; private set; }
+        [Required(ErrorMessage = "Parents list is required.")]
+        [MinLength(1, ErrorMessage = "Category must have at least one parent category.")]
+        public List<ICategory> Parents { get;  set; }
 
         /// <summary>
-        /// Gets the list of subcategories that belong to this category.
+        /// Gets or sets the list of subcategories that belong to this category.
         /// </summary>
-        public List<ICategory> Subcategories { get; private set; }
+        [Required(ErrorMessage = "Subcategories list is required.")]
+        [MinLength(1, ErrorMessage = "Category must have at least one subcategory.")]
+        public List<ICategory> Subcategories { get;  set; }
 
         /// <inheritdoc/>
         public void AddParent(ICategory parentCategory)

@@ -18,6 +18,12 @@ namespace DomainModel
         string Name { get; }
 
         /// <summary>
+        /// Gets or sets the roles of the person in the auction process.
+        /// Multiple roles can be combined using bitwise operations.
+        /// </summary>
+        PersonRole Role { get; set; }
+
+        /// <summary>
         /// Gets the score of the person, representing their reliability.
         /// </summary>
         decimal Score { get; }

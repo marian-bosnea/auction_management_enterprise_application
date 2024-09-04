@@ -2,11 +2,11 @@
 // Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
 // </copyright>
 
-// Person.cs
 namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Represents a person who can initiate and manage auctions, with a score reflecting their reliability.
@@ -25,19 +25,30 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets the name of the person.
+        /// Gets or sets the name of the person.
         /// </summary>
-        public string Name { get; private set; }
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Name must be between 1 and 100 characters long.")]
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the score of the person, representing their reliability.
         /// </summary>
+        [Range(0, 10, ErrorMessage = "Score must be between 0 and 10.")]
         public decimal Score { get; set; }
 
         /// <summary>
         /// Gets or sets the list of active auctions initiated by this person.
         /// </summary>
+        [Required(ErrorMessage = "Active auctions list is required.")]
         public List<Auction> ActiveAuctions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the roles of the person in the auction process.
+        /// Multiple roles can be combined using bitwise operations.
+        /// </summary>
+        [Required(ErrorMessage = "Role is required.")]
+        public PersonRole Role { get; set; }
 
         /// <summary>
         /// Adjusts the person's score based on feedback or auction completion.

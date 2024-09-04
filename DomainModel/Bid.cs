@@ -5,6 +5,7 @@
 namespace DomainModel
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Represents a bid made in an auction.
@@ -32,24 +33,47 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets the amount of the bid.
+        /// Gets or sets the amount of the bid.
         /// </summary>
-        public decimal Amount { get; private set; }
+        [Required(ErrorMessage = "Bid amount is required.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Bid amount must be greater than zero.")]
+        public decimal Amount { get;  set; }
 
         /// <summary>
-        /// Gets the currency in which the bid is made.
+        /// Gets or sets the currency in which the bid is made.
         /// </summary>
-        public string Currency { get; private set; }
+        [Required(ErrorMessage = "Currency is required.")]
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "Currency must be a valid 3-letter ISO code.")]
+        public string Currency { get;  set; }
 
         /// <summary>
-        /// Gets the time when the bid was made.
+        /// Gets or sets the time when the bid was made.
         /// </summary>
-        public DateTime BidTime { get; private set; }
+        [Required(ErrorMessage = "Bid time is required.")]
+        [DataType(DataType.DateTime, ErrorMessage = "Bid time must be a valid date and time.")]
+        [CustomValidation(typeof(Bid), nameof(ValidateBidTime))]
+        public DateTime BidTime { get;  set; }
 
         /// <inheritdoc/>
         public override string ToString()
         {
             return $"{this.Amount} {this.Currency} at {this.BidTime}";
+        }
+
+        /// <summary>
+        /// Validates that the bid time is not in the future.
+        /// </summary>
+        /// <param name="bidTime">The bid time to validate.</param>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>A ValidationResult indicating whether the bid time is valid.</returns>
+        private ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
+        {
+            if (bidTime > DateTime.Now)
+            {
+                return new ValidationResult("Bid time cannot be in the future.");
+            }
+
+            return ValidationResult.Success;
         }
     }
 }

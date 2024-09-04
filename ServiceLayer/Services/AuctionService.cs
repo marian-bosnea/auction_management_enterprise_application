@@ -7,6 +7,7 @@ namespace Services
     using System;
     using System.Configuration;
     using System.Linq;
+    using DataMapper.Interfaces;
     using DomainModel;
     using ServiceLayer;
 
@@ -18,14 +19,14 @@ namespace Services
     public class AuctionService
     {
         /// <summary>
-        /// The repository interface for managing auction-related data.
+        /// The DAO interface for managing auction-related data.
         /// </summary>
-        private readonly IAuctionRepository auctionRepository;
+        private readonly IAuctionDAO auctionDAO;
 
         /// <summary>
-        /// The repository interface for managing person-related data.
+        /// The DAO interface for managing person-related data.
         /// </summary>
-        private readonly IPersonRepository personRepository;
+        private readonly IPersonDAO personDAO;
 
         /// <summary>
         /// The maximum number of active auctions a person can have at any given time.
@@ -45,12 +46,12 @@ namespace Services
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionService"/> class.
         /// </summary>
-        /// <param name="auctionRepo">The auction repository.</param>
-        /// <param name="personRepo">The person repository.</param>
-        public AuctionService(IAuctionRepository auctionRepo, IPersonRepository personRepo)
+        /// <param name="auctionDAO">The auction repository.</param>
+        /// <param name="personDAO">The person repository.</param>
+        public AuctionService(IAuctionDAO auctionDAO, IPersonDAO personDAO)
         {
-            this.auctionRepository = auctionRepo;
-            this.personRepository = personRepo;
+            this.auctionDAO = auctionDAO;
+            this.personDAO = personDAO;
 
             // Read configuration values or set default values if not configured.
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
@@ -83,7 +84,7 @@ namespace Services
 
             foreach (var category in product.Categories)
             {
-                int activeAuctionsInCategory = this.auctionRepository.GetActiveAuctionsForPersonInCategory(person, category).Count;
+                int activeAuctionsInCategory = this.auctionDAO.GetActiveAuctionsForPersonInCategory(person, category).Count;
                 if (activeAuctionsInCategory >= this.maxActiveAuctionsPerCategory)
                 {
                     throw new InvalidOperationException($"Cannot start a new auction. Maximum of {this.maxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.");
@@ -92,8 +93,8 @@ namespace Services
 
             var auction = new Auction(product, startDate, endDate, startingPrice, currency);
             person.ActiveAuctions.Add(auction);
-            this.auctionRepository.Save(auction);
-            this.personRepository.Update(person);
+            this.auctionDAO.Add(auction);
+            this.personDAO.Update(person);
         }
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace Services
                 person.AdjustScore(0.1m);
             }
 
-            this.personRepository.Update(person);
+            this.personDAO.Update(person);
         }
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace Services
         public void ProvideFeedback(Person person, decimal feedbackScore)
         {
             person.AdjustScore(feedbackScore);
-            this.personRepository.Update(person);
+            this.personDAO.Update(person);
         }
 
         /// <summary>

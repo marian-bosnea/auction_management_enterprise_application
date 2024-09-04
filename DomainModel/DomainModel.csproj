@@ -58,7 +58,6 @@
     <Compile Include="Auction.cs" />
     <Compile Include="Bid.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="CategoryManager.cs" />
     <Compile Include="Interfaces\IAuction.cs" />
     <Compile Include="Interfaces\IBid.cs" />
     <Compile Include="Interfaces\ICategory.cs" />

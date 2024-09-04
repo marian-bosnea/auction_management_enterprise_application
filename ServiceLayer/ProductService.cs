@@ -1,4 +1,4 @@
-﻿// <copyright file="CategoryService.cs" company="Transilvania University of Brasov">
+﻿// <copyright file="ProductService.cs" company="Transilvania University of Brasov">
 // Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
 // </copyright>
 
@@ -12,7 +12,7 @@ namespace DomainModel
     /// <summary>
     /// Manages categories and products, allowing creation and association of products with categories.
     /// </summary>
-    public class CategoryService
+    public class ProductService
     {
         /// <summary>
         /// The default similarity threshold used for checking product description similarity.
@@ -21,9 +21,9 @@ namespace DomainModel
         private const int DefaultSimilarityThreshold = 5;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CategoryService"/> class.
+        /// Initializes a new instance of the <see cref="ProductService"/> class.
         /// </summary>
-        public CategoryService()
+        public ProductService()
         {
             this.Categories = new Dictionary<string, Category>();
             this.Products = new List<Product>();
@@ -37,7 +37,7 @@ namespace DomainModel
         public Dictionary<string, Category> Categories { get; private set; }
 
         /// <summary>
-        /// Gets the list of products managed by this CategoryService.
+        /// Gets the list of products managed by this ProductService.
         /// </summary>
         public List<Product> Products { get; private set; }
 
@@ -95,6 +95,7 @@ namespace DomainModel
                 else
                 {
                     var newCategory = this.CreateCategory(catName);
+                    this.Categories.Add(catName, newCategory);
                     product.AddCategory(newCategory);
                 }
             }

@@ -6,6 +6,7 @@ namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Represents an auction associated with a specific product.
@@ -54,34 +55,43 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets the product associated with this auction.
+        /// Gets or sets the product associated with this auction.
         /// </summary>
-        public IProduct Product { get; private set; }
+        [Required(ErrorMessage = "Product is required.")]
+        public IProduct Product { get; set; }
 
         /// <summary>
-        /// Gets the start date of the auction.
+        /// Gets or sets the start date of the auction.
         /// </summary>
-        public DateTime StartDate { get; private set; }
+        [Required(ErrorMessage = "Start date is required.")]
+        [DataType(DataType.DateTime)]
+        public DateTime StartDate { get; set; }
 
         /// <summary>
-        /// Gets the end date of the auction.
+        /// Gets or sets the end date of the auction.
         /// </summary>
-        public DateTime EndDate { get; private set; }
+        [Required(ErrorMessage = "End date is required.")]
+        [DataType(DataType.DateTime)]
+        public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Gets the starting price of the auction.
+        /// Gets or sets the starting price of the auction.
         /// </summary>
-        public decimal StartingPrice { get; private set; }
+        [Required(ErrorMessage = "Starting price is required.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Starting price must be greater than zero.")]
+        public decimal StartingPrice { get; set; }
 
         /// <summary>
-        /// Gets the currency in which the auction is conducted.
+        /// Gets or sets the currency in which the auction is conducted.
         /// </summary>
-        public string Currency { get; private set; }
+        [Required(ErrorMessage = "Currency is required.")]
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "Currency must be a valid 3-letter ISO code.")]
+        public string Currency { get; set; }
 
         /// <summary>
-        /// Gets the list of bids made in this auction.
+        /// Gets or sets the list of bids made in this auction.
         /// </summary>
-        public List<IBid> Bids { get; private set; }
+        public List<IBid> Bids { get; set; } = new List<IBid>();
 
         /// <summary>
         /// Adds a bid to the list of bids associated with the auction.
