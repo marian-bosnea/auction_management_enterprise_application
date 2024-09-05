@@ -34,9 +34,13 @@ namespace DomainModel
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductService"/> class.
-        /// <param name="productDAO">The DAO which manages products.</param>
-        /// <param name="categoryService">The DAO which manages categories.</param>
         /// </summary>
+        /// <param name="productDAO">The DAO interface for managing product-related data. This is used to perform CRUD operations on products.</param>
+        /// <param name="categoryService">The service for managing categories. This is used to create and retrieve categories associated with products.</param>
+        /// <remarks>
+        /// The constructor initializes the internal collections for storing categories and products. It also configures the similarity threshold
+        /// for product description comparisons, which is obtained from the configuration settings.
+        /// </remarks>
         public ProductService(IProductDAO productDAO, ICategoryService categoryService)
         {
             this.Categories = new Dictionary<string, ICategory>();
@@ -99,9 +103,14 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Adds a product to the system.
-        /// <param name="product">The product to be added.</param>
+        /// Adds a new product to the internal collection and persists it in the data store.
         /// </summary>
+        /// <param name="product">The product to be added. This should be a fully initialized <see cref="IProduct"/> instance.</param>
+        /// <remarks>
+        /// The method performs two key actions:
+        /// 1. Adds the product to the internal list of products managed by this service.
+        /// 2. Uses the <see cref="IProductDAO"/> to add the product to the data store, ensuring it is persisted across sessions.
+        /// </remarks>
         public void AddProduct(IProduct product)
         {
             this.Products.Add(product);
@@ -130,9 +139,14 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Updates an existing product in the system.
-        /// <param name="product">The product to be updated.</param>
+        /// Updates an existing product in the internal collection and persists the changes in the data store.
         /// </summary>
+        /// <param name="product">The product to be updated. This should be a fully initialized <see cref="IProduct"/> instance with the updated details.</param>
+        /// <remarks>
+        /// The method performs two key actions:
+        /// 1. Replaces the existing product in the internal list of products with the updated product.
+        /// 2. Uses the <see cref="IProductDAO"/> to update the product in the data store, ensuring that the changes are persisted across sessions.
+        /// </remarks>
         public void UpdateProduct(IProduct product)
         {
                 var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
@@ -144,9 +158,13 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Deletes a product by its ID.
-        /// <param name="product">The product to be deleted.</param>
+        /// Removes a product from the internal collection of products.
         /// </summary>
+        /// <param name="product">The product to be deleted. This should be an instance of <see cref="Product"/> that exists in the internal collection.</param>
+        /// <remarks>
+        /// This method removes the specified product from the internal list of products. It does not interact with the data store or perform any other operations.
+        /// To ensure consistency, any additional persistence or cleanup operations should be handled separately.
+        /// </remarks>
         public void DeleteProduct(Product product)
         {
                 this.Products.Remove(product);

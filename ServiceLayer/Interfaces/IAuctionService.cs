@@ -32,20 +32,6 @@ namespace ServiceLayer.Interfaces
         void AddBid(IAuction auction, IBid bid);
 
         /// <summary>
-        /// Finalizes an auction and adjusts the person's score if applicable.
-        /// </summary>
-        /// <param name="person">The person who owns the auction.</param>
-        /// <param name="auction">The auction to finalize.</param>
-        void FinalizeAuction(IPerson person, IAuction auction);
-
-        /// <summary>
-        /// Provides feedback to this person, adjusting their score.
-        /// </summary>
-        /// <param name="person">The person to receive feedback.</param>
-        /// <param name="feedbackScore">The feedback score to adjust, between -0.1 and 0.1.</param>
-        void ProvideFeedback(IPerson person, decimal feedbackScore);
-
-        /// <summary>
         /// Adds a new auction to the system.
         /// </summary>
         /// <param name="auction">The auction to add.</param>

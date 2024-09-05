@@ -25,11 +25,6 @@ namespace Services
         private readonly IAuctionDAO auctionDAO;
 
         /// <summary>
-        /// The DAO interface for managing person-related data.
-        /// </summary>
-        private readonly IPersonDAO personDAO;
-
-        /// <summary>
         /// The DAO interface for managing bid-related data.
         /// </summary>
         private readonly IBidDAO bidDAO;
@@ -53,15 +48,12 @@ namespace Services
         /// Initializes a new instance of the <see cref="AuctionService"/> class.
         /// </summary>
         /// <param name="auctionDAO">The auction DAO.</param>
-        /// <param name="personDAO">The person DAO.</param>
         /// <param name="bidDAO">The bid DAO.</param>
-        public AuctionService(IAuctionDAO auctionDAO, IPersonDAO personDAO, IBidDAO bidDAO)
+        public AuctionService(IAuctionDAO auctionDAO, IBidDAO bidDAO)
         {
             this.auctionDAO = auctionDAO;
-            this.personDAO = personDAO;
             this.bidDAO = bidDAO;
 
-            // Read configuration values or set default values if not configured.
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
             this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "3");
             this.seriousnessThreshold = decimal.Parse(ConfigurationManager.AppSettings["SeriousnessThreshold"] ?? "4.0");
@@ -78,18 +70,6 @@ namespace Services
         /// <param name="currency">The currency for the auction.</param>
         public void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
-            if (person.Score < this.seriousnessThreshold)
-            {
-                throw new InvalidOperationException($"Cannot start a new auction. Seriousness score is below the required threshold of {this.seriousnessThreshold}.");
-            }
-
-            int maxItemsBasedOnScore = this.CalculateMaxItemsBasedOnScore(person.Score);
-
-            if (person.ActiveAuctions.Count >= maxItemsBasedOnScore)
-            {
-                throw new InvalidOperationException($"Cannot start a new auction. Maximum of {maxItemsBasedOnScore} active auctions allowed based on seriousness score.");
-            }
-
             foreach (var category in product.Categories)
             {
                 int activeAuctionsInCategory = this.auctionDAO.GetActiveAuctionsForPersonInCategory(person, category).Count;
@@ -102,7 +82,6 @@ namespace Services
             var auction = new Auction(product, startDate, endDate, startingPrice, currency);
             person.ActiveAuctions.Add(auction);
             this.auctionDAO.Add(auction);
-            this.personDAO.Update(person);
         }
 
         /// <summary>
@@ -137,39 +116,6 @@ namespace Services
             this.bidDAO.Add(bid);
 
             this.auctionDAO.Update(auction);
-        }
-
-        /// <summary>
-        /// Finalizes an auction and adjusts the person's score if applicable.
-        /// </summary>
-        /// <param name="person">The person who owns the auction.</param>
-        /// <param name="auction">The auction to finalize.</param>
-        public void FinalizeAuction(IPerson person, IAuction auction)
-        {
-            if (!person.ActiveAuctions.Contains(auction))
-            {
-                throw new InvalidOperationException("Cannot finalize an auction that is not active or was not initiated by this person.");
-            }
-
-            person.ActiveAuctions.Remove(auction);
-
-            if (auction.Bids.Any())
-            {
-                person.AdjustScore(0.1m);
-            }
-
-            this.personDAO.Update(person);
-        }
-
-        /// <summary>
-        /// Provides feedback to this person, adjusting their score.
-        /// </summary>
-        /// <param name="person">The person to receive feedback.</param>
-        /// <param name="feedbackScore">The feedback score to adjust, between -0.1 and 0.1.</param>
-        public void ProvideFeedback(IPerson person, decimal feedbackScore)
-        {
-            person.AdjustScore(feedbackScore);
-            this.personDAO.Update(person);
         }
 
         /// <summary>
