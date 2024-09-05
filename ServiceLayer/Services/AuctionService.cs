@@ -30,6 +30,11 @@ namespace Services
         private readonly IPersonDAO personDAO;
 
         /// <summary>
+        /// The DAO interface for managing bid-related data.
+        /// </summary>
+        private readonly IBidDAO bidDAO;
+
+        /// <summary>
         /// The maximum number of active auctions a person can have at any given time.
         /// </summary>
         private readonly int maxActiveAuctions;
@@ -47,12 +52,14 @@ namespace Services
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionService"/> class.
         /// </summary>
-        /// <param name="auctionDAO">The auction repository.</param>
-        /// <param name="personDAO">The person repository.</param>
-        public AuctionService(IAuctionDAO auctionDAO, IPersonDAO personDAO)
+        /// <param name="auctionDAO">The auction DAO.</param>
+        /// <param name="personDAO">The person DAO.</param>
+        /// <param name="bidDAO">The bid DAO.</param>
+        public AuctionService(IAuctionDAO auctionDAO, IPersonDAO personDAO, IBidDAO bidDAO)
         {
             this.auctionDAO = auctionDAO;
             this.personDAO = personDAO;
+            this.bidDAO = bidDAO;
 
             // Read configuration values or set default values if not configured.
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
@@ -116,13 +123,20 @@ namespace Services
                 throw new ArgumentException("Bid currency must match auction currency.");
             }
 
-            decimal minPrice = auction.Bids.Count == 0 ? auction.StartingPrice : auction.Bids[auction.Bids.Count - 1].Amount * 1.1m;
+            decimal minPrice = auction.Bids.Count == 0
+                                ? auction.StartingPrice
+                                : auction.Bids[auction.Bids.Count - 1].Amount * 1.1m;
+
             if (bid.Amount < minPrice)
             {
                 throw new ArgumentException("Bid amount must be at least 10% higher than the previous bid.");
             }
 
             auction.AddBid(bid);
+
+            this.bidDAO.Add(bid);
+
+            this.auctionDAO.Update(auction);
         }
 
         /// <summary>

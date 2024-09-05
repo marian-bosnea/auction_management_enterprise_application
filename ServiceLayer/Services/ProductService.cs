@@ -28,15 +28,22 @@ namespace DomainModel
         private readonly IProductDAO productDAO;
 
         /// <summary>
+        /// The service interface for managing category-related data.
+        /// </summary>
+        private readonly ICategoryService categoryService;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ProductService"/> class.
         /// <param name="productDAO">The DAO which manages products.</param>
+        /// <param name="categoryService">The DAO which manages categories.</param>
         /// </summary>
-        public ProductService(IProductDAO productDAO)
+        public ProductService(IProductDAO productDAO, ICategoryService categoryService)
         {
             this.Categories = new Dictionary<string, ICategory>();
             this.Products = new List<IProduct>();
 
             this.productDAO = productDAO;
+            this.categoryService = categoryService;
 
             this.SimilarityThreshold = this.GetSimilarityThresholdFromConfig();
         }
@@ -59,28 +66,12 @@ namespace DomainModel
         private int SimilarityThreshold { get; set; }
 
         /// <summary>
-        /// Creates a new category if it does not already exist.
-        /// </summary>
-        /// <param name="name">The name of the category.</param>
-        /// <returns>The created or existing <see cref="Category"/>.</returns>
-        public ICategory CreateCategory(string name)
-        {
-            if (!this.Categories.ContainsKey(name))
-            {
-                var category = new Category(name);
-                this.Categories[name] = category;
-            }
-
-            return this.Categories[name];
-        }
-
-        /// <summary>
         /// Creates a new product with the specified name, description, and categories.
         /// </summary>
         /// <param name="name">The name of the product.</param>
         /// <param name="description">The description of the product.</param>
         /// <param name="categoryNames">A list of category names to associate with the product.</param>
-        /// <returns>The newly created <see cref="Product"/>.</returns>
+        /// <returns>The newly created <see cref="IProduct"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown if a product with a similar description already exists.</exception>
         public IProduct CreateProduct(string name, string description, List<string> categoryNames)
         {
@@ -94,21 +85,16 @@ namespace DomainModel
             }
 
             var product = new Product(0, name, description, new List<ICategory>());
+
             foreach (var catName in categoryNames)
             {
-                if (this.Categories.ContainsKey(catName))
-                {
-                    product.AddCategory(this.Categories[catName]);
-                }
-                else
-                {
-                    var newCategory = this.CreateCategory(catName);
-                    this.Categories.Add(catName, newCategory);
-                    product.AddCategory(newCategory);
-                }
+                var category = this.categoryService.CreateCategory(catName);
+                product.AddCategory(category);
             }
 
+            this.productDAO.Add(product);
             this.Products.Add(product);
+
             return product;
         }
 
@@ -145,33 +131,25 @@ namespace DomainModel
 
         /// <summary>
         /// Updates an existing product in the system.
-        /// <param name="productID">The ID of the product to be updated.</param>
+        /// <param name="product">The product to be updated.</param>
         /// </summary>
-        public void UpdateProduct(int productID)
+        public void UpdateProduct(IProduct product)
         {
-            var product = this.GetProductById(productID);
-
-            if (product != null)
-            {
                 var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
 
                 this.Products.Remove(product);
                 this.Products.Add(newProduct);
 
                 this.productDAO.Update(newProduct);
-            }
         }
 
         /// <summary>
         /// Deletes a product by its ID.
+        /// <param name="product">The product to be deleted.</param>
         /// </summary>
-        public void DeleteProduct(int id)
+        public void DeleteProduct(Product product)
         {
-            var product = this.GetProductById(id);
-            if (product != null)
-            {
                 this.Products.Remove(product);
-            }
         }
 
         /// <summary>

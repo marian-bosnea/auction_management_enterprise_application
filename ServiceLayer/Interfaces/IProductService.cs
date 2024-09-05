@@ -14,13 +14,6 @@ namespace ServiceLayer.Interfaces
     public interface IProductService
     {
         /// <summary>
-        /// Creates a new category if it does not already exist.
-        /// </summary>
-        /// <param name="name">The name of the category.</param>
-        /// <returns>The created or existing <see cref="ICategory"/>.</returns>
-        ICategory CreateCategory(string name);
-
-        /// <summary>
         /// Creates a new product with the specified name, description, and categories.
         /// </summary>
         /// <param name="name">The name of the product.</param>
@@ -52,14 +45,14 @@ namespace ServiceLayer.Interfaces
         /// <summary>
         /// Updates an existing product in the system.
         /// </summary>
-        /// <param name="productID">The ID of the product to update.</param>
-        void UpdateProduct(int productID);
+        /// <param name="product">The product to update.</param>
+        void UpdateProduct(IProduct product);
 
         /// <summary>
         /// Deletes a product by its ID.
         /// </summary>
-        /// <param name="id">The ID of the product to delete.</param>
-        void DeleteProduct(int id);
+        /// <param name="product">The product to delete.</param>
+        void DeleteProduct(Product product);
 
         /// <summary>
         /// Returns a string representation of the category manager, listing all categories and products.
