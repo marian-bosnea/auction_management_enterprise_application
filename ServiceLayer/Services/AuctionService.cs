@@ -5,18 +5,19 @@
 namespace Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
     using DataMapper.Interfaces;
     using DomainModel;
-    using ServiceLayer;
+    using ServiceLayer.Interfaces;
 
     /// <summary>
     /// The AuctionService class provides business logic for managing auctions, including operations
     /// such as starting, finalizing auctions, and providing feedback to users. It handles the validation
     /// and constraints on the number of active auctions a person can have, based on their seriousness score.
     /// </summary>
-    public class AuctionService
+    public class AuctionService : IAuctionService
     {
         /// <summary>
         /// The DAO interface for managing auction-related data.
@@ -68,7 +69,7 @@ namespace Services
         /// <param name="endDate">The end date of the auction.</param>
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency for the auction.</param>
-        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             if (person.Score < this.seriousnessThreshold)
             {
@@ -129,7 +130,7 @@ namespace Services
         /// </summary>
         /// <param name="person">The person who owns the auction.</param>
         /// <param name="auction">The auction to finalize.</param>
-        public void FinalizeAuction(Person person, Auction auction)
+        public void FinalizeAuction(IPerson person, IAuction auction)
         {
             if (!person.ActiveAuctions.Contains(auction))
             {
@@ -151,10 +152,60 @@ namespace Services
         /// </summary>
         /// <param name="person">The person to receive feedback.</param>
         /// <param name="feedbackScore">The feedback score to adjust, between -0.1 and 0.1.</param>
-        public void ProvideFeedback(Person person, decimal feedbackScore)
+        public void ProvideFeedback(IPerson person, decimal feedbackScore)
         {
             person.AdjustScore(feedbackScore);
             this.personDAO.Update(person);
+        }
+
+        /// <summary>
+        /// Adds a new auction to the system.
+        /// </summary>
+        /// <param name="auction">The auction to add.</param>
+        public void AddAuction(IAuction auction)
+        {
+            this.auctionDAO.Add(auction);
+        }
+
+        /// <summary>
+        /// Retrieves an auction by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the auction to retrieve.</param>
+        /// <returns>The auction with the specified ID, or null if not found.</returns>
+        public IAuction GetAuctionById(int id)
+        {
+            return this.auctionDAO.Get(id);
+        }
+
+        /// <summary>
+        /// Retrieves all auctions in the system.
+        /// </summary>
+        /// <returns>A list of all auctions.</returns>
+        public List<IAuction> GetAllAuctions()
+        {
+            return this.auctionDAO.GetAll();
+        }
+
+        /// <summary>
+        /// Updates an existing auction in the system.
+        /// </summary>
+        /// <param name="auction">The auction to update.</param>
+        public void UpdateAuction(IAuction auction)
+        {
+            this.auctionDAO.Update(auction);
+        }
+
+        /// <summary>
+        /// Deletes an auction from the system.
+        /// </summary>
+        /// <param name="id">The ID of the auction to delete.</param>
+        public void DeleteAuction(int id)
+        {
+            var auction = this.auctionDAO.Get(id);
+            if (auction != null)
+            {
+                this.auctionDAO.Delete(auction.Id);
+            }
         }
 
         /// <summary>

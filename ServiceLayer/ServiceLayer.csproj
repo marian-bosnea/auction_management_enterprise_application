@@ -59,17 +59,22 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuctionService.cs" />
-    <Compile Include="CategoryService.cs" />
-    <Compile Include="IAuctionRepository.cs" />
-    <Compile Include="IPersonRepository.cs" />
+    <Compile Include="Services\AuctionService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataMapper\DataMapper.csproj">
+      <Project>{1F060EE6-0ED6-42EB-8C3D-D7712F59C3ED}</Project>
+      <Name>DataMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{7dd302a2-651b-4128-9a1e-7e85c0d11a0b}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.55.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.55.0\build\StyleCop.MSBuild.Targets')" />

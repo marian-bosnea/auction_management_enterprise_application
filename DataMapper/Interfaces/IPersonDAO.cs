@@ -35,7 +35,7 @@ namespace DataMapper.Interfaces
         /// Updates an existing user in the data store.
         /// </summary>
         /// <param name="user">The user to update.</param>
-        void Update(Person user);
+        void Update(IPerson user);
 
         /// <summary>
         /// Deletes a user from the data store by their identifier.

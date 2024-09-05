@@ -24,7 +24,7 @@ namespace DomainModel
         /// <exception cref="ArgumentException">Thrown when the start date is in the past, the end date is in the past, or the end date is before the start date.</exception>
         /// <exception cref="ArgumentException">Thrown when the starting price is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the product is null.</exception>
-        public Auction(Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public Auction(IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             if (startDate < DateTime.Now)
             {
@@ -53,6 +53,11 @@ namespace DomainModel
             this.Currency = currency;
             this.Bids = new List<IBid>();
         }
+
+        /// <summary>
+        /// Gets or sets the unique identifier for the auction.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the product associated with this auction.

@@ -12,24 +12,29 @@ namespace DomainModel
     public interface IBid
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the bid.
+        /// </summary>
+         int Id { get; set; }
+
+        /// <summary>
         /// Gets the amount of the bid.
         /// </summary>
-        decimal Amount { get; }
+         decimal Amount { get; }
 
         /// <summary>
         /// Gets the currency in which the bid is made.
         /// </summary>
-        string Currency { get; }
+         string Currency { get; }
 
         /// <summary>
         /// Gets the time when the bid was made.
         /// </summary>
-        DateTime BidTime { get; }
+         DateTime BidTime { get; }
 
         /// <summary>
         /// Returns a string representation of the bid.
         /// </summary>
         /// <returns>A string that represents the current bid.</returns>
-        string ToString();
+         string ToString();
     }
 }

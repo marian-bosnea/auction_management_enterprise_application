@@ -7,12 +7,14 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using DataMapper.Interfaces;
     using ServiceLayer;
+    using ServiceLayer.Interfaces;
 
     /// <summary>
     /// Manages categories and products, allowing creation and association of products with categories.
     /// </summary>
-    public class ProductService
+    public class ProductService : IProductService
     {
         /// <summary>
         /// The default similarity threshold used for checking product description similarity.
@@ -21,12 +23,20 @@ namespace DomainModel
         private const int DefaultSimilarityThreshold = 5;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductService"/> class.
+        /// The DAO interface for managing product-related data.
         /// </summary>
-        public ProductService()
+        private readonly IProductDAO productDAO;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductService"/> class.
+        /// <param name="productDAO">The DAO which manages products.</param>
+        /// </summary>
+        public ProductService(IProductDAO productDAO)
         {
-            this.Categories = new Dictionary<string, Category>();
-            this.Products = new List<Product>();
+            this.Categories = new Dictionary<string, ICategory>();
+            this.Products = new List<IProduct>();
+
+            this.productDAO = productDAO;
 
             this.SimilarityThreshold = this.GetSimilarityThresholdFromConfig();
         }
@@ -34,12 +44,12 @@ namespace DomainModel
         /// <summary>
         /// Gets the dictionary of categories, keyed by their name.
         /// </summary>
-        public Dictionary<string, Category> Categories { get; private set; }
+        public Dictionary<string, ICategory> Categories { get; private set; }
 
         /// <summary>
         /// Gets the list of products managed by this ProductService.
         /// </summary>
-        public List<Product> Products { get; private set; }
+        public List<IProduct> Products { get; private set; }
 
         /// <summary>
         /// Gets or sets the similarity threshold for determining if a new product's description is too similar
@@ -53,7 +63,7 @@ namespace DomainModel
         /// </summary>
         /// <param name="name">The name of the category.</param>
         /// <returns>The created or existing <see cref="Category"/>.</returns>
-        public Category CreateCategory(string name)
+        public ICategory CreateCategory(string name)
         {
             if (!this.Categories.ContainsKey(name))
             {
@@ -72,9 +82,8 @@ namespace DomainModel
         /// <param name="categoryNames">A list of category names to associate with the product.</param>
         /// <returns>The newly created <see cref="Product"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown if a product with a similar description already exists.</exception>
-        public Product CreateProduct(string name, string description, List<string> categoryNames)
+        public IProduct CreateProduct(string name, string description, List<string> categoryNames)
         {
-            // Check for similar descriptions in existing products
             foreach (var existingProduct in this.Products)
             {
                 int distance = StringUtils.CalculateLevenshteinDistance(existingProduct.Description, description);
@@ -84,8 +93,7 @@ namespace DomainModel
                 }
             }
 
-            // Create and configure the new product
-            var product = new Product(name, description);
+            var product = new Product(0, name, description, new List<ICategory>());
             foreach (var catName in categoryNames)
             {
                 if (this.Categories.ContainsKey(catName))
@@ -102,6 +110,68 @@ namespace DomainModel
 
             this.Products.Add(product);
             return product;
+        }
+
+        /// <summary>
+        /// Adds a product to the system.
+        /// <param name="product">The product to be added.</param>
+        /// </summary>
+        public void AddProduct(IProduct product)
+        {
+            this.Products.Add(product);
+            this.productDAO.Add(product);
+        }
+
+        /// <summary>
+        /// Gets a product by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the product to retrieve.</param>
+        /// <returns>The product with the specified ID, or null if not found.</returns>
+        public IProduct GetProductById(int id)
+        {
+            return this.Products.Find(p => p.Id == id);
+        }
+
+        /// <summary>
+        /// Gets all products in the system.
+        /// </summary>
+        /// <returns>A list of all products.</returns>
+        public List<IProduct> GetAllProducts()
+        {
+             this.Products = this.productDAO.GetAll();
+
+             return this.Products;
+        }
+
+        /// <summary>
+        /// Updates an existing product in the system.
+        /// <param name="productID">The ID of the product to be updated.</param>
+        /// </summary>
+        public void UpdateProduct(int productID)
+        {
+            var product = this.GetProductById(productID);
+
+            if (product != null)
+            {
+                var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
+
+                this.Products.Remove(product);
+                this.Products.Add(newProduct);
+
+                this.productDAO.Update(newProduct);
+            }
+        }
+
+        /// <summary>
+        /// Deletes a product by its ID.
+        /// </summary>
+        public void DeleteProduct(int id)
+        {
+            var product = this.GetProductById(id);
+            if (product != null)
+            {
+                this.Products.Remove(product);
+            }
         }
 
         /// <summary>

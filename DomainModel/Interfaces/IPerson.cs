@@ -13,6 +13,11 @@ namespace DomainModel
     public interface IPerson
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the person.
+        /// </summary>
+        int Id { get; set; }
+
+        /// <summary>
         /// Gets the name of the person.
         /// </summary>
         string Name { get; }
@@ -31,6 +36,12 @@ namespace DomainModel
         /// <summary>
         /// Gets or sets the list of active auctions initiated by this person.
         /// </summary>
-        List<Auction> ActiveAuctions { get; set; }
+        List<IAuction> ActiveAuctions { get; set; }
+
+        /// <summary>
+        /// Adjusts the person's score based on feedback or auction completion.
+        /// </summary>
+        /// <param name="amount">The amount to adjust the score by, between -0.1 and 0.1.</param>
+        void AdjustScore(decimal amount);
     }
 }

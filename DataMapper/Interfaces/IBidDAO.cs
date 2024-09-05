@@ -16,13 +16,13 @@ namespace DataMapper.Interfaces
         /// Adds a new bid to the data store.
         /// </summary>
         /// <param name="bid">The bid to add.</param>
-        void Add(Bid bid);
+        void Add(IBid bid);
 
         /// <summary>
         /// Retrieves all bids from the data store.
         /// </summary>
         /// <returns>A list of all bids.</returns>
-        List<Bid> GetAll();
+        List<IBid> GetAll();
 
         /// <summary>
         /// Retrieves a specific bid by its identifier.
@@ -35,7 +35,7 @@ namespace DataMapper.Interfaces
         /// Updates an existing bid in the data store.
         /// </summary>
         /// <param name="bid">The bid to update.</param>
-        void Update(Bid bid);
+        void Update(IBid bid);
 
         /// <summary>
         /// Deletes a bid from the data store by its identifier.

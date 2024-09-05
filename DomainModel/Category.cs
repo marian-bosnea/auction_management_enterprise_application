@@ -24,6 +24,11 @@ namespace DomainModel
         }
 
         /// <summary>
+        /// Gets or sets the unique identifier for the category.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the category.
         /// </summary>
         [Required(ErrorMessage = "Category name is required.")]

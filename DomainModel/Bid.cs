@@ -33,6 +33,11 @@ namespace DomainModel
         }
 
         /// <summary>
+        /// Gets or sets the unique identifier for the bid.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the amount of the bid.
         /// </summary>
         [Required(ErrorMessage = "Bid amount is required.")]

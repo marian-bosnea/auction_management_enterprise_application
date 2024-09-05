@@ -12,6 +12,11 @@ namespace DomainModel
     public interface ICategory
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the category.
+        /// </summary>
+        int Id { get; set; }
+
+        /// <summary>
         /// Gets the name of the category.
         /// </summary>
         string Name { get; }

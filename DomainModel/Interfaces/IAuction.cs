@@ -13,6 +13,11 @@ namespace DomainModel
     public interface IAuction
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the auction.
+        /// </summary>
+        int Id { get; set; }
+
+        /// <summary>
         /// Gets the product associated with this auction.
         /// </summary>
         IProduct Product { get; }

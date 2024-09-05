@@ -21,8 +21,13 @@ namespace DomainModel
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.Score = 5.0m; // Initial seriousness score
-            this.ActiveAuctions = new List<Auction>();
+            this.ActiveAuctions = new List<IAuction>();
         }
+
+        /// <summary>
+        /// Gets or sets the unique identifier for the person.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the person.
@@ -41,7 +46,7 @@ namespace DomainModel
         /// Gets or sets the list of active auctions initiated by this person.
         /// </summary>
         [Required(ErrorMessage = "Active auctions list is required.")]
-        public List<Auction> ActiveAuctions { get; set; }
+        public List<IAuction> ActiveAuctions { get; set; }
 
         /// <summary>
         /// Gets or sets the roles of the person in the auction process.

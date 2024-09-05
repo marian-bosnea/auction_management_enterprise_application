@@ -15,14 +15,22 @@ namespace DomainModel
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
+        /// <param name="id">The id of the product.</param>
         /// <param name="name">The name of the product.</param>
         /// <param name="description">The description of the product.</param>
-        public Product(string name, string description)
+        /// <param name="categories">The categories of the product.</param>
+        public Product(int id, string name, string description, List<ICategory> categories)
         {
+            this.Id = id;
             this.Name = name;
             this.Description = description;
-            this.Categories = new List<ICategory>();
+            this.Categories = categories;
         }
+
+        /// <summary>
+        /// Gets or sets the unique identifier for the product.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets the name of the product.

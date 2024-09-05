@@ -12,6 +12,11 @@ namespace DomainModel
     public interface IProduct
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the product.
+        /// </summary>
+        int Id { get; set; }
+
+        /// <summary>
         /// Gets the name of the product.
         /// </summary>
         string Name { get; }
