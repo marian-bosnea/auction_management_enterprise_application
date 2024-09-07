@@ -18,6 +18,11 @@ namespace DomainModel
         int Id { get; set; }
 
         /// <summary>
+        /// Gets the seller who initiated the auction.
+        /// </summary>
+        IPerson Seller { get; }
+
+        /// <summary>
         /// Gets the product associated with this auction.
         /// </summary>
         IProduct Product { get; }
@@ -46,6 +51,11 @@ namespace DomainModel
         /// Gets the list of bids made in this auction.
         /// </summary>
         List<IBid> Bids { get; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the auction is completed.
+        /// </summary>
+        bool IsCompleted { get; set; }
 
         /// <summary>
         /// Adds a new bid to the auction.

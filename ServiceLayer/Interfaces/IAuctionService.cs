@@ -25,6 +25,25 @@ namespace ServiceLayer.Interfaces
         void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency);
 
         /// <summary>
+        /// Ends the specified auction by setting its status to completed if the person trying to end it is the owner.
+        /// </summary>
+        /// <param name="auction">The auction to be ended.</param>
+        /// <param name="person">The person attempting to end the auction.</param>
+        /// <exception cref="UnauthorizedAccessException">
+        /// Thrown when the person attempting to end the auction is not the owner of the auction.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the auction is already completed.
+        /// </exception>
+        /// <remarks>
+        /// This method sets the <c>IsCompleted</c> field of the auction to <c>true</c> if the person
+        /// trying to end the auction is the owner. If the auction is already completed or if the person
+        /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
+        /// in the data store through the <c>auctionDAO</c> object.
+        /// </remarks>
+        void EndAuction(IAuction auction, IPerson person);
+
+        /// <summary>
         /// Adds a new bid to an auction after validating the bid's currency and amount.
         /// </summary>
         /// <param name="auction">The auction to which the bid is being added.</param>

@@ -85,6 +85,40 @@ namespace Services
         }
 
         /// <summary>
+        /// Ends the specified auction by setting its status to completed if the person trying to end it is the owner.
+        /// </summary>
+        /// <param name="auction">The auction to be ended.</param>
+        /// <param name="person">The person attempting to end the auction.</param>
+        /// <exception cref="UnauthorizedAccessException">
+        /// Thrown when the person attempting to end the auction is not the owner of the auction.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the auction is already completed.
+        /// </exception>
+        /// <remarks>
+        /// This method sets the <c>IsCompleted</c> field of the auction to <c>true</c> if the person
+        /// trying to end the auction is the owner. If the auction is already completed or if the person
+        /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
+        /// in the data store through the <c>auctionDAO</c> object.
+        /// </remarks>
+        public void EndAuction(IAuction auction, IPerson person)
+        {
+            if (auction.Seller != person)
+            {
+                throw new UnauthorizedAccessException("Only the owner of the auction can end it.");
+            }
+
+            if (auction.IsCompleted)
+            {
+                throw new InvalidOperationException("The auction has already been completed.");
+            }
+
+            auction.IsCompleted = true;
+
+            this.auctionDAO.Update(auction);
+        }
+
+        /// <summary>
         /// Adds a new bid to an auction after validating the bid's currency and amount.
         /// The bid must match the auction's currency, and the bid amount must be at least 10% higher
         /// than the previous highest bid or the starting price if no bids exist.
@@ -97,6 +131,11 @@ namespace Services
         /// </exception>
         public void AddBid(IAuction auction, IBid bid)
         {
+            if (DateTime.Now >= auction.EndDate)
+            {
+                throw new InvalidOperationException("The auction has ended. No more bids can be placed.");
+            }
+
             if (bid.Currency != auction.Currency)
             {
                 throw new ArgumentException("Bid currency must match auction currency.");

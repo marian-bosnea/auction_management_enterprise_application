@@ -52,12 +52,19 @@ namespace DomainModel
             this.StartingPrice = startingPrice;
             this.Currency = currency;
             this.Bids = new List<IBid>();
+            this.IsCompleted = false;
         }
 
         /// <summary>
         /// Gets or sets the unique identifier for the auction.
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seller who initiated the auction.
+        /// </summary>
+        [Required(ErrorMessage = "Seller is required")]
+        public IPerson Seller { get; set; }
 
         /// <summary>
         /// Gets or sets the product associated with this auction.
@@ -70,6 +77,7 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "Start date is required.")]
         [DataType(DataType.DateTime)]
+        [CurrentOrFutureDate(ErrorMessage = "The start date cannot be earlier than the current date.")]
         public DateTime StartDate { get; set; }
 
         /// <summary>
@@ -77,6 +85,7 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "End date is required.")]
         [DataType(DataType.DateTime)]
+        [EndDateLaterThanStartDate("StartDate", ErrorMessage = "End date must be later than the start date.")]
         public DateTime EndDate { get; set; }
 
         /// <summary>
@@ -97,6 +106,11 @@ namespace DomainModel
         /// Gets or sets the list of bids made in this auction.
         /// </summary>
         public List<IBid> Bids { get; set; } = new List<IBid>();
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the auction is completed.
+        /// </summary>
+        public bool IsCompleted { get; set; }
 
         /// <summary>
         /// Adds a bid to the list of bids associated with the auction.
