@@ -50,7 +50,6 @@ namespace DomainModel
             if (currency.Length != 3)
             {
                 throw new ArgumentException("Currency ISO code must be 3 characters long.");
-
             }
 
             this.Seller = seller ?? throw new ArgumentNullException(nameof(seller));

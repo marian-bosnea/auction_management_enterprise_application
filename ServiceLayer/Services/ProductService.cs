@@ -20,7 +20,7 @@ namespace DomainModel
         /// The default similarity threshold used for checking product description similarity.
         /// This value is used if no valid threshold is provided in the configuration file.
         /// </summary>
-        private const int DefaultSimilarityThreshold = 5;
+        public const int DefaultSimilarityThreshold = 5;
 
         /// <summary>
         /// The DAO interface for managing product-related data.
@@ -154,7 +154,7 @@ namespace DomainModel
             this.Products.Remove(product);
             this.Products.Add(newProduct);
 
-            this.productDAO.Update(newProduct);
+            this.productDAO.Update(product);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace DomainModel
         /// Retrieves the similarity threshold from the configuration file.
         /// </summary>
         /// <returns>The similarity threshold.</returns>
-        private int GetSimilarityThresholdFromConfig()
+        public int GetSimilarityThresholdFromConfig()
         {
             int threshold;
             string configValue = ConfigurationManager.AppSettings["SimilarityThreshold"];

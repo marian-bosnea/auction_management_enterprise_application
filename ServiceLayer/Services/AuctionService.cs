@@ -49,7 +49,7 @@ namespace Services
             this.bidDAO = bidDAO;
 
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
-            this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "3");
+            this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "1");
         }
 
         /// <summary>
@@ -201,7 +201,15 @@ namespace Services
             var auction = this.auctionDAO.Get(id);
             if (auction != null)
             {
-                this.auctionDAO.Delete(auction.Id);
+                this.auctionDAO.Delete(id);
+            }
+        }
+
+        public int MaxActiveAuctionsPerCategory
+        {
+            get
+            {
+                return this.maxActiveAuctionsPerCategory;
             }
         }
 

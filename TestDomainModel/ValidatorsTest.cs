@@ -16,7 +16,7 @@ namespace DomainModel.Tests
         public void IsValid_DateIsFutureDate_ReturnsTrue()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             DateTime futureDate = DateTime.Now.AddDays(1);
 
             // Act
@@ -30,7 +30,7 @@ namespace DomainModel.Tests
         public void IsValid_DateIsPastDate_ReturnsFalse()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             DateTime pastDate = DateTime.Now.AddDays(-1);
 
             // Act
@@ -44,7 +44,7 @@ namespace DomainModel.Tests
         public void IsValid_ValueIsNotDate_ReturnsFalse()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             string nonDateValue = "Not a Date";
 
             // Act
@@ -58,7 +58,7 @@ namespace DomainModel.Tests
         public void FormatErrorMessage_ReturnsCorrectMessage()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             string propertyName = "TestDate";
 
             // Act
@@ -73,7 +73,7 @@ namespace DomainModel.Tests
         public void IsValid_DateIsExactlyMidnightInFuture_ReturnsTrue()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             DateTime dateExactlyMidnightInFuture = DateTime.Today.AddDays(1);
 
             // Act
@@ -87,7 +87,7 @@ namespace DomainModel.Tests
         public void IsValid_NullDate_ReturnsFalse()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             DateTime? nullDate = null;
 
             // Act
@@ -101,7 +101,7 @@ namespace DomainModel.Tests
         public void IsValid_FutureDateInDifferentTimeZone_ReturnsTrue()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             DateTime futureDateInDifferentTimeZone = DateTime.UtcNow.AddDays(1);
 
             // Act
@@ -115,7 +115,7 @@ namespace DomainModel.Tests
         public void IsValid_PastDateInDifferentTimeZone_ReturnsFalse()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             DateTime pastDateInDifferentTimeZone = DateTime.UtcNow.AddDays(-1);
 
             // Act
@@ -129,7 +129,7 @@ namespace DomainModel.Tests
         public void FormatErrorMessage_WithDifferentPropertyNames_ReturnsCorrectMessage()
         {
             // Arrange
-            var attribute = CreateAttribute();
+            var attribute = this.CreateAttribute();
             string propertyName1 = "StartDate";
             string propertyName2 = "EndDate";
 

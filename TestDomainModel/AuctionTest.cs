@@ -20,7 +20,7 @@ namespace DomainModel.Tests
 
         private Bid CreateValidBid(Auction auction)
         {
-            return new Bid(15.00, "USD", auction)
+            return new Bid(15.00, "USD")
             {
                 Bidder = this.CreateValidPerson()
             };

@@ -18,7 +18,7 @@
             var auction = new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD");
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
 
             // Assert
             Assert.AreEqual(amount, bid.Amount);
@@ -35,7 +35,7 @@
             var auction = new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD");
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => new Bid(invalidAmount, currency, auction));
+            Assert.ThrowsException<ArgumentException>(() => new Bid(invalidAmount, currency));
         }
 
         [TestMethod]
@@ -47,14 +47,14 @@
             var auction = new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD");
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new Bid(amount, currency, auction));
+            Assert.ThrowsException<ArgumentNullException>(() => new Bid(amount, currency));
         }
 
         [TestMethod]
         public void Amount_SetToInvalidValue_ShouldThrowValidationException()
         {
             // Arrange
-            var bid = new Bid(100.0, "USD", new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD"));
+            var bid = new Bid(100.0, "USD");
 
             // Act & Assert
             var exception = Assert.ThrowsException<ArgumentException>(() => bid.Amount = -1.0);
@@ -65,7 +65,7 @@
         public void Currency_SetToInvalidValue_ShouldThrowValidationException()
         {
             // Arrange
-            var bid = new Bid(100.0, "USD", new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD"));
+            var bid = new Bid(100.0, "USD");
 
             // Act & Assert
             var exception = Assert.ThrowsException<ArgumentException>(() => bid.Currency = "US");
@@ -76,7 +76,7 @@
         public void ToString_ShouldReturnFormattedString()
         {
             // Arrange
-            var bid = new Bid(100.0, "USD", new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD"));
+            var bid = new Bid(100.0, "USD");
 
             // Act
             string result = bid.ToString();
@@ -107,7 +107,7 @@
             string currency = "USD";
 
             // Act
-            var bid = new Bid(amount, currency, auction) { Bidder = bidder };
+            var bid = new Bid(amount, currency) { Bidder = bidder };
 
             // Assert
             Assert.AreEqual(bidder, bid.Bidder);
@@ -117,8 +117,7 @@
         public void BidTime_SetToCurrentDate_ShouldNotThrowException()
         {
             // Arrange
-            var auction = this.CreateValidAuction();
-            var bid = new Bid(100.0, "USD", auction);
+            var bid = new Bid(100.0, "USD");
             DateTime currentTime = DateTime.Now;
 
             // Act & Assert
@@ -131,8 +130,8 @@
         {
             // Arrange
             var auction = this.CreateValidAuction();
-            var bid1 = new Bid(100.0, "USD", auction) { BidTime = DateTime.Now };
-            var bid2 = new Bid(150.0, "EUR", auction) { BidTime = DateTime.Now.AddHours(-1) };
+            var bid1 = new Bid(100.0, "USD") { BidTime = DateTime.Now };
+            var bid2 = new Bid(150.0, "EUR") { BidTime = DateTime.Now.AddHours(-1) };
 
             // Act
             string result1 = bid1.ToString();
@@ -148,7 +147,7 @@
         {
             // Arrange
             var auction = this.CreateValidAuction();
-            var bid = new Bid(200.0, "USD", auction);
+            var bid = new Bid(200.0, "USD");
 
             DateTime pastTime = DateTime.Now.AddDays(-1);
             DateTime futureTime = DateTime.Now.AddDays(1);
@@ -173,7 +172,7 @@
             double invalidAmount = 0.0;
 
             // Act & Assert
-            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(invalidAmount, "USD", auction));
+            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(invalidAmount, "USD"));
             Assert.AreEqual("Bid amount must be greater than zero.", exception.Message);
         }
 
@@ -185,7 +184,7 @@
             string invalidCurrency = "US";
 
             // Act & Assert
-            var bid = new Bid(100.0, invalidCurrency, auction);
+            var bid = new Bid(100.0, invalidCurrency);
             var validationResults = new List<ValidationResult>();
             var validationContext = new ValidationContext(bid)
             {
@@ -203,7 +202,7 @@
         {
             // Arrange
             var auction = this.CreateValidAuction();
-            var bid = new Bid(100.0, "USD", auction);
+            var bid = new Bid(100.0, "USD");
 
             // Act
             bid.Bidder = null;
@@ -222,7 +221,7 @@
             DateTime minDateTime = DateTime.MinValue;
 
             // Act
-            var bid = new Bid(amount, currency, auction)
+            var bid = new Bid(amount, currency)
             {
                 BidTime = minDateTime
             };
@@ -241,7 +240,7 @@
             DateTime maxDateTime = DateTime.MaxValue;
 
             // Act
-            var bid = new Bid(amount, currency, auction)
+            var bid = new Bid(amount, currency)
             {
                 BidTime = maxDateTime
             };
@@ -258,7 +257,7 @@
             double invalidAmount = 0.0;
 
             // Act & Assert
-            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(invalidAmount, "USD", auction));
+            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(invalidAmount, "USD"));
             Assert.AreEqual("Bid amount must be greater than zero.", exception.Message);
         }
 
@@ -270,7 +269,7 @@
             double largeAmount = 1_000_000.0;
 
             // Act
-            var bid = new Bid(largeAmount, "USD", auction);
+            var bid = new Bid(largeAmount, "USD");
 
             // Assert
             Assert.AreEqual(largeAmount, bid.Amount);
@@ -287,7 +286,7 @@
             DateTime updatedTime = DateTime.Now.AddMinutes(10);
 
             // Act
-            var bid = new Bid(amount, currency, auction)
+            var bid = new Bid(amount, currency)
             {
                 BidTime = initialTime
             };
@@ -303,7 +302,7 @@
         {
             // Arrange
             var auction = this.CreateValidAuction();
-            var bid = new Bid(300.0, "USD", auction)
+            var bid = new Bid(300.0, "USD")
             {
                 BidTime = DateTime.Now.AddDays(1)
             };
@@ -324,7 +323,7 @@
             string currency = "USD";
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
 
             // Assert
             Assert.AreEqual(amount, bid.Amount);
@@ -341,7 +340,7 @@
             string currency = "USD";
 
             // Act & Assert
-            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(amount, currency, auction));
+            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(amount, currency));
             Assert.AreEqual("Bid amount must be greater than zero.", exception.Message);
         }
 
@@ -354,7 +353,7 @@
             string currency = "USD";
 
             // Act & Assert
-            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(amount, currency, auction));
+            var exception = Assert.ThrowsException<ArgumentException>(() => new Bid(amount, currency));
             Assert.AreEqual("Bid amount must be greater than zero.", exception.Message);
         }
 
@@ -368,7 +367,7 @@
             var beforeCreation = DateTime.Now;
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
             var afterCreation = DateTime.Now;
 
             // Assert
@@ -384,7 +383,7 @@
             string currency = "EUR";
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
 
             // Assert
             Assert.AreEqual(currency, bid.Currency);
@@ -399,11 +398,10 @@
             string currency = "GBP";
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
 
             // Assert
-            Assert.IsNotNull(bid); // Ensure the Bid object is created
-            Assert.AreEqual(auction, auction); // Ensure the correct auction is associated
+            Assert.IsNotNull(bid);
         }
 
         [TestMethod]
@@ -415,7 +413,7 @@
             var auction = new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD");
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
 
             // Assert
             Assert.AreEqual(amount, bid.Amount);
@@ -433,7 +431,7 @@
             var auction = new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD");
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
         }
 
         [TestMethod]
@@ -445,7 +443,7 @@
             var auction = new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD");
 
             // Act
-            var bid = new Bid(amount, currency, auction);
+            var bid = new Bid(amount, currency);
 
             // Assert
             Assert.AreEqual(DateTime.Now.Date, bid.BidTime.Date); // Compare only the date part
@@ -455,7 +453,7 @@
         public void Currency_SetValidThreeLetterISOCode_ShouldSetCurrency()
         {
             // Arrange
-            var bid = new Bid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = new Bid(100.00, "USD");
             string validCurrency = "EUR";
 
             // Act
@@ -470,7 +468,7 @@
         public void Currency_SetInvalidCurrencyLength_ShouldThrowArgumentException()
         {
             // Arrange
-            var bid = new Bid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = new Bid(100.00, "USD");
             string invalidCurrency = "US";
 
             // Act
@@ -482,7 +480,7 @@
         public void Currency_SetEmptyString_ShouldThrowArgumentException()
         {
             // Arrange
-            var bid = new Bid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = new Bid(100.00, "USD");
             string emptyCurrency = "";
 
             // Act
@@ -494,7 +492,7 @@
         public void Currency_SetLongString_ShouldThrowArgumentException()
         {
             // Arrange
-            var bid = new Bid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = new Bid(100.00, "USD");
             string longCurrency = "USD123";
 
             // Act
@@ -505,7 +503,7 @@
         public void Currency_SetValidCurrency_ShouldUpdateCurrencyProperty()
         {
             // Arrange
-            var bid = new Bid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = new Bid(100.00, "USD");
             string initialCurrency = "USD";
             string newCurrency = "JPY";
 
@@ -518,14 +516,14 @@
 
         private Bid CreateBid(double amount, string currency, Auction auction)
         {
-            return new Bid(amount, currency, auction);
+            return new Bid(amount, currency);
         }
 
         [TestMethod]
         public void ValidateBidTime_BidTimeInPast_ShouldReturnSuccess()
         {
             // Arrange
-            var bid = CreateBid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = this.CreateBid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
             DateTime pastDateTime = DateTime.Now.AddDays(-1); // A date in the past
             var validationContext = new ValidationContext(bid);
 
@@ -540,7 +538,7 @@
         public void ValidateBidTime_BidTimeNow_ShouldReturnSuccess()
         {
             // Arrange
-            var bid = CreateBid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = this.CreateBid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
             DateTime now = DateTime.Now; // Current time
             var validationContext = new ValidationContext(bid);
 
@@ -555,7 +553,7 @@
         public void ValidateBidTime_BidTimeInFuture_ShouldReturnValidationError()
         {
             // Arrange
-            var bid = CreateBid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
+            var bid = this.CreateBid(100.00, "USD", new Auction(new Person("Seller"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 50.00, "USD"));
             DateTime futureDateTime = DateTime.Now.AddDays(1); // A date in the future
             var validationContext = new ValidationContext(bid);
 

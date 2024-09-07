@@ -59,5 +59,7 @@ namespace ServiceLayer.Services
 
             return category;
         }
+
+        public Dictionary<string, Category> Categories { get { return this.categories;  } }
     }
 }

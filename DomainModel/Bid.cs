@@ -20,10 +20,9 @@ namespace DomainModel
         /// </summary>
         /// <param name="amount">The amount of the Bid.</param>
         /// <param name="currency">The currency in which the Bid is made.</param>
-        /// <param name="auction">The auction associated with this Bid.</param>
         /// <exception cref="ArgumentException">Thrown when the Bid amount is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the currency or auction is null.</exception>
-        public Bid(double amount, string currency, Auction auction)
+        public Bid(double amount, string currency)
         {
             if (amount <= 0)
             {
