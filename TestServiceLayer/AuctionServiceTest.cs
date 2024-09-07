@@ -1,12 +1,15 @@
-﻿using DataMapper.Interfaces;
-using DomainModel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-
-namespace Services.Tests
+﻿namespace Services.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using DataMapper.Interfaces;
+    using DomainModel;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
+    /// <summary>
+    /// Unit tests for the <see cref="AuctionService"/> class.
+    /// </summary>
     [TestClass]
     public class AuctionServiceTests
     {
@@ -14,6 +17,9 @@ namespace Services.Tests
         private Mock<IBidDAO> bidDAOMock;
         private AuctionService auctionService;
 
+        /// <summary>
+        /// Initializes the test environment by creating mocks and an instance of <see cref="AuctionService"/>.
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -22,6 +28,9 @@ namespace Services.Tests
             this.auctionService = new AuctionService(this.auctionDAOMock.Object, this.bidDAOMock.Object);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method correctly starts an auction when provided valid details.
+        /// </summary>
         [TestMethod]
         public void StartAuction_ValidAuction_StartsAuction()
         {
@@ -43,13 +52,16 @@ namespace Services.Tests
             this.auctionDAOMock.Verify(a => a.Add(It.IsAny<Auction>()), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method finalizes an auction if it is not already completed.
+        /// </summary>
         [TestMethod]
         public void FinalizeAuction_AuctionNotCompleted_FinalizesAuction()
         {
             // Arrange
             var auction = new Auction(new Person("John Doe"), new Product(1, "Product A", "Description", new List<Category>()), DateTime.Now, DateTime.Now.AddDays(1), 100, "USD")
             {
-                IsCompleted = false
+                IsCompleted = false,
             };
 
             // Act
@@ -60,21 +72,26 @@ namespace Services.Tests
             this.auctionDAOMock.Verify(a => a.Update(auction), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method throws an exception if the auction is already completed.
+        /// </summary>
         [TestMethod]
         public void FinalizeAuction_AuctionAlreadyCompleted_ThrowsException()
         {
             // Arrange
             var auction = new Auction(new Person("John Doe"), new Product(1, "Product A", "Description", new List<Category>()), DateTime.Now, DateTime.Now.AddDays(1), 100, "USD")
             {
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             // Act & Assert
             Assert.ThrowsException<InvalidOperationException>(() =>
-                this.auctionService.FinalizeAuction(new Person("John Doe"), auction)
-            );
+                this.auctionService.FinalizeAuction(new Person("John Doe"), auction));
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.GetAuctionById"/> method returns the correct auction for a valid ID.
+        /// </summary>
         [TestMethod]
         public void GetAuctionById_ValidId_ReturnsAuction()
         {
@@ -89,6 +106,9 @@ namespace Services.Tests
             Assert.AreEqual(auction, result);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.GetAllAuctions"/> method returns all auctions.
+        /// </summary>
         [TestMethod]
         public void GetAllAuctions_ReturnsAllAuctions()
         {
@@ -96,7 +116,7 @@ namespace Services.Tests
             var auctions = new List<Auction>
             {
                 new Auction(new Person("John Doe"), new Product(1, "Product A", "Description", new List<Category>()), DateTime.Now, DateTime.Now.AddDays(1), 100, "USD"),
-                new Auction(new Person("Jane Smith"), new Product(2, "Product B", "Description", new List<Category>()), DateTime.Now, DateTime.Now.AddDays(2), 200, "USD")
+                new Auction(new Person("Jane Smith"), new Product(2, "Product B", "Description", new List<Category>()), DateTime.Now, DateTime.Now.AddDays(2), 200, "USD"),
             };
             this.auctionDAOMock.Setup(a => a.GetAll()).Returns(auctions);
 
@@ -107,6 +127,9 @@ namespace Services.Tests
             CollectionAssert.AreEqual(auctions, result);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.UpdateAuction"/> method correctly updates an auction.
+        /// </summary>
         [TestMethod]
         public void UpdateAuction_ValidAuction_UpdatesAuction()
         {
@@ -121,6 +144,9 @@ namespace Services.Tests
             this.auctionDAOMock.Verify(a => a.Update(auction), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.AddBid"/> method throws an exception if the bid currency does not match the auction currency.
+        /// </summary>
         [TestMethod]
         public void AddBid_CurrencyMismatch_ThrowsArgumentException()
         {
@@ -132,6 +158,9 @@ namespace Services.Tests
             Assert.ThrowsException<ArgumentException>(() => this.auctionService.AddBid(auction, bid));
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.AddBid"/> method throws an exception if the bid amount is lower than the highest bid.
+        /// </summary>
         [TestMethod]
         public void AddBid_AmountTooLow_ThrowsArgumentException()
         {
@@ -145,6 +174,9 @@ namespace Services.Tests
             Assert.ThrowsException<ArgumentException>(() => this.auctionService.AddBid(auction, bid));
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.AddBid"/> method adds a bid when there are no previous bids.
+        /// </summary>
         [TestMethod]
         public void AddBid_NoPreviousBids_AddsBid()
         {
@@ -160,6 +192,9 @@ namespace Services.Tests
             this.bidDAOMock.Verify(b => b.Add(bid), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.AddAuction"/> method calls the DAO's <c>Add</c> method.
+        /// </summary>
         [TestMethod]
         public void AddAuction_ShouldCallAddOnAuctionDAO()
         {
@@ -173,6 +208,9 @@ namespace Services.Tests
             this.auctionDAOMock.Verify(dao => dao.Add(auction), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.AddAuction"/> method throws an exception when the DAO's <c>Add</c> method fails.
+        /// </summary>
         [TestMethod]
         public void AddAuction_ShouldThrowException_WhenDAOAddFails()
         {
@@ -185,6 +223,9 @@ namespace Services.Tests
             Assert.AreEqual("DAO error", ex.Message);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.DeleteAuction"/> method calls the DAO's <c>Delete</c> method when the auction exists.
+        /// </summary>
         [TestMethod]
         public void DeleteAuction_ShouldCallDeleteOnAuctionDAO_WhenAuctionExists()
         {
@@ -200,6 +241,9 @@ namespace Services.Tests
             this.auctionDAOMock.Verify(dao => dao.Delete(auctionId), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.DeleteAuction"/> method does not call the DAO's <c>Delete</c> method when the auction does not exist.
+        /// </summary>
         [TestMethod]
         public void DeleteAuction_ShouldNotCallDeleteOnAuctionDAO_WhenAuctionDoesNotExist()
         {
@@ -214,6 +258,9 @@ namespace Services.Tests
             this.auctionDAOMock.Verify(dao => dao.Delete(It.IsAny<int>()), Times.Never);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method does not throw an exception when no category exceeds the maximum number of active auctions.
+        /// </summary>
         [TestMethod]
         public void StartAuction_ShouldNotThrowException_WhenNoCategoryExceedsMaxAuctionsPerCategory()
         {
@@ -240,6 +287,9 @@ namespace Services.Tests
             }
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method throws an exception when a category exceeds the maximum number of active auctions.
+        /// </summary>
         [TestMethod]
         public void StartAuction_ShouldThrowException_WhenCategoryExceedsMaxAuctionsPerCategory()
         {
@@ -248,7 +298,7 @@ namespace Services.Tests
             var category = new Category("Category1");
             var product = new Product(1, "Product", "Description", new List<Category> { category });
             var auction = new Auction(new Person("John Doe"), new Product(1, "Product A", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 100, "USD");
-        
+
             this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
             this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category))
                           .Returns(new List<Auction> { auction });
@@ -260,6 +310,9 @@ namespace Services.Tests
             Assert.AreEqual($"Cannot start a new auction. Maximum of {this.auctionService.MaxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.", ex.Message);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method throws an exception when multiple categories exceed the maximum number of active auctions.
+        /// </summary>
         [TestMethod]
         public void StartAuction_ShouldThrowException_WhenMultipleCategoriesExceedMaxAuctionsPerCategory()
         {
@@ -273,7 +326,7 @@ namespace Services.Tests
             // Mocking the DAO methods
             this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
             this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category1))
-                          .Returns(new List<Auction> { auction});
+                          .Returns(new List<Auction> { auction });
             this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category2))
                           .Returns(new List<Auction> { auction });
 

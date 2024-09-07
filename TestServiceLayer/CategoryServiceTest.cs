@@ -1,15 +1,21 @@
-﻿using DataMapper.Interfaces;
-using DomainModel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using ServiceLayer.Services;
-using System;
-
-namespace TestServiceLayer
+﻿namespace TestServiceLayer
 {
+    using System;
+    using DataMapper.Interfaces;
+    using DomainModel;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+    using ServiceLayer.Services;
+
+    /// <summary>
+    /// Unit tests for the <see cref="CategoryService"/> class.
+    /// </summary>
     [TestClass]
     public class CategoryServiceTest
     {
+        /// <summary>
+        /// Tests that the <see cref="CategoryService.CreateCategory"/> method creates and caches a new category when it does not already exist.
+        /// </summary>
         [TestMethod]
         public void CreateCategory_ShouldCreateAndCacheNewCategory_WhenCategoryDoesNotExist()
         {
@@ -30,6 +36,9 @@ namespace TestServiceLayer
             categoryDAO.Verify(dao => dao.Add(It.IsAny<Category>()), Times.Once);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="CategoryService.CreateCategory"/> method returns an existing category when it already exists.
+        /// </summary>
         [TestMethod]
         public void CreateCategory_ShouldReturnExistingCategory_WhenCategoryExists()
         {
@@ -51,6 +60,9 @@ namespace TestServiceLayer
             Assert.IsTrue(categoryService.Categories.ContainsKey(categoryName));
         }
 
+        /// <summary>
+        /// Tests that the <see cref="CategoryService.CreateCategory"/> method creates a new category when the DAO returns null.
+        /// </summary>
         [TestMethod]
         public void CreateCategory_ShouldCreateCategory_WhenDAOReturnsNull()
         {
@@ -72,6 +84,9 @@ namespace TestServiceLayer
             Assert.IsTrue(categoryService.Categories.ContainsKey(categoryName));
         }
 
+        /// <summary>
+        /// Tests that the <see cref="CategoryService.CreateCategory"/> method caches the category when it is created.
+        /// </summary>
         [TestMethod]
         public void CreateCategory_ShouldCacheCategory_WhenCreated()
         {
@@ -91,6 +106,6 @@ namespace TestServiceLayer
             // Assert
             Assert.AreSame(category1, category2);
             Assert.IsTrue(categoryService.Categories.ContainsKey(categoryName));
+        }
     }
-}
 }

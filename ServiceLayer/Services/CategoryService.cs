@@ -35,6 +35,14 @@ namespace ServiceLayer.Services
         }
 
         /// <summary>
+        /// Gets a dictionary for caching categories by their name.
+        /// </summary>
+        public Dictionary<string, Category> Categories
+        {
+            get { return this.categories; }
+        }
+
+        /// <summary>
         /// Creates a new category with the specified name if it does not already exist.
         /// </summary>
         /// <param name="name">The name of the category to be created.</param>
@@ -59,7 +67,5 @@ namespace ServiceLayer.Services
 
             return category;
         }
-
-        public Dictionary<string, Category> Categories { get { return this.categories;  } }
     }
 }

@@ -1,17 +1,27 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace DomainModel.Tests
+﻿namespace DomainModel.Tests
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Contains unit tests for the <see cref="CurrentOrFutureDateAttribute"/> custom validation attribute.
+    /// </summary>
     [TestClass]
     public class ValidatorTests
     {
+        /// <summary>
+        /// Creates an instance of the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="CurrentOrFutureDateAttribute"/>.</returns>
         private CurrentOrFutureDateAttribute CreateAttribute()
         {
             return new CurrentOrFutureDateAttribute();
         }
 
+        /// <summary>
+        /// Tests that a future date is considered valid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_DateIsFutureDate_ReturnsTrue()
         {
@@ -26,6 +36,9 @@ namespace DomainModel.Tests
             Assert.IsTrue(result);
         }
 
+        /// <summary>
+        /// Tests that a past date is considered invalid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_DateIsPastDate_ReturnsFalse()
         {
@@ -40,6 +53,9 @@ namespace DomainModel.Tests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Tests that a non-date value is considered invalid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_ValueIsNotDate_ReturnsFalse()
         {
@@ -54,6 +70,9 @@ namespace DomainModel.Tests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="CurrentOrFutureDateAttribute.FormatErrorMessage"/> method returns the correct error message for a property.
+        /// </summary>
         [TestMethod]
         public void FormatErrorMessage_ReturnsCorrectMessage()
         {
@@ -69,6 +88,9 @@ namespace DomainModel.Tests
             Assert.AreEqual(expectedMessage, result);
         }
 
+        /// <summary>
+        /// Tests that a date exactly at midnight in the future is considered valid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_DateIsExactlyMidnightInFuture_ReturnsTrue()
         {
@@ -83,6 +105,9 @@ namespace DomainModel.Tests
             Assert.IsTrue(result);
         }
 
+        /// <summary>
+        /// Tests that a null date is considered invalid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_NullDate_ReturnsFalse()
         {
@@ -97,6 +122,9 @@ namespace DomainModel.Tests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Tests that a future date in a different time zone is considered valid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_FutureDateInDifferentTimeZone_ReturnsTrue()
         {
@@ -111,6 +139,9 @@ namespace DomainModel.Tests
             Assert.IsTrue(result);
         }
 
+        /// <summary>
+        /// Tests that a past date in a different time zone is considered invalid by the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
         [TestMethod]
         public void IsValid_PastDateInDifferentTimeZone_ReturnsFalse()
         {
@@ -125,6 +156,9 @@ namespace DomainModel.Tests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="CurrentOrFutureDateAttribute.FormatErrorMessage"/> method returns the correct error messages for different property names.
+        /// </summary>
         [TestMethod]
         public void FormatErrorMessage_WithDifferentPropertyNames_ReturnsCorrectMessage()
         {

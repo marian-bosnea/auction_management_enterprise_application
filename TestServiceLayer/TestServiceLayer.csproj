@@ -132,6 +132,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuctionMediatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuctionServiceTest.cs" />
     <Compile Include="CategoryServiceTest.cs" />

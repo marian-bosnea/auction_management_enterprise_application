@@ -167,4 +167,3 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionM
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.exe
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.AssemblyReference.cache

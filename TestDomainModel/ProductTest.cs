@@ -1,13 +1,19 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DomainModel;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace DomainModel.Tests
+﻿namespace DomainModel.Tests
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using DomainModel;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Contains unit tests for the <see cref="Product"/> class.
+    /// </summary>
     [TestClass]
-    public class ProductTests
+    public class ProductTest
     {
+        /// <summary>
+        /// Tests that the constructor correctly initializes a product with valid parameters.
+        /// </summary>
         [TestMethod]
         public void Constructor_ValidParameters_ShouldInitializeProductCorrectly()
         {
@@ -27,6 +33,9 @@ namespace DomainModel.Tests
             Assert.AreEqual(categories, product.Categories);
         }
 
+        /// <summary>
+        /// Tests that validating a product with an empty name throws a <see cref="ValidationException"/>.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
         public void ValidateProduct_EmptyName_ShouldThrowValidationException()
@@ -40,6 +49,9 @@ namespace DomainModel.Tests
             Validator.ValidateObject(product, context, true);
         }
 
+        /// <summary>
+        /// Tests that validating a product with a name longer than 200 characters throws a <see cref="ValidationException"/>.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
         public void ValidateProduct_NameTooLong_ShouldThrowValidationException()
@@ -54,6 +66,9 @@ namespace DomainModel.Tests
             Validator.ValidateObject(product, context, true);
         }
 
+        /// <summary>
+        /// Tests that validating a product with an empty description throws a <see cref="ValidationException"/>.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
         public void ValidateProduct_EmptyDescription_ShouldThrowValidationException()
@@ -67,6 +82,9 @@ namespace DomainModel.Tests
             Validator.ValidateObject(product, context, true);
         }
 
+        /// <summary>
+        /// Tests that validating a product with a description longer than 1000 characters throws a <see cref="ValidationException"/>.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
         public void ValidateProduct_DescriptionTooLong_ShouldThrowValidationException()
@@ -81,6 +99,9 @@ namespace DomainModel.Tests
             Validator.ValidateObject(product, context, true);
         }
 
+        /// <summary>
+        /// Tests that adding a valid category to a product increases the number of categories.
+        /// </summary>
         [TestMethod]
         public void AddCategory_ValidCategory_ShouldAddCategory()
         {
@@ -97,6 +118,9 @@ namespace DomainModel.Tests
             Assert.IsTrue(product.Categories.Contains(category));
         }
 
+        /// <summary>
+        /// Tests that adding a category that already exists in the product's category list does not add a duplicate.
+        /// </summary>
         [TestMethod]
         public void AddCategory_CategoryAlreadyExists_ShouldNotAddDuplicateCategory()
         {
@@ -112,6 +136,9 @@ namespace DomainModel.Tests
             Assert.AreEqual(1, product.Categories.Count);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="Product.ToString"/> method returns the product's name.
+        /// </summary>
         [TestMethod]
         public void ToString_ShouldReturnProductName()
         {

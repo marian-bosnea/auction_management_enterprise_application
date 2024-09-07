@@ -821,6 +821,9 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="267793149">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="AuctionManagementEfCoreDbContext.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
@@ -1097,7 +1100,4 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="267793149">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
 </stylecopresultscache>

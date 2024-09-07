@@ -12,9 +12,21 @@ namespace DomainModel
     /// </summary>
     public class Person
     {
+        /// <summary>
+        /// The score associated with the person, which is clamped between 0 and 10.
+        /// </summary>
         private double score;
+
+        /// <summary>
+        /// The name of the person. Must be between 1 and 100 characters long.
+        /// </summary>
         private string name;
+
+        /// <summary>
+        /// The role assigned to the person, indicating their position or function within the system.
+        /// </summary>
         private PersonRole role;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.
