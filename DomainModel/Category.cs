@@ -76,9 +76,15 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Adds a subcategory to this category.
+        /// Returns a string that represents the current object.
         /// </summary>
-        /// <param name="subcategory">The subcategory to add.</param>
+        /// <returns>
+        /// A string that contains the name of the current object.
+        /// </returns>
+        /// <remarks>
+        /// This method overrides the default <see cref="object.ToString"/> method to provide a meaningful representation of the object.
+        /// In this implementation, it returns the <see cref="Name"/> property of the object.
+        /// </remarks>
         public override string ToString()
         {
             return this.Name;

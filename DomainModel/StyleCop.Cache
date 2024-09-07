@@ -205,7 +205,7 @@
   <sourcecode name=".NETFramework,Version=v4.7.2.AssemblyAttributes.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
       <sourceFile>2024/08/21 14:08:02.441</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
@@ -231,7 +231,7 @@
   <sourcecode name="Auction.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
       <sourceFile>2024/09/07 12:36:35.281</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
@@ -254,7 +254,7 @@
   <sourcecode name="Bid.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
       <sourceFile>2024/09/07 12:39:38.765</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
@@ -277,8 +277,8 @@
   <sourcecode name="Category.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/09/07 12:40:39.772</sourceFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
+      <sourceFile>2024/09/07 14:09:11.419</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -295,24 +295,13 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementParameterDocumentationMustMatchElementParameters" ruleCheckId="SA1612">
-        <context>The param tags in the documentation header must match the element's parameter list.</context>
-        <line>82</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementReturnValueMustBeDocumented" ruleCheckId="SA1615">
-        <context>The documentation header must contain a returns tag since the element has a return value.</context>
-        <line>82</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="Person.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/09/07 12:29:43.025</sourceFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
+      <sourceFile>2024/09/07 15:14:55.403</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -334,8 +323,8 @@
   <sourcecode name="PersonRole.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/09/07 12:30:47.405</sourceFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
+      <sourceFile>2024/09/07 15:14:55.332</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -357,7 +346,7 @@
   <sourcecode name="Product.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
       <sourceFile>2024/09/07 12:39:05.578</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
@@ -380,7 +369,7 @@
   <sourcecode name="CurrentOrFutureDateAttribute.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
       <sourceFile>2024/09/07 11:22:43.477</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
@@ -415,8 +404,8 @@
   <sourcecode name="EndDateLAterThanStartDateAttribute.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
-      <settingsFile>2024/08/21 13:48:29.005</settingsFile>
-      <sourceFile>2024/09/07 10:22:05.256</sourceFile>
+      <settingsFile>2024/09/07 15:29:02.345</settingsFile>
+      <sourceFile>2024/09/07 15:34:04.233</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -434,19 +423,14 @@
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
     <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
-        <context>The field must have a documentation header.</context>
-        <line>14</line>
-        <warning>False</warning>
-      </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to endDateValue must begin with the 'this.', 'base.', 'object.' or 'EndDateLaterThanStartDateAttribute.' or 'ValidationAttribute.' prefix to indicate the intended method call. </context>
-        <line>45</line>
-        <index>2040</index>
-        <endIndex>2051</endIndex>
-        <startLine>45</startLine>
+        <line>49</line>
+        <index>2297</index>
+        <endIndex>2308</endIndex>
+        <startLine>49</startLine>
         <startColumn>21</startColumn>
-        <endLine>45</endLine>
+        <endLine>49</endLine>
         <endColumn>32</endColumn>
         <warning>False</warning>
       </violation>

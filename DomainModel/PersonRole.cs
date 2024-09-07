@@ -4,9 +4,6 @@
 
 namespace DomainModel
 {
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Represents the role of a person in the auction process.
     /// </summary>

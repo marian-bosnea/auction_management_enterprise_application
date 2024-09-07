@@ -153,21 +153,28 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="AuctionManagementEfCoreDbContext.cs" />
+    <Compile Include="DAO\AuctionDAO.cs" />
+    <Compile Include="DAO\BidDAO.cs" />
+    <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\PersonDAO.cs" />
+    <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="Interfaces\IAuctionDAO.cs" />
     <Compile Include="Interfaces\IBidDAO.cs" />
     <Compile Include="Interfaces\ICategoryDAO.cs" />
     <Compile Include="Interfaces\IProductDAO.cs" />
     <Compile Include="Interfaces\IPersonDAO.cs" />
-    <Compile Include="Migrations\202409071106475_first_migration.cs" />
+    <Compile Include="Migrations\202409071106475_first_migration.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\202409071106475_first_migration.designer.cs">
       <DependentUpon>202409071106475_first_migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Configuration.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuctionManagementApplication\AuctionManagementApplication.csproj">

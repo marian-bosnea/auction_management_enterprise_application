@@ -26,7 +26,7 @@ namespace Services
         /// <summary>
         /// The DAO interface for managing Bid-related data.
         /// </summary>
-        private readonly IBidDAO BidDAO;
+        private readonly IBidDAO bidDAO;
 
         /// <summary>
         /// The maximum number of active auctions a person can have at any given time.
@@ -46,7 +46,7 @@ namespace Services
         public AuctionService(IAuctionDAO auctionDAO, IBidDAO bidDAO)
         {
             this.auctionDAO = auctionDAO;
-            this.BidDAO = bidDAO;
+            this.bidDAO = bidDAO;
 
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
             this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "3");
@@ -154,7 +154,7 @@ namespace Services
 
             auction.AddBid(bid);
 
-            this.BidDAO.Add(bid);
+            this.bidDAO.Add(bid);
 
             this.auctionDAO.Update(auction);
         }

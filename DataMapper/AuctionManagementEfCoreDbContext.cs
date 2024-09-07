@@ -1,7 +1,11 @@
-﻿namespace DataMapper
+﻿// <copyright file="AuctionManagementEfCoreDbContext.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DataMapper
 {
-    using DomainModel;
     using System.Data.Entity;
+    using DomainModel;
 
     /// <summary>
     /// Represents the Entity Framework Core database context for auction management.

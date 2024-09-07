@@ -11,6 +11,10 @@ namespace DomainModel
     /// </summary>
     public class EndDateLaterThanStartDateAttribute : ValidationAttribute
     {
+        /// <summary>
+        /// Stores the name of the property that represents the start date of an entity or object.
+        /// This is used to dynamically reference or validate the start date property in various operations.
+        /// </summary>
         private readonly string startDatePropertyName;
 
         /// <summary>
