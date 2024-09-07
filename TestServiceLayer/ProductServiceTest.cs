@@ -1,4 +1,8 @@
-﻿namespace TestServiceLayer
+﻿// <copyright file="ProductServiceTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace TestServiceLayer
 {
     using System;
     using System.Collections.Generic;
@@ -15,10 +19,21 @@
     /// Unit tests for the <see cref="ProductService"/> class.
     /// </summary>
     [TestClass]
-    public class ProductServiceTests
+    public class ProductServiceTest
     {
+        /// <summary>
+        /// A mock implementation of the <see cref="IProductDAO"/> used for testing data access operations related to products.
+        /// </summary>
         private Mock<IProductDAO> productDAO;
+
+        /// <summary>
+        /// A mock implementation of the <see cref="ICategoryService"/> used for testing category-related operations and interactions.
+        /// </summary>
         private Mock<ICategoryService> categoryService;
+
+        /// <summary>
+        /// The service responsible for managing product-related operations, including business logic and data manipulation.
+        /// </summary>
         private ProductService productService;
 
         /// <summary>

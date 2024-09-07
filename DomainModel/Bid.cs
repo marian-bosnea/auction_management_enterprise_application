@@ -12,7 +12,14 @@ namespace DomainModel
     /// </summary>;
     public class Bid
     {
+        /// <summary>
+        /// The amount of the transaction or financial value, represented as a double.
+        /// </summary>
         private double amount;
+
+        /// <summary>
+        /// The currency in which the <see cref="amount"/> is denominated, represented as a string (e.g., "USD", "EUR").
+        /// </summary>
         private string currency;
 
         /// <summary>

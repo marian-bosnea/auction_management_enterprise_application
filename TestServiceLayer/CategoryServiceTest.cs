@@ -1,4 +1,8 @@
-﻿namespace TestServiceLayer
+﻿// <copyright file="CategoryServiceTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace TestServiceLayer
 {
     using System;
     using DataMapper.Interfaces;

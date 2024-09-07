@@ -1,4 +1,8 @@
-﻿namespace DomainModel.Tests
+﻿// <copyright file="ProductTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel.Tests
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

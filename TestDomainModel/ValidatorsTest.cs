@@ -1,4 +1,8 @@
-﻿namespace DomainModel.Tests
+﻿// <copyright file="ValidatorsTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel.Tests
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -8,17 +12,8 @@
     /// Contains unit tests for the <see cref="CurrentOrFutureDateAttribute"/> custom validation attribute.
     /// </summary>
     [TestClass]
-    public class ValidatorTests
+    public class ValidatorsTest
     {
-        /// <summary>
-        /// Creates an instance of the <see cref="CurrentOrFutureDateAttribute"/>.
-        /// </summary>
-        /// <returns>A new instance of the <see cref="CurrentOrFutureDateAttribute"/>.</returns>
-        private CurrentOrFutureDateAttribute CreateAttribute()
-        {
-            return new CurrentOrFutureDateAttribute();
-        }
-
         /// <summary>
         /// Tests that a future date is considered valid by the <see cref="CurrentOrFutureDateAttribute"/>.
         /// </summary>
@@ -174,6 +169,15 @@
             // Assert
             Assert.AreEqual($"The {propertyName1} cannot be earlier than the current date.", result1);
             Assert.AreEqual($"The {propertyName2} cannot be earlier than the current date.", result2);
+        }
+
+        /// <summary>
+        /// Creates an instance of the <see cref="CurrentOrFutureDateAttribute"/>.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="CurrentOrFutureDateAttribute"/>.</returns>
+        private CurrentOrFutureDateAttribute CreateAttribute()
+        {
+            return new CurrentOrFutureDateAttribute();
         }
     }
 }

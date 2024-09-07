@@ -133,7 +133,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestData
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\tr\Microsoft.Build.Utilities.Core.resources.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\zh-Hans\Microsoft.Build.Utilities.Core.resources.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\zh-Hant\Microsoft.Build.Utilities.Core.resources.dll
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.AssemblyReference.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMapper.dll.config
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.CoreCompileInputs.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.CopyComplete
@@ -156,3 +155,4 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestData
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\tr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\zh-Hant\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.AssemblyReference.cache

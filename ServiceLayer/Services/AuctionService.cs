@@ -53,6 +53,17 @@ namespace Services
         }
 
         /// <summary>
+        /// Gets the maximum number of active auctions a person can have within a single category.
+        /// </summary>
+        public int MaxActiveAuctionsPerCategory
+        {
+            get
+            {
+                return this.maxActiveAuctionsPerCategory;
+            }
+        }
+
+        /// <summary>
         /// Creates and starts a new auction for a person.
         /// </summary>
         /// <param name="person">The person starting the auction.</param>
@@ -101,7 +112,7 @@ namespace Services
         /// </exception>
         /// <remarks>
         /// This method sets the <c>IsCompleted</c> property of the auction to <c>true</c> if the auction is not already completed.
-        /// It then updates the auction record in the data store through the <c>auctionDAO</c> object. 
+        /// It then updates the auction record in the data store through the <c>auctionDAO</c> object.
         /// Note that currently, the <c>person</c> parameter is not used within the method, but it may be used for additional validation or logging in future implementations.
         /// </remarks>
         public void FinalizeAuction(Person person, Auction auction)
@@ -202,14 +213,6 @@ namespace Services
             if (auction != null)
             {
                 this.auctionDAO.Delete(id);
-            }
-        }
-
-        public int MaxActiveAuctionsPerCategory
-        {
-            get
-            {
-                return this.maxActiveAuctionsPerCategory;
             }
         }
 

@@ -1,4 +1,8 @@
-﻿namespace TestServiceLayer
+﻿// <copyright file="PersonServiceTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace TestServiceLayer
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +21,14 @@
     [TestClass]
     public class PersonServiceTest
     {
+        /// <summary>
+        /// A mock implementation of the <see cref="IPersonDAO"/> used for testing data access operations related to people.
+        /// </summary>
         private Mock<IPersonDAO> personDAO;
+
+        /// <summary>
+        /// The service responsible for managing person-related operations, including business logic and data manipulation.
+        /// </summary>
         private PersonService personService;
 
         /// <summary>

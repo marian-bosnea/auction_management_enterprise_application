@@ -1,4 +1,8 @@
-﻿namespace DomainModel.Tests
+﻿// <copyright file="PersonTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DomainModel.Tests
 {
     using System;
     using DomainModel;

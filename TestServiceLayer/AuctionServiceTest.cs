@@ -1,4 +1,8 @@
-﻿namespace Services.Tests
+﻿// <copyright file="AuctionServiceTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace Services.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -11,10 +15,21 @@
     /// Unit tests for the <see cref="AuctionService"/> class.
     /// </summary>
     [TestClass]
-    public class AuctionServiceTests
+    public class AuctionServiceTest
     {
+        /// <summary>
+        /// A mock implementation of the <see cref="IAuctionDAO"/> used for testing data access operations related to auctions.
+        /// </summary>
         private Mock<IAuctionDAO> auctionDAOMock;
+
+        /// <summary>
+        /// A mock implementation of the <see cref="IBidDAO"/> used for testing data access operations related to bids.
+        /// </summary>
         private Mock<IBidDAO> bidDAOMock;
+
+        /// <summary>
+        /// The service responsible for managing auction-related operations, including business logic and data manipulation.
+        /// </summary>
         private AuctionService auctionService;
 
         /// <summary>
@@ -267,10 +282,10 @@
             // Arrange
             var person = new Person("John Doe");
             var product = new Product(1, "Product", "Description", new List<Category>
-    {
-        new Category("Category1"),
-        new Category("Category2"),
-    });
+            {
+            new Category("Category1"),
+            new Category("Category2"),
+            });
 
             // Mocking the DAO methods
             this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());

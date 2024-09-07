@@ -1,4 +1,8 @@
-﻿namespace TestServiceLayer
+﻿// <copyright file="AuctionMediatorTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace TestServiceLayer
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +20,19 @@
     [TestClass]
     public class AuctionMediatorTest
     {
+        /// <summary>
+        /// A mock implementation of the <see cref="IAuctionService"/> used for testing auction-related functionalities.
+        /// </summary>
         private Mock<IAuctionService> auctionServiceMock;
+
+        /// <summary>
+        /// A mock implementation of the <see cref="IPersonService"/> used for testing person-related functionalities.
+        /// </summary>
         private Mock<IPersonService> personServiceMock;
+
+        /// <summary>
+        /// The mediator responsible for coordinating interactions between auctions and other components.
+        /// </summary>
         private AuctionMediator auctionMediator;
 
         /// <summary>
