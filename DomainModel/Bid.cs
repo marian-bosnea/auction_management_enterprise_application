@@ -12,6 +12,9 @@ namespace DomainModel
     /// </summary>;
     public class Bid
     {
+        private double amount;
+        private string currency;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bid"/> class.
         /// </summary>
@@ -20,15 +23,15 @@ namespace DomainModel
         /// <param name="auction">The auction associated with this Bid.</param>
         /// <exception cref="ArgumentException">Thrown when the Bid amount is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the currency or auction is null.</exception>
-        public Bid(decimal amount, string currency, Auction auction)
+        public Bid(double amount, string currency, Auction auction)
         {
             if (amount <= 0)
             {
                 throw new ArgumentException("Bid amount must be greater than zero.");
             }
 
-            this.Amount = amount;
-            this.Currency = currency ?? throw new ArgumentNullException(nameof(currency));
+            this.amount = amount;
+            this.currency = currency ?? throw new ArgumentNullException(nameof(currency));
             this.BidTime = DateTime.Now;
         }
 
@@ -47,14 +50,39 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "Bid amount is required.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Bid amount must be greater than zero.")]
-        public decimal Amount { get;  set; }
+        public double Amount
+        {
+            get
+            {
+                return this.amount;
+            }
+
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Bid amount must be greater than zero.");
+                }
+
+                this.amount = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the currency in which the Bid is made.
         /// </summary>
         [Required(ErrorMessage = "Currency is required.")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Currency must be a valid 3-letter ISO code.")]
-        public string Currency { get;  set; }
+        public string Currency { get { return this.currency;  } set
+            {
+                if(value.Length != 3)
+                {
+                    throw new ArgumentException("Currency must be a valid 3-letter ISO code.");
+                }
+
+                this.currency = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the time when the Bid was made.
@@ -62,7 +90,7 @@ namespace DomainModel
         [Required(ErrorMessage = "Bid time is required.")]
         [DataType(DataType.DateTime, ErrorMessage = "Bid time must be a valid date and time.")]
         [CustomValidation(typeof(Bid), nameof(ValidateBidTime))]
-        public DateTime BidTime { get;  set; }
+        public DateTime BidTime { get; set; }
 
         /// <inheritdoc/>
         public override string ToString()

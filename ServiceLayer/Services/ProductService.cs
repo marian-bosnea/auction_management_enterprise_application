@@ -133,9 +133,9 @@ namespace DomainModel
         /// <returns>A list of all products.</returns>
         public List<Product> GetAllProducts()
         {
-             this.Products = this.productDAO.GetAll();
+            this.Products = this.productDAO.GetAll();
 
-             return this.Products;
+            return this.Products;
         }
 
         /// <summary>
@@ -149,12 +149,12 @@ namespace DomainModel
         /// </remarks>
         public void UpdateProduct(Product product)
         {
-                var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
+            var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
 
-                this.Products.Remove(product);
-                this.Products.Add(newProduct);
+            this.Products.Remove(product);
+            this.Products.Add(newProduct);
 
-                this.productDAO.Update(newProduct);
+            this.productDAO.Update(newProduct);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace DomainModel
         /// </remarks>
         public void DeleteProduct(Product product)
         {
-                this.Products.Remove(product);
+            this.Products.Remove(product);
         }
 
         /// <summary>

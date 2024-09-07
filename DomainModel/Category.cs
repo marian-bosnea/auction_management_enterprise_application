@@ -33,21 +33,21 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "Category name is required.")]
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Category name must be between 1 and 100 characters long.")]
-        public string Name { get;  set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the list of parent categories to which this category belongs.
         /// </summary>
         [Required(ErrorMessage = "Parents list is required.")]
         [MinLength(1, ErrorMessage = "Category must have at least one parent category.")]
-        public List<Category> Parents { get;  set; }
+        public List<Category> Parents { get; set; }
 
         /// <summary>
         /// Gets or sets the list of subcategories that belong to this category.
         /// </summary>
         [Required(ErrorMessage = "Subcategories list is required.")]
         [MinLength(1, ErrorMessage = "Category must have at least one subcategory.")]
-        public List<Category> Subcategories { get;  set; }
+        public List<Category> Subcategories { get; set; }
 
         /// <summary>
         /// Adds a parent category to this category.

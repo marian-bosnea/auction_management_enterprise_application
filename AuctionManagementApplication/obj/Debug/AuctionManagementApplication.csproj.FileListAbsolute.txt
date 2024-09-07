@@ -49,3 +49,4 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionM
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\System.Numerics.Vectors.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.AssemblyReference.cache

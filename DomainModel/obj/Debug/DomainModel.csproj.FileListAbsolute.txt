@@ -8,4 +8,10 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainMo
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\System.Numerics.Vectors.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\System.Numerics.Vectors.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.AssemblyReference.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml

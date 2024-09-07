@@ -47,6 +47,12 @@ namespace DomainModel
                 throw new ArgumentException("Starting price must be greater than zero.");
             }
 
+            if (currency.Length != 3)
+            {
+                throw new ArgumentException("Currency ISO code must be 3 characters long.");
+
+            }
+
             this.Seller = seller ?? throw new ArgumentNullException(nameof(seller));
             this.Product = product ?? throw new ArgumentNullException(nameof(product));
             this.StartDate = startDate;
@@ -123,6 +129,16 @@ namespace DomainModel
         /// </exception>
         public void AddBid(Bid bid)
         {
+            if (bid == null)
+            {
+                throw new ArgumentNullException(nameof(bid));
+            }
+
+            if (this.IsCompleted)
+            {
+                return;
+            }
+
             this.Bids.Add(bid);
         }
 
