@@ -56,6 +56,6 @@ namespace ServiceLayer.Interfaces
         /// The method adjusts the person's score based on the feedback score provided. Positive feedback increases the score, while negative feedback decreases it.
         /// The feedback score should be within the range of -0.1 to 0.1 to ensure balanced adjustments.
         /// </remarks>
-        void ProvideFeedback(Person person, decimal feedbackScore);
+        void ProvideFeedback(Person person, double feedbackScore);
     }
 }

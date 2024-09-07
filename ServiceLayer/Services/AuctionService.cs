@@ -61,7 +61,7 @@ namespace Services
         /// <param name="endDate">The end date of the auction.</param>
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency for the auction.</param>
-        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, double startingPrice, string currency)
         {
             int maxItemsBasedOnScore = this.CalculateMaxItemsBasedOnScore(person.Score);
 
@@ -139,9 +139,9 @@ namespace Services
                 throw new ArgumentException("Bid currency must match auction currency.");
             }
 
-            decimal minPrice = auction.Bids.Count == 0
+            double minPrice = auction.Bids.Count == 0
                                 ? auction.StartingPrice
-                                : auction.Bids[auction.Bids.Count - 1].Amount * 1.1m;
+                                : auction.Bids[auction.Bids.Count - 1].Amount * 1.1;
 
             if (bid.Amount < minPrice)
             {
@@ -218,9 +218,9 @@ namespace Services
         /// <c>Max(1, 10 - ((10 - score) * 0.5m))</c>
         /// This ensures that the number of items decreases as the score decreases, with a minimum of 1 item.
         /// </remarks>
-        private int CalculateMaxItemsBasedOnScore(decimal score)
+        private int CalculateMaxItemsBasedOnScore(double score)
         {
-            return (int)Math.Max(1, 10 - ((10 - score) * 0.5m));
+            return (int)Math.Max(1, 10 - ((10 - score) * 0.5));
         }
     }
 }

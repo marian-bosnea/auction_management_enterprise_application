@@ -44,7 +44,7 @@ namespace ServiceLayer
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency in which the auction is conducted.</param>
         /// <exception cref="ArgumentException">Thrown if the parameters are invalid.</exception>
-        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, double startingPrice, string currency)
         {
             this.personService.StartAuction(person);
             this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency);
@@ -81,7 +81,7 @@ namespace ServiceLayer
         /// <param name="person">The person receiving the feedback.</param>
         /// <param name="feedbackScore">The score representing the feedback.</param>
         /// <exception cref="ArgumentException">Thrown if the feedback score is invalid.</exception>
-        public void ProvideFeedback(Person person, decimal feedbackScore)
+        public void ProvideFeedback(Person person, double feedbackScore)
         {
             this.personService.ProvideFeedback(person, feedbackScore);
         }

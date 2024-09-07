@@ -7,14 +7,14 @@ namespace DomainModel
     using System;
     using System.ComponentModel.DataAnnotations;
 
-
     /// <summary>
     /// Represents a person who can initiate and manage auctions, with a score reflecting their reliability.
     /// </summary>
     public class Person
     {
         private double score;
-        private String name;
+        private string name;
+        private PersonRole role;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.
@@ -22,8 +22,8 @@ namespace DomainModel
         /// <param name="name">The name of the person.</param>
         public Person(string name)
         {
-            this.Name = name ?? throw new ArgumentNullException("name");
-            this.Score = 5.0;
+            this.name = name ?? throw new ArgumentNullException("name");
+            this.score = 5.0;
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace DomainModel
         {
             get
             {
-                return this.Role;
+                return this.role;
             }
 
             set
@@ -106,7 +106,7 @@ namespace DomainModel
                     throw new ArgumentException("Role enum must be valid");
                 }
 
-                this.Role = value;
+                this.role = value;
             }
         }
 

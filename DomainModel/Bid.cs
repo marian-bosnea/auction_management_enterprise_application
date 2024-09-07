@@ -73,13 +73,19 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "Currency is required.")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Currency must be a valid 3-letter ISO code.")]
-        public string Currency { get { return this.currency;  } set
+        public string Currency
+        {
+            get
             {
-                if(value.Length != 3)
+                return this.currency;
+            }
+
+            set
+            {
+                if (value.Length != 3)
                 {
                     throw new ArgumentException("Currency must be a valid 3-letter ISO code.");
                 }
-
                 this.currency = value;
             }
         }

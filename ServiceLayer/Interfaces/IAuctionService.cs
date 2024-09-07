@@ -22,7 +22,7 @@ namespace ServiceLayer.Interfaces
         /// <param name="endDate">The end date of the auction.</param>
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency for the auction.</param>
-        void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency);
+        void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, double startingPrice, string currency);
 
         /// <summary>
         /// Ends the specified auction by setting its status to completed if the person attempting to end it is the owner.

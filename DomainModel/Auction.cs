@@ -25,7 +25,7 @@ namespace DomainModel
         /// <exception cref="ArgumentException">Thrown when the start date is in the past, the end date is in the past, or the end date is before the start date.</exception>
         /// <exception cref="ArgumentException">Thrown when the starting price is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the product is null.</exception>
-        public Auction(Person seller, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public Auction(Person seller, Product product, DateTime startDate, DateTime endDate, double startingPrice, string currency)
         {
             if (startDate < DateTime.Now)
             {
@@ -101,7 +101,7 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "Starting price is required.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Starting price must be greater than zero.")]
-        public decimal StartingPrice { get; set; }
+        public double StartingPrice { get; set; }
 
         /// <summary>
         /// Gets or sets the currency in which the auction is conducted.

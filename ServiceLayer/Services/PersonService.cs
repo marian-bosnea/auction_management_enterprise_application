@@ -29,10 +29,10 @@ namespace Services
         /// The seriousness threshold used for determining if a person's score meets the criteria for certain operations.
         /// </summary>
         /// <remarks>
-        /// This threshold is a decimal value that is used to enforce criteria related to the seriousness of a person when performing actions such as starting auctions.
+        /// This threshold is a double value that is used to enforce criteria related to the seriousness of a person when performing actions such as starting auctions.
         /// The value is configurable through the application settings, with a default of 4.0 if not specified.
         /// </remarks>
-        private readonly decimal seriousnessThreshold;
+        private readonly double seriousnessThreshold;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
@@ -46,7 +46,7 @@ namespace Services
         public PersonService(IPersonDAO personDAO)
         {
             this.personDAO = personDAO;
-            this.seriousnessThreshold = decimal.Parse(ConfigurationManager.AppSettings["SeriousnessThreshold"] ?? "4.0");
+            this.seriousnessThreshold = double.Parse(ConfigurationManager.AppSettings["SeriousnessThreshold"] ?? "4.0");
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Services
 
             if (auction.Bids.Any())
             {
-                person.AdjustScore(0.1m);
+                person.AdjustScore(0.1);
             }
 
             this.personDAO.Update(person);
@@ -109,7 +109,7 @@ namespace Services
         /// </summary>
         /// <param name="person">The person to receive feedback.</param>
         /// <param name="feedbackScore">The feedback score to adjust, between -0.1 and 0.1.</param>
-        public void ProvideFeedback(Person person, decimal feedbackScore)
+        public void ProvideFeedback(Person person, double feedbackScore)
         {
             person.AdjustScore(feedbackScore);
             this.personDAO.Update(person);

@@ -4,6 +4,7 @@
 
 namespace DomainModel
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -18,6 +19,16 @@ namespace DomainModel
         /// <param name="name">The name of the category.</param>
         public Category(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException("Name must not be null.");
+            }
+
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Name must be a non-empty string");
+            }
+
             this.Name = name;
             this.Parents = new List<Category>();
             this.Subcategories = new List<Category>();

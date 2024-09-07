@@ -34,7 +34,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -60,7 +60,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(-1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -76,7 +76,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(-1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -92,7 +92,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 0.00m;
+            double startingPrice = 0.00;
             string currency = "USD";
 
             // Act
@@ -108,7 +108,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -124,7 +124,7 @@ namespace DomainModel.Tests
             Product product = null;
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -139,7 +139,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
             var bid = this.CreateValidBid(auction);
@@ -160,7 +160,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
             var expected = $"Auction for {product.Name} from {startDate} to {endDate} with starting price {startingPrice} {currency}";
@@ -181,7 +181,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
 
@@ -197,7 +197,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
 
@@ -216,7 +216,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
             auction.IsCompleted = true;
@@ -240,8 +240,8 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auctionMinPrice = new Auction(seller, product, startDate, endDate, 0.01m, currency);
-            var auctionMaxPrice = new Auction(seller, product, startDate, endDate, decimal.MaxValue, currency);
+            var auctionMinPrice = new Auction(seller, product, startDate, endDate, 0.01, currency);
+            var auctionMaxPrice = new Auction(seller, product, startDate, endDate, double.MaxValue, currency);
 
             // Assert
             Assert.IsNotNull(auctionMinPrice);
@@ -257,7 +257,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string invalidCurrency = "US";
 
             // Act
@@ -272,7 +272,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now; // Start date is today
             var endDate = startDate.AddDays(1); // End date is tomorrow
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -292,7 +292,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate; // End date is the same as start date
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
 
             // Act
@@ -307,7 +307,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = decimal.MaxValue; // Very large price
+            double startingPrice = double.MaxValue; // Very large price
             string currency = "USD";
 
             // Act
@@ -326,7 +326,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
 
@@ -346,7 +346,7 @@ namespace DomainModel.Tests
             var product = this.CreateValidProduct();
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddDays(1);
-            decimal startingPrice = 10.00m;
+            double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
             var bid = this.CreateValidBid(auction);
