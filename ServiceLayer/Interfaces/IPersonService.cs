@@ -13,23 +13,25 @@ namespace ServiceLayer.Interfaces
     public interface IPersonService
     {
         /// <summary>
-        /// Starts a new auction for a person with the specified product, start and end dates, starting price, and currency.
+        /// Creates and starts a new auction for a person.
         /// </summary>
-        /// <param name="person">The person initiating the auction. The person must meet certain criteria, such as having a seriousness score above a threshold, to start an auction.</param>
-        /// <param name="product">The product to be auctioned. This should be an instance of the <see cref="IProduct"/> interface representing the item that is being listed for auction.</param>
-        /// <param name="startDate">The start date and time of the auction. The auction will not begin before this date and time.</param>
-        /// <param name="endDate">The end date and time of the auction. The auction will end after this date and time.</param>
-        /// <param name="startingPrice">The initial price at which the auction starts. This is the minimum amount that can be bid at the start of the auction.</param>
-        /// <param name="currency">The currency in which the auction is conducted. This should match the currency of the bids placed in the auction.</param>
+        /// <param name="person">The person starting the auction.</param>
+        void StartAuction(IPerson person);
+
+        /// <summary>
+        /// Adds a bid to the auction, provided the person meets the seriousness threshold required for bidding.
+        /// </summary>
+        /// <param name="person">The person placing the bid.</param>
+        /// <param name="bid">The bid to be added to the auction.</param>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if the person does not meet the criteria to start an auction, such as having a seriousness score below the required threshold,
-        /// or if the person has reached the maximum number of active auctions allowed based on their score.
+        /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a bid.
         /// </exception>
         /// <remarks>
-        /// The method validates that the person has a seriousness score above a predefined threshold and that they do not exceed the maximum number of active auctions.
-        /// It also ensures that the auction does not exceed the allowed number of active auctions per category.
+        /// This method checks the seriousness score of the person attempting to place a bid. If the person's score is below
+        /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the bid cannot be placed.
+        /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place bids.
         /// </remarks>
-        void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency);
+        void AddBid(IPerson person, IBid bid);
 
         /// <summary>
         /// Finalizes an auction and adjusts the person's score if applicable.

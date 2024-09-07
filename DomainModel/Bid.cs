@@ -38,6 +38,11 @@ namespace DomainModel
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the person who placed the bid.
+        /// </summary>
+        public IPerson Bidder { get; set; }
+
+        /// <summary>
         /// Gets or sets the amount of the bid.
         /// </summary>
         [Required(ErrorMessage = "Bid amount is required.")]

@@ -50,5 +50,19 @@ namespace DataMapper.Interfaces
         /// <param name="category">The category in which to look for active auctions.</param>
         /// <returns>A list of active auctions for the specified person and category.</returns>
         List<IAuction> GetActiveAuctionsForPersonInCategory(IPerson person, ICategory category);
+
+        /// <summary>
+        /// Retrieves active auctions for a specific person.
+        /// </summary>
+        /// <param name="person">The person whose active auctions are to be retrieved.</param>
+        /// <returns>A list of active auctions for the specified person.</returns>
+        List<IAuction> GetActiveAuctionsForPerson(IPerson person);
+
+        /// <summary>
+        /// Retrieves auctions for a specific person.
+        /// </summary>
+        /// <param name="person">The person whose active auctions are to be retrieved.</param>
+        /// <returns>A list of active auctions for the specified person.</returns>
+        List<IAuction> GetAuctionsForPerson(IPerson person);
     }
 }

@@ -26,22 +26,6 @@ namespace Services
         private readonly IPersonDAO personDAO;
 
         /// <summary>
-        /// The data access object (DAO) responsible for managing auction-related data.
-        /// </summary>
-        /// <remarks>
-        /// This DAO provides methods for interacting with auction records, allowing the service to perform operations related to auctions, such as starting and finalizing auctions.
-        /// </remarks>
-        private readonly IAuctionDAO auctionDAO;
-
-        /// <summary>
-        /// The data access object (DAO) responsible for managing bid-related data.
-        /// </summary>
-        /// <remarks>
-        /// This DAO provides methods for handling bid records, including adding and retrieving bids. It is used by the service to manage bids associated with auctions.
-        /// </remarks>
-        private readonly IBidDAO bidDAO;
-
-        /// <summary>
         /// The seriousness threshold used for determining if a person's score meets the criteria for certain operations.
         /// </summary>
         /// <remarks>
@@ -54,18 +38,14 @@ namespace Services
         /// Initializes a new instance of the <see cref="PersonService"/> class.
         /// </summary>
         /// <param name="personDAO">The data access object (DAO) responsible for managing person-related data. This DAO provides methods for retrieving and persisting person records.</param>
-        /// <param name="auctionDAO">The data access object (DAO) responsible for managing auction-related data. This DAO provides methods for interacting with auction records.</param>
-        /// <param name="bidDAO">The data access object (DAO) responsible for managing bid-related data. This DAO provides methods for handling bid records.</param>
         /// <remarks>
         /// The constructor initializes the <see cref="PersonService"/> with the specified DAOs, which are used to perform data operations related to persons, auctions, and bids.
         /// It also reads the seriousness threshold from the application configuration. This threshold is used to determine the criteria for certain operations, such as starting auctions.
         /// If the configuration value is not available, a default value of 4.0 is used.
         /// </remarks>
-        public PersonService(IPersonDAO personDAO, IAuctionDAO auctionDAO, IBidDAO bidDAO)
+        public PersonService(IPersonDAO personDAO)
         {
             this.personDAO = personDAO;
-            this.auctionDAO = auctionDAO;
-            this.bidDAO = bidDAO;
             this.seriousnessThreshold = decimal.Parse(ConfigurationManager.AppSettings["SeriousnessThreshold"] ?? "4.0");
         }
 
@@ -73,27 +53,35 @@ namespace Services
         /// Creates and starts a new auction for a person.
         /// </summary>
         /// <param name="person">The person starting the auction.</param>
-        /// <param name="product">The product to be auctioned.</param>
-        /// <param name="startDate">The start date of the auction.</param>
-        /// <param name="endDate">The end date of the auction.</param>
-        /// <param name="startingPrice">The starting price of the auction.</param>
-        /// <param name="currency">The currency for the auction.</param>
-        public void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public void StartAuction(IPerson person)
         {
             if (person.Score < this.seriousnessThreshold)
             {
                 throw new InvalidOperationException($"Cannot start a new auction. Seriousness score is below the required threshold of {this.seriousnessThreshold}.");
             }
+        }
 
-            int maxItemsBasedOnScore = this.CalculateMaxItemsBasedOnScore(person.Score);
-
-            if (person.ActiveAuctions.Count >= maxItemsBasedOnScore)
+        /// <summary>
+        /// Adds a bid to the auction, provided the person meets the seriousness threshold required for bidding.
+        /// </summary>
+        /// <param name="person">The person placing the bid.</param>
+        /// <param name="bid">The bid to be added to the auction.</param>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a bid.
+        /// </exception>
+        /// <remarks>
+        /// This method checks the seriousness score of the person attempting to place a bid. If the person's score is below
+        /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the bid cannot be placed.
+        /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place bids.
+        /// </remarks>
+        public void AddBid(IPerson person, IBid bid)
+        {
+            if (person.Score < this.seriousnessThreshold)
             {
-                throw new InvalidOperationException($"Cannot start a new auction. Maximum of {maxItemsBasedOnScore} active auctions allowed based on seriousness score.");
+                throw new InvalidOperationException($"Cannot place a bid. Seriousness score is below the required threshold of {this.seriousnessThreshold}.");
             }
 
-            var auctionService = new AuctionService(this.auctionDAO, this.bidDAO);
-            auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency);
+            bid.Bidder = person;
         }
 
         /// <summary>
@@ -103,12 +91,10 @@ namespace Services
         /// <param name="auction">The auction to finalize.</param>
         public void FinalizeAuction(IPerson person, IAuction auction)
         {
-            if (!person.ActiveAuctions.Contains(auction))
+            if (auction.Seller != person)
             {
                 throw new InvalidOperationException("Cannot finalize an auction that is not active or was not initiated by this person.");
             }
-
-            person.ActiveAuctions.Remove(auction);
 
             if (auction.Bids.Any())
             {
@@ -127,25 +113,6 @@ namespace Services
         {
             person.AdjustScore(feedbackScore);
             this.personDAO.Update(person);
-        }
-
-        /// <summary>
-        /// Calculates the maximum number of items that a person can list for auction based on their seriousness score.
-        /// </summary>
-        /// <param name="score">The seriousness score of the person, ranging from 0 to 10.</param>
-        /// <returns>
-        /// An integer representing the maximum number of items that can be listed for auction.
-        /// The value is calculated such that a higher seriousness score allows listing more items, with a minimum of 1 item.
-        /// </returns>
-        /// <remarks>
-        /// The calculation is based on the following formula:
-        /// <c>Max(1, 10 - ((10 - score) * 0.5m))</c>
-        /// This formula ensures that as the seriousness score increases, the maximum number of items that can be listed increases linearly.
-        /// The minimum number of items that can be listed is capped at 1, regardless of the score.
-        /// </remarks>
-        private int CalculateMaxItemsBasedOnScore(decimal score)
-        {
-            return (int)Math.Max(1, 10 - ((10 - score) * 0.5m));
         }
     }
 }

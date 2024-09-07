@@ -49,11 +49,11 @@
   <project key="-547661450">
     <configuration>DEBUG;TRACE</configuration>
   </project>
-  <sourcecode name="IAuctionService.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="AuctionMediator.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:36.978</settingsFile>
-      <sourceFile>2024/09/07 10:22:53.021</sourceFile>
+      <sourceFile>2024/09/07 11:21:31.325</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -71,6 +71,35 @@
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
     <violations />
+  </sourcecode>
+  <sourcecode name="IAuctionService.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2024/08/21 13:42:12.921</styleCop>
+      <settingsFile>2024/08/21 13:48:36.978</settingsFile>
+      <sourceFile>2024/09/07 11:15:53.615</sourceFile>
+      <parser>2024/08/21 13:42:12.921</parser>
+      <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2024/08/21 13:42:12.921</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2024/08/21 13:42:12.921</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2024/08/21 13:42:12.921</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="DocumentationMustContainValidXml" ruleCheckId="SA1603">
+        <context>The documentation header is composed of invalid Xml: '&lt;' is an unexpected token. The expected token is '&gt;'. Line 6, position 1.</context>
+        <line>44</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="ICategoryService.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
@@ -99,7 +128,7 @@
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:36.978</settingsFile>
-      <sourceFile>2024/09/05 21:51:34.713</sourceFile>
+      <sourceFile>2024/09/07 11:20:43.769</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -145,7 +174,7 @@
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:36.978</settingsFile>
-      <sourceFile>2024/09/07 10:22:59.732</sourceFile>
+      <sourceFile>2024/09/07 11:16:14.777</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -162,7 +191,18 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsForMultiLineStatementsMustNotShareLine" ruleCheckId="SA1500">
+        <context>If a statement spans multiple lines, the opening curly bracket must be placed on its own line.</context>
+        <line>75</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="DocumentationMustContainValidXml" ruleCheckId="SA1603">
+        <context>The documentation header is composed of invalid Xml: '&lt;' is an unexpected token. The expected token is '&gt;'. Line 6, position 1.</context>
+        <line>110</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="CategoryService.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
@@ -191,7 +231,7 @@
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:36.978</settingsFile>
-      <sourceFile>2024/09/05 21:51:53.463</sourceFile>
+      <sourceFile>2024/09/07 11:15:02.119</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>

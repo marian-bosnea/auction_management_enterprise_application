@@ -16,6 +16,7 @@ namespace DomainModel
         /// <summary>
         /// Initializes a new instance of the <see cref="Auction"/> class.
         /// </summary>
+        /// <param name="seller">The seller that initiates this auction.</param>
         /// <param name="product">The product associated with this auction.</param>
         /// <param name="startDate">The start date of the auction.</param>
         /// <param name="endDate">The end date of the auction.</param>
@@ -24,7 +25,7 @@ namespace DomainModel
         /// <exception cref="ArgumentException">Thrown when the start date is in the past, the end date is in the past, or the end date is before the start date.</exception>
         /// <exception cref="ArgumentException">Thrown when the starting price is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the product is null.</exception>
-        public Auction(IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public Auction(IPerson seller, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             if (startDate < DateTime.Now)
             {
@@ -46,6 +47,7 @@ namespace DomainModel
                 throw new ArgumentException("Starting price must be greater than zero.");
             }
 
+            this.Seller = seller ?? throw new ArgumentNullException(nameof(seller));
             this.Product = product ?? throw new ArgumentNullException(nameof(product));
             this.StartDate = startDate;
             this.EndDate = endDate;

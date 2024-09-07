@@ -34,11 +34,6 @@ namespace DomainModel
         decimal Score { get; }
 
         /// <summary>
-        /// Gets or sets the list of active auctions initiated by this person.
-        /// </summary>
-        List<IAuction> ActiveAuctions { get; set; }
-
-        /// <summary>
         /// Adjusts the person's score based on feedback or auction completion.
         /// </summary>
         /// <param name="amount">The amount to adjust the score by, between -0.1 and 0.1.</param>

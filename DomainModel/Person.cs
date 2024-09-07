@@ -20,8 +20,7 @@ namespace DomainModel
         public Person(string name)
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
-            this.Score = 5.0m; // Initial seriousness score
-            this.ActiveAuctions = new List<IAuction>();
+            this.Score = 5.0m;
         }
 
         /// <summary>
@@ -41,12 +40,6 @@ namespace DomainModel
         /// </summary>
         [Range(0, 10, ErrorMessage = "Score must be between 0 and 10.")]
         public decimal Score { get; set; }
-
-        /// <summary>
-        /// Gets or sets the list of active auctions initiated by this person.
-        /// </summary>
-        [Required(ErrorMessage = "Active auctions list is required.")]
-        public List<IAuction> ActiveAuctions { get; set; }
 
         /// <summary>
         /// Gets or sets the roles of the person in the auction process.

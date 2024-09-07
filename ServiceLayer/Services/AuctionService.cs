@@ -7,7 +7,6 @@ namespace Services
     using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Linq;
     using DataMapper.Interfaces;
     using DomainModel;
     using ServiceLayer.Interfaces;
@@ -40,11 +39,6 @@ namespace Services
         private readonly int maxActiveAuctionsPerCategory;
 
         /// <summary>
-        /// The threshold score that determines the maximum number of items a person can list for auction based on their seriousness score.
-        /// </summary>
-        private readonly decimal seriousnessThreshold;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AuctionService"/> class.
         /// </summary>
         /// <param name="auctionDAO">The auction DAO.</param>
@@ -56,7 +50,6 @@ namespace Services
 
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
             this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "3");
-            this.seriousnessThreshold = decimal.Parse(ConfigurationManager.AppSettings["SeriousnessThreshold"] ?? "4.0");
         }
 
         /// <summary>
@@ -70,6 +63,19 @@ namespace Services
         /// <param name="currency">The currency for the auction.</param>
         public void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
+            int maxItemsBasedOnScore = this.CalculateMaxItemsBasedOnScore(person.Score);
+
+            if (this.auctionDAO.GetActiveAuctionsForPerson(person).Count >= maxItemsBasedOnScore)
+            {
+                throw new InvalidOperationException($"Cannot start a new auction. Maximum of {maxItemsBasedOnScore} active auctions allowed based on seriousness score.");
+            }
+
+            int activeAuctions = this.auctionDAO.GetActiveAuctionsForPerson(person).Count;
+
+            if (activeAuctions >= this.maxActiveAuctions) {
+                throw new InvalidOperationException($"Cannot start a new auction. Maximum of {this.maxActiveAuctions} active auctions.");
+            }
+
             foreach (var category in product.Categories)
             {
                 int activeAuctionsInCategory = this.auctionDAO.GetActiveAuctionsForPersonInCategory(person, category).Count;
@@ -79,16 +85,16 @@ namespace Services
                 }
             }
 
-            var auction = new Auction(product, startDate, endDate, startingPrice, currency);
-            person.ActiveAuctions.Add(auction);
+            var auction = new Auction(person, product, startDate, endDate, startingPrice, currency);
+
             this.auctionDAO.Add(auction);
         }
 
         /// <summary>
         /// Ends the specified auction by setting its status to completed if the person trying to end it is the owner.
         /// </summary>
-        /// <param name="auction">The auction to be ended.</param>
         /// <param name="person">The person attempting to end the auction.</param>
+        /// <param name="auction">The auction to be ended.</param
         /// <exception cref="UnauthorizedAccessException">
         /// Thrown when the person attempting to end the auction is not the owner of the auction.
         /// </exception>
@@ -101,13 +107,8 @@ namespace Services
         /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
         /// in the data store through the <c>auctionDAO</c> object.
         /// </remarks>
-        public void EndAuction(IAuction auction, IPerson person)
+        public void FinalizeAuction(IPerson person, IAuction auction)
         {
-            if (auction.Seller != person)
-            {
-                throw new UnauthorizedAccessException("Only the owner of the auction can end it.");
-            }
-
             if (auction.IsCompleted)
             {
                 throw new InvalidOperationException("The auction has already been completed.");
