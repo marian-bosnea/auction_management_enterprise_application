@@ -128,7 +128,6 @@
     <Compile Include="Person.cs" />
     <Compile Include="PersonRole.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="Validators\EndDateLAterThanStartDateAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

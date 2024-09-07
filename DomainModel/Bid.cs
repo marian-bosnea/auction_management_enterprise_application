@@ -86,6 +86,7 @@ namespace DomainModel
                 {
                     throw new ArgumentException("Currency must be a valid 3-letter ISO code.");
                 }
+
                 this.currency = value;
             }
         }
@@ -110,7 +111,7 @@ namespace DomainModel
         /// <param name="bidTime">The Bid time to validate.</param>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>A ValidationResult indicating whether the Bid time is valid.</returns>
-        private ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
+        public ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
         {
             if (bidTime > DateTime.Now)
             {

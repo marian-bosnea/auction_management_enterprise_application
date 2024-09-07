@@ -93,7 +93,6 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "End date is required.")]
         [DataType(DataType.DateTime)]
-        [EndDateLaterThanStartDate("StartDate", ErrorMessage = "End date must be later than the start date.")]
         public DateTime EndDate { get; set; }
 
         /// <summary>
