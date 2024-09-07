@@ -74,7 +74,7 @@ namespace DataMapper.DAO
         public List<Product> GetAll()
         {
             return this.databaseContext.Products
-                            .Include(p => p.Categories)  // Eager loading of related categories
+                            .Include(p => p.Categories)
                             .ToList();
         }
 

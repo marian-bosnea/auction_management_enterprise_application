@@ -41,7 +41,6 @@ namespace ServiceLayer.Interfaces
         /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
         /// in the data store through the <c>auctionDAO</c> object.
         /// </remarks>
-
         void FinalizeAuction(Person person, Auction auction);
 
         /// <summary>

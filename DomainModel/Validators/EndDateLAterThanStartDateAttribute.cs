@@ -42,20 +42,6 @@ namespace DomainModel
                 return new ValidationResult($"Unknown property: {this.startDatePropertyName}");
             }
 
-            var startDateValue = (DateTime)startDateProperty.GetValue(validationContext.ObjectInstance);
-
-            if (value is DateTime endDateValue)
-            {
-                if (endDateValue > startDateValue)
-                {
-                    return ValidationResult.Success;
-                }
-                else
-                {
-                    return new ValidationResult("End date must be later than start date.");
-                }
-            }
-
             return new ValidationResult("Invalid date value.");
         }
     }
