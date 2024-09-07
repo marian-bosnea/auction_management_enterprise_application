@@ -9,7 +9,7 @@ namespace ServiceLayer
     using ServiceLayer.Interfaces;
 
     /// <summary>
-    /// Mediates interactions between auction and person services, providing a unified interface for managing auctions and bids.
+    /// Mediates interactions between auction and person services, providing a unified interface for managing auctions and Bids.
     /// </summary>
     public class AuctionMediator
     {
@@ -44,20 +44,20 @@ namespace ServiceLayer
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency in which the auction is conducted.</param>
         /// <exception cref="ArgumentException">Thrown if the parameters are invalid.</exception>
-        public void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             this.personService.StartAuction(person);
             this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
-        /// Adds a bid to a specified auction on behalf of a person.
+        /// Adds a Bid to a specified auction on behalf of a person.
         /// </summary>
-        /// <param name="person">The person placing the bid.</param>
-        /// <param name="auction">The auction to which the bid is being added.</param>
-        /// <param name="bid">The bid being placed.</param>
-        /// <exception cref="ArgumentException">Thrown if the bid is invalid or the auction does not accept it.</exception>
-        public void AddBid(IPerson person, IAuction auction, IBid bid)
+        /// <param name="person">The person placing the Bid.</param>
+        /// <param name="auction">The auction to which the Bid is being added.</param>
+        /// <param name="bid">The Bid being placed.</param>
+        /// <exception cref="ArgumentException">Thrown if the Bid is invalid or the auction does not accept it.</exception>
+        public void AddBid(Person person, Auction auction, Bid bid)
         {
             this.personService.AddBid(person, bid);
             this.auctionService.AddBid(auction, bid);
@@ -69,7 +69,7 @@ namespace ServiceLayer
         /// <param name="person">The person requesting to finalize the auction.</param>
         /// <param name="auction">The auction to be finalized.</param>
         /// <exception cref="InvalidOperationException">Thrown if the auction cannot be finalized.</exception>
-        public void FinalizeAuction(IPerson person, IAuction auction)
+        public void FinalizeAuction(Person person, Auction auction)
         {
             this.personService.FinalizeAuction(person, auction);
             this.auctionService.FinalizeAuction(person, auction);
@@ -81,7 +81,7 @@ namespace ServiceLayer
         /// <param name="person">The person receiving the feedback.</param>
         /// <param name="feedbackScore">The score representing the feedback.</param>
         /// <exception cref="ArgumentException">Thrown if the feedback score is invalid.</exception>
-        public void ProvideFeedback(IPerson person, decimal feedbackScore)
+        public void ProvideFeedback(Person person, decimal feedbackScore)
         {
             this.personService.ProvideFeedback(person, feedbackScore);
         }

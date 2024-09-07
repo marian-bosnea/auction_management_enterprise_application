@@ -24,9 +24,9 @@ namespace Services
         private readonly IAuctionDAO auctionDAO;
 
         /// <summary>
-        /// The DAO interface for managing bid-related data.
+        /// The DAO interface for managing Bid-related data.
         /// </summary>
-        private readonly IBidDAO bidDAO;
+        private readonly IBidDAO BidDAO;
 
         /// <summary>
         /// The maximum number of active auctions a person can have at any given time.
@@ -42,11 +42,11 @@ namespace Services
         /// Initializes a new instance of the <see cref="AuctionService"/> class.
         /// </summary>
         /// <param name="auctionDAO">The auction DAO.</param>
-        /// <param name="bidDAO">The bid DAO.</param>
+        /// <param name="bidDAO">The Bid DAO.</param>
         public AuctionService(IAuctionDAO auctionDAO, IBidDAO bidDAO)
         {
             this.auctionDAO = auctionDAO;
-            this.bidDAO = bidDAO;
+            this.BidDAO = bidDAO;
 
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
             this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "3");
@@ -61,7 +61,7 @@ namespace Services
         /// <param name="endDate">The end date of the auction.</param>
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency for the auction.</param>
-        public void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             int maxItemsBasedOnScore = this.CalculateMaxItemsBasedOnScore(person.Score);
 
@@ -72,7 +72,8 @@ namespace Services
 
             int activeAuctions = this.auctionDAO.GetActiveAuctionsForPerson(person).Count;
 
-            if (activeAuctions >= this.maxActiveAuctions) {
+            if (activeAuctions >= this.maxActiveAuctions)
+            {
                 throw new InvalidOperationException($"Cannot start a new auction. Maximum of {this.maxActiveAuctions} active auctions.");
             }
 
@@ -107,7 +108,7 @@ namespace Services
         /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
         /// in the data store through the <c>auctionDAO</c> object.
         /// </remarks>
-        public void FinalizeAuction(IPerson person, IAuction auction)
+        public void FinalizeAuction(Person person, Auction auction)
         {
             if (auction.IsCompleted)
             {
@@ -120,21 +121,21 @@ namespace Services
         }
 
         /// <summary>
-        /// Adds a new bid to an auction after validating the bid's currency and amount.
-        /// The bid must match the auction's currency, and the bid amount must be at least 10% higher
-        /// than the previous highest bid or the starting price if no bids exist.
+        /// Adds a new Bid to an auction after validating the Bid's currency and amount.
+        /// The Bid must match the auction's currency, and the Bid amount must be at least 10% higher
+        /// than the previous highest Bid or the starting price if no Bids exist.
         /// </summary>
-        /// <param name="auction">The auction to which the bid is being added.</param>
-        /// <param name="bid">The bid to be added to the auction.</param>
+        /// <param name="auction">The auction to which the Bid is being added.</param>
+        /// <param name="bid">The Bid to be added to the auction.</param>
         /// <exception cref="ArgumentException">
-        /// Thrown if the bid currency does not match the auction's currency, or if the bid amount
-        /// is less than the required minimum (10% higher than the previous highest bid or the starting price).
+        /// Thrown if the Bid currency does not match the auction's currency, or if the Bid amount
+        /// is less than the required minimum (10% higher than the previous highest Bid or the starting price).
         /// </exception>
-        public void AddBid(IAuction auction, IBid bid)
+        public void AddBid(Auction auction, Bid bid)
         {
             if (DateTime.Now >= auction.EndDate)
             {
-                throw new InvalidOperationException("The auction has ended. No more bids can be placed.");
+                throw new InvalidOperationException("The auction has ended. No more Bids can be placed.");
             }
 
             if (bid.Currency != auction.Currency)
@@ -148,12 +149,12 @@ namespace Services
 
             if (bid.Amount < minPrice)
             {
-                throw new ArgumentException("Bid amount must be at least 10% higher than the previous bid.");
+                throw new ArgumentException("Bid amount must be at least 10% higher than the previous Bid.");
             }
 
             auction.AddBid(bid);
 
-            this.bidDAO.Add(bid);
+            this.BidDAO.Add(bid);
 
             this.auctionDAO.Update(auction);
         }
@@ -162,7 +163,7 @@ namespace Services
         /// Adds a new auction to the system.
         /// </summary>
         /// <param name="auction">The auction to add.</param>
-        public void AddAuction(IAuction auction)
+        public void AddAuction(Auction auction)
         {
             this.auctionDAO.Add(auction);
         }
@@ -172,7 +173,7 @@ namespace Services
         /// </summary>
         /// <param name="id">The ID of the auction to retrieve.</param>
         /// <returns>The auction with the specified ID, or null if not found.</returns>
-        public IAuction GetAuctionById(int id)
+        public Auction GetAuctionById(int id)
         {
             return this.auctionDAO.Get(id);
         }
@@ -181,7 +182,7 @@ namespace Services
         /// Retrieves all auctions in the system.
         /// </summary>
         /// <returns>A list of all auctions.</returns>
-        public List<IAuction> GetAllAuctions()
+        public List<Auction> GetAllAuctions()
         {
             return this.auctionDAO.GetAll();
         }
@@ -190,7 +191,7 @@ namespace Services
         /// Updates an existing auction in the system.
         /// </summary>
         /// <param name="auction">The auction to update.</param>
-        public void UpdateAuction(IAuction auction)
+        public void UpdateAuction(Auction auction)
         {
             this.auctionDAO.Update(auction);
         }

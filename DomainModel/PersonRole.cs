@@ -18,7 +18,7 @@ namespace DomainModel
         Seller = 0,
 
         /// <summary>
-        /// The person who places bids in an auction.
+        /// The person who places Bids in an auction.
         /// </summary>
         Bidder = 1,
 

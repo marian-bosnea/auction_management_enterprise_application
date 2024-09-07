@@ -59,14 +59,11 @@
     <Compile Include="Auction.cs" />
     <Compile Include="Bid.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Interfaces\IAuction.cs" />
-    <Compile Include="Interfaces\IBid.cs" />
-    <Compile Include="Interfaces\ICategory.cs" />
-    <Compile Include="Interfaces\IPerson.cs" />
-    <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Validators\CurrentOrFutureDateAttribute.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonRole.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="Validators\EndDateLAterThanStartDateAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

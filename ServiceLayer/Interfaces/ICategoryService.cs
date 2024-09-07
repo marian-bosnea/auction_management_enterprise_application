@@ -15,8 +15,8 @@ namespace ServiceLayer.Interfaces
         /// Creates a new category with the specified name.
         /// </summary>
         /// <param name="name">The name of the category to be created.</param>
-        /// <returns>The created <see cref="ICategory"/> instance.</returns>
+        /// <returns>The created <see cref="Category"/> instance.</returns>
         /// <exception cref="ArgumentException">Thrown when a category with the specified name already exists.</exception>
-        ICategory CreateCategory(string name);
+        Category CreateCategory(string name);
     }
 }

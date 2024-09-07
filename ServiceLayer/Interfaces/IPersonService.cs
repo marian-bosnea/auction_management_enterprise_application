@@ -16,22 +16,22 @@ namespace ServiceLayer.Interfaces
         /// Creates and starts a new auction for a person.
         /// </summary>
         /// <param name="person">The person starting the auction.</param>
-        void StartAuction(IPerson person);
+        void StartAuction(Person person);
 
         /// <summary>
-        /// Adds a bid to the auction, provided the person meets the seriousness threshold required for bidding.
+        /// Adds a Bid to the auction, provided the person meets the seriousness threshold required for Bidding.
         /// </summary>
-        /// <param name="person">The person placing the bid.</param>
-        /// <param name="bid">The bid to be added to the auction.</param>
+        /// <param name="person">The person placing the Bid.</param>
+        /// <param name="Bid">The Bid to be added to the auction.</param>
         /// <exception cref="InvalidOperationException">
-        /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a bid.
+        /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a Bid.
         /// </exception>
         /// <remarks>
-        /// This method checks the seriousness score of the person attempting to place a bid. If the person's score is below
-        /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the bid cannot be placed.
-        /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place bids.
+        /// This method checks the seriousness score of the person attempting to place a Bid. If the person's score is below
+        /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the Bid cannot be placed.
+        /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place Bids.
         /// </remarks>
-        void AddBid(IPerson person, IBid bid);
+        void AddBid(Person person, Bid Bid);
 
         /// <summary>
         /// Finalizes an auction and adjusts the person's score if applicable.
@@ -42,10 +42,10 @@ namespace ServiceLayer.Interfaces
         /// Thrown if the auction is not active or was not initiated by the specified person.
         /// </exception>
         /// <remarks>
-        /// The method removes the auction from the person's list of active auctions. If the auction received any bids, the person's score is adjusted positively.
+        /// The method removes the auction from the person's list of active auctions. If the auction received any Bids, the person's score is adjusted positively.
         /// The person's score adjustment reflects their activity and performance in the auction process.
         /// </remarks>
-        void FinalizeAuction(IPerson person, IAuction auction);
+        void FinalizeAuction(Person person, Auction auction);
 
         /// <summary>
         /// Provides feedback to a person by adjusting their score based on the feedback provided.
@@ -56,6 +56,6 @@ namespace ServiceLayer.Interfaces
         /// The method adjusts the person's score based on the feedback score provided. Positive feedback increases the score, while negative feedback decreases it.
         /// The feedback score should be within the range of -0.1 to 0.1 to ensure balanced adjustments.
         /// </remarks>
-        void ProvideFeedback(IPerson person, decimal feedbackScore);
+        void ProvideFeedback(Person person, decimal feedbackScore);
     }
 }

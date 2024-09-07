@@ -10,7 +10,7 @@ namespace DomainModel
     /// <summary>
     /// Represents a category that can be part of a hierarchy, with parent and subcategory relationships.
     /// </summary>
-    public class Category : ICategory
+    public class Category
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Category"/> class.
@@ -19,8 +19,8 @@ namespace DomainModel
         public Category(string name)
         {
             this.Name = name;
-            this.Parents = new List<ICategory>();
-            this.Subcategories = new List<ICategory>();
+            this.Parents = new List<Category>();
+            this.Subcategories = new List<Category>();
         }
 
         /// <summary>
@@ -40,17 +40,20 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = "Parents list is required.")]
         [MinLength(1, ErrorMessage = "Category must have at least one parent category.")]
-        public List<ICategory> Parents { get;  set; }
+        public List<Category> Parents { get;  set; }
 
         /// <summary>
         /// Gets or sets the list of subcategories that belong to this category.
         /// </summary>
         [Required(ErrorMessage = "Subcategories list is required.")]
         [MinLength(1, ErrorMessage = "Category must have at least one subcategory.")]
-        public List<ICategory> Subcategories { get;  set; }
+        public List<Category> Subcategories { get;  set; }
 
-        /// <inheritdoc/>
-        public void AddParent(ICategory parentCategory)
+        /// <summary>
+        /// Adds a parent category to this category.
+        /// </summary>
+        /// <param name="parentCategory">The parent category to add.</param>
+        public void AddParent(Category parentCategory)
         {
             if (!this.Parents.Contains(parentCategory))
             {
@@ -59,8 +62,11 @@ namespace DomainModel
             }
         }
 
-        /// <inheritdoc/>
-        public void AddSubcategory(ICategory subcategory)
+        /// <summary>
+        /// Adds a subcategory to this category.
+        /// </summary>
+        /// <param name="subcategory">The subcategory to add.</param>
+        public void AddSubcategory(Category subcategory)
         {
             if (!this.Subcategories.Contains(subcategory))
             {
@@ -69,7 +75,10 @@ namespace DomainModel
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Adds a subcategory to this category.
+        /// </summary>
+        /// <param name="subcategory">The subcategory to add.</param>
         public override string ToString()
         {
             return this.Name;

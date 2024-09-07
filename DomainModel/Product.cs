@@ -10,7 +10,7 @@ namespace DomainModel
     /// <summary>
     /// Represents a product that can be associated with one or more categories.
     /// </summary>
-    public class Product : IProduct
+    public class Product
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
@@ -19,7 +19,7 @@ namespace DomainModel
         /// <param name="name">The name of the product.</param>
         /// <param name="description">The description of the product.</param>
         /// <param name="categories">The categories of the product.</param>
-        public Product(int id, string name, string description, List<ICategory> categories)
+        public Product(int id, string name, string description, List<Category> categories)
         {
             this.Id = id;
             this.Name = name;
@@ -43,7 +43,7 @@ namespace DomainModel
         /// Gets the list of categories associated with this product.
         /// </summary>
         [Required(ErrorMessage = "At least one category is required.")]
-        public List<ICategory> Categories { get; private set; }
+        public List<Category> Categories { get; private set; }
 
         /// <summary>
         /// Gets the description of the product.
@@ -52,8 +52,11 @@ namespace DomainModel
         [StringLength(1000, ErrorMessage = "Description must not exceed 1000 characters.")]
         public string Description { get; private set; }
 
-        /// <inheritdoc/>
-        public void AddCategory(ICategory category)
+        /// <summary>
+        /// Adds a category to the list of categories associated with this product.
+        /// </summary>
+        /// <param name="category">The category to add.</param>
+        public void AddCategory(Category category)
         {
             if (!this.Categories.Contains(category))
             {

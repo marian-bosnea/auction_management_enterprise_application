@@ -1,4 +1,1 @@
-<StyleCopViolations>
-  <Violation Section="Root.TestDataMapper.UnitTest1" LineNumber="11" Source="D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\UnitTest1.cs" RuleNamespace="StyleCop.CSharp.DocumentationRules" Rule="ElementsMustBeDocumented" RuleId="SA1600">The class must have a documentation header.</Violation>
-  <Violation Section="Root.TestDataMapper.UnitTest1.TestMethod1" LineNumber="14" Source="D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\UnitTest1.cs" RuleNamespace="StyleCop.CSharp.DocumentationRules" Rule="ElementsMustBeDocumented" RuleId="SA1600">The method must have a documentation header.</Violation>
-</StyleCopViolations>
+<StyleCopViolations />

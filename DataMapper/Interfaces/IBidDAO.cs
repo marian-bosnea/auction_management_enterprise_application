@@ -8,39 +8,39 @@ namespace DataMapper.Interfaces
     using DomainModel;
 
     /// <summary>
-    /// Defines the data access operations for bids.
+    /// Defines the data access operations for Bids.
     /// </summary>
     public interface IBidDAO
     {
         /// <summary>
-        /// Adds a new bid to the data store.
+        /// Adds a new Bid to the data store.
         /// </summary>
-        /// <param name="bid">The bid to add.</param>
-        void Add(IBid bid);
+        /// <param name="bid">The Bid to add.</param>
+        void Add(Bid bid);
 
         /// <summary>
-        /// Retrieves all bids from the data store.
+        /// Retrieves all Bids from the data store.
         /// </summary>
-        /// <returns>A list of all bids.</returns>
-        List<IBid> GetAll();
+        /// <returns>A list of all Bids.</returns>
+        List<Bid> GetAll();
 
         /// <summary>
-        /// Retrieves a specific bid by its identifier.
+        /// Retrieves a specific Bid by its identifier.
         /// </summary>
-        /// <param name="id">The identifier of the bid to retrieve.</param>
-        /// <returns>The bid with the specified identifier, or null if not found.</returns>
+        /// <param name="id">The identifier of the Bid to retrieve.</param>
+        /// <returns>The Bid with the specified identifier, or null if not found.</returns>
         Bid Get(int id);
 
         /// <summary>
-        /// Updates an existing bid in the data store.
+        /// Updates an existing Bid in the data store.
         /// </summary>
-        /// <param name="bid">The bid to update.</param>
-        void Update(IBid bid);
+        /// <param name="bid">The Bid to update.</param>
+        void Update(Bid bid);
 
         /// <summary>
-        /// Deletes a bid from the data store by its identifier.
+        /// Deletes a Bid from the data store by its identifier.
         /// </summary>
-        /// <param name="id">The identifier of the bid to delete.</param>
+        /// <param name="id">The identifier of the Bid to delete.</param>
         void Delete(int id);
     }
 }

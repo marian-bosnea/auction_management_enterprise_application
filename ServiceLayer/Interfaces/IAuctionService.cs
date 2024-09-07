@@ -22,7 +22,7 @@ namespace ServiceLayer.Interfaces
         /// <param name="endDate">The end date of the auction.</param>
         /// <param name="startingPrice">The starting price of the auction.</param>
         /// <param name="currency">The currency for the auction.</param>
-        void StartAuction(IPerson person, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency);
+        void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency);
 
         /// <summary>
         /// Ends the specified auction by setting its status to completed if the person trying to end it is the owner.
@@ -41,39 +41,39 @@ namespace ServiceLayer.Interfaces
         /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
         /// in the data store through the <c>auctionDAO</c> object.
         /// </remarks>
-        void FinalizeAuction(IPerson person, IAuction auction);
+        void FinalizeAuction(Person person, Auction auction);
 
         /// <summary>
-        /// Adds a new bid to an auction after validating the bid's currency and amount.
+        /// Adds a new Bid to an auction after validating the Bid's currency and amount.
         /// </summary>
-        /// <param name="auction">The auction to which the bid is being added.</param>
-        /// <param name="bid">The bid to be added to the auction.</param>
-        void AddBid(IAuction auction, IBid bid);
+        /// <param name="auction">The auction to which the Bid is being added.</param>
+        /// <param name="bid">The Bid to be added to the auction.</param>
+        void AddBid(Auction auction, Bid bid);
 
         /// <summary>
         /// Adds a new auction to the system.
         /// </summary>
         /// <param name="auction">The auction to add.</param>
-        void AddAuction(IAuction auction);
+        void AddAuction(Auction auction);
 
         /// <summary>
         /// Retrieves an auction by its ID.
         /// </summary>
         /// <param name="id">The ID of the auction to retrieve.</param>
         /// <returns>The auction with the specified ID, or null if not found.</returns>
-        IAuction GetAuctionById(int id);
+        Auction GetAuctionById(int id);
 
         /// <summary>
         /// Retrieves all auctions in the system.
         /// </summary>
         /// <returns>A list of all auctions.</returns>
-        List<IAuction> GetAllAuctions();
+        List<Auction> GetAllAuctions();
 
         /// <summary>
         /// Updates an existing auction in the system.
         /// </summary>
         /// <param name="auction">The auction to update.</param>
-        void UpdateAuction(IAuction auction);
+        void UpdateAuction(Auction auction);
 
         /// <summary>
         /// Deletes an auction from the system.

@@ -43,8 +43,8 @@ namespace DomainModel
         /// </remarks>
         public ProductService(IProductDAO productDAO, ICategoryService categoryService)
         {
-            this.Categories = new Dictionary<string, ICategory>();
-            this.Products = new List<IProduct>();
+            this.Categories = new Dictionary<string, Category>();
+            this.Products = new List<Product>();
 
             this.productDAO = productDAO;
             this.categoryService = categoryService;
@@ -55,12 +55,12 @@ namespace DomainModel
         /// <summary>
         /// Gets the dictionary of categories, keyed by their name.
         /// </summary>
-        public Dictionary<string, ICategory> Categories { get; private set; }
+        public Dictionary<string, Category> Categories { get; private set; }
 
         /// <summary>
         /// Gets the list of products managed by this ProductService.
         /// </summary>
-        public List<IProduct> Products { get; private set; }
+        public List<Product> Products { get; private set; }
 
         /// <summary>
         /// Gets or sets the similarity threshold for determining if a new product's description is too similar
@@ -75,9 +75,9 @@ namespace DomainModel
         /// <param name="name">The name of the product.</param>
         /// <param name="description">The description of the product.</param>
         /// <param name="categoryNames">A list of category names to associate with the product.</param>
-        /// <returns>The newly created <see cref="IProduct"/>.</returns>
+        /// <returns>The newly created <see cref="Product"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown if a product with a similar description already exists.</exception>
-        public IProduct CreateProduct(string name, string description, List<string> categoryNames)
+        public Product CreateProduct(string name, string description, List<string> categoryNames)
         {
             foreach (var existingProduct in this.Products)
             {
@@ -88,7 +88,7 @@ namespace DomainModel
                 }
             }
 
-            var product = new Product(0, name, description, new List<ICategory>());
+            var product = new Product(0, name, description, new List<Category>());
 
             foreach (var catName in categoryNames)
             {
@@ -105,13 +105,13 @@ namespace DomainModel
         /// <summary>
         /// Adds a new product to the internal collection and persists it in the data store.
         /// </summary>
-        /// <param name="product">The product to be added. This should be a fully initialized <see cref="IProduct"/> instance.</param>
+        /// <param name="product">The product to be added. This should be a fully initialized <see cref="Product"/> instance.</param>
         /// <remarks>
         /// The method performs two key actions:
         /// 1. Adds the product to the internal list of products managed by this service.
-        /// 2. Uses the <see cref="IProductDAO"/> to add the product to the data store, ensuring it is persisted across sessions.
+        /// 2. Uses the <see cref="ProductDAO"/> to add the product to the data store, ensuring it is persisted across sessions.
         /// </remarks>
-        public void AddProduct(IProduct product)
+        public void AddProduct(Product product)
         {
             this.Products.Add(product);
             this.productDAO.Add(product);
@@ -122,7 +122,7 @@ namespace DomainModel
         /// </summary>
         /// <param name="id">The ID of the product to retrieve.</param>
         /// <returns>The product with the specified ID, or null if not found.</returns>
-        public IProduct GetProductById(int id)
+        public Product GetProductById(int id)
         {
             return this.Products.Find(p => p.Id == id);
         }
@@ -131,7 +131,7 @@ namespace DomainModel
         /// Gets all products in the system.
         /// </summary>
         /// <returns>A list of all products.</returns>
-        public List<IProduct> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
              this.Products = this.productDAO.GetAll();
 
@@ -141,13 +141,13 @@ namespace DomainModel
         /// <summary>
         /// Updates an existing product in the internal collection and persists the changes in the data store.
         /// </summary>
-        /// <param name="product">The product to be updated. This should be a fully initialized <see cref="IProduct"/> instance with the updated details.</param>
+        /// <param name="product">The product to be updated. This should be a fully initialized <see cref="Product"/> instance with the updated details.</param>
         /// <remarks>
         /// The method performs two key actions:
         /// 1. Replaces the existing product in the internal list of products with the updated product.
-        /// 2. Uses the <see cref="IProductDAO"/> to update the product in the data store, ensuring that the changes are persisted across sessions.
+        /// 2. Uses the <see cref="ProductDAO"/> to update the product in the data store, ensuring that the changes are persisted across sessions.
         /// </remarks>
-        public void UpdateProduct(IProduct product)
+        public void UpdateProduct(Product product)
         {
                 var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
 

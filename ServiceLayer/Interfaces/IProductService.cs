@@ -19,34 +19,34 @@ namespace ServiceLayer.Interfaces
         /// <param name="name">The name of the product.</param>
         /// <param name="description">The description of the product.</param>
         /// <param name="categoryNames">A list of category names to associate with the product.</param>
-        /// <returns>The newly created <see cref="IProduct"/>.</returns>
+        /// <returns>The newly created <see cref="Product"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown if a product with a similar description already exists.</exception>
-        IProduct CreateProduct(string name, string description, List<string> categoryNames);
+        Product CreateProduct(string name, string description, List<string> categoryNames);
 
         /// <summary>
         /// Adds a product to the system.
         /// </summary>
         /// <param name="product">The product to add.</param>
-        void AddProduct(IProduct product);
+        void AddProduct(Product product);
 
         /// <summary>
         /// Gets a product by its ID.
         /// </summary>
         /// <param name="id">The ID of the product to retrieve.</param>
         /// <returns>The product with the specified ID, or null if not found.</returns>
-        IProduct GetProductById(int id);
+        Product GetProductById(int id);
 
         /// <summary>
         /// Gets all products in the system.
         /// </summary>
         /// <returns>A list of all products.</returns>
-        List<IProduct> GetAllProducts();
+        List<Product> GetAllProducts();
 
         /// <summary>
         /// Updates an existing product in the system.
         /// </summary>
         /// <param name="product">The product to update.</param>
-        void UpdateProduct(IProduct product);
+        void UpdateProduct(Product product);
 
         /// <summary>
         /// Deletes a product by its ID.

@@ -1,11 +1,11 @@
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\AuctionManagementApplication.exe.config
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\AuctionManagementApplication.exe
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\AuctionManagementApplication.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.AssemblyReference.cache
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.CoreCompileInputs.cache
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.exe
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.pdb
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\StyleCop.CSharp.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\StyleCop.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.AssemblyReference.cache
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.CoreCompileInputs.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.csproj.CopyComplete
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.exe
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\AuctionManagementApplication\obj\Debug\AuctionManagementApplication.pdb

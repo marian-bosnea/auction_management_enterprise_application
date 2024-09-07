@@ -11,7 +11,7 @@ namespace DomainModel
     /// <summary>
     /// Represents an auction associated with a specific product.
     /// </summary>
-    public class Auction : IAuction
+    public class Auction
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Auction"/> class.
@@ -25,7 +25,7 @@ namespace DomainModel
         /// <exception cref="ArgumentException">Thrown when the start date is in the past, the end date is in the past, or the end date is before the start date.</exception>
         /// <exception cref="ArgumentException">Thrown when the starting price is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the product is null.</exception>
-        public Auction(IPerson seller, IProduct product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
+        public Auction(Person seller, Product product, DateTime startDate, DateTime endDate, decimal startingPrice, string currency)
         {
             if (startDate < DateTime.Now)
             {
@@ -53,7 +53,7 @@ namespace DomainModel
             this.EndDate = endDate;
             this.StartingPrice = startingPrice;
             this.Currency = currency;
-            this.Bids = new List<IBid>();
+            this.Bids = new List<Bid>();
             this.IsCompleted = false;
         }
 
@@ -66,13 +66,13 @@ namespace DomainModel
         /// Gets or sets the seller who initiated the auction.
         /// </summary>
         [Required(ErrorMessage = "Seller is required")]
-        public IPerson Seller { get; set; }
+        public Person Seller { get; set; }
 
         /// <summary>
         /// Gets or sets the product associated with this auction.
         /// </summary>
         [Required(ErrorMessage = "Product is required.")]
-        public IProduct Product { get; set; }
+        public Product Product { get; set; }
 
         /// <summary>
         /// Gets or sets the start date of the auction.
@@ -105,9 +105,9 @@ namespace DomainModel
         public string Currency { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of bids made in this auction.
+        /// Gets or sets the list of Bids made in this auction.
         /// </summary>
-        public List<IBid> Bids { get; set; } = new List<IBid>();
+        public List<Bid> Bids { get; set; } = new List<Bid>();
 
         /// <summary>
         /// Gets or sets a value indicating whether the auction is completed.
@@ -115,13 +115,13 @@ namespace DomainModel
         public bool IsCompleted { get; set; }
 
         /// <summary>
-        /// Adds a bid to the list of bids associated with the auction.
+        /// Adds a Bid to the list of Bids associated with the auction.
         /// </summary>
-        /// <param name="bid">The bid to be added to the auction.</param>
+        /// <param name="bid">The Bid to be added to the auction.</param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if the bid is null.
+        /// Thrown if the Bid is null.
         /// </exception>
-        public void AddBid(IBid bid)
+        public void AddBid(Bid bid)
         {
             this.Bids.Add(bid);
         }

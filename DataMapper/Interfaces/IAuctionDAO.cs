@@ -16,13 +16,13 @@ namespace DataMapper.Interfaces
         /// Adds a new auction to the data store.
         /// </summary>
         /// <param name="auction">The auction to add.</param>
-        void Add(IAuction auction);
+        void Add(Auction auction);
 
         /// <summary>
         /// Retrieves all auctions from the data store.
         /// </summary>
         /// <returns>A list of all auctions.</returns>
-        List<IAuction> GetAll();
+        List<Auction> GetAll();
 
         /// <summary>
         /// Retrieves a specific auction by its identifier.
@@ -35,7 +35,7 @@ namespace DataMapper.Interfaces
         /// Updates an existing auction in the data store.
         /// </summary>
         /// <param name="auction">The auction to update.</param>
-        void Update(IAuction auction);
+        void Update(Auction auction);
 
         /// <summary>
         /// Deletes an auction from the data store by its identifier.
@@ -49,20 +49,20 @@ namespace DataMapper.Interfaces
         /// <param name="person">The person whose active auctions are to be retrieved.</param>
         /// <param name="category">The category in which to look for active auctions.</param>
         /// <returns>A list of active auctions for the specified person and category.</returns>
-        List<IAuction> GetActiveAuctionsForPersonInCategory(IPerson person, ICategory category);
+        List<Auction> GetActiveAuctionsForPersonInCategory(Person person, Category category);
 
         /// <summary>
         /// Retrieves active auctions for a specific person.
         /// </summary>
         /// <param name="person">The person whose active auctions are to be retrieved.</param>
         /// <returns>A list of active auctions for the specified person.</returns>
-        List<IAuction> GetActiveAuctionsForPerson(IPerson person);
+        List<Auction> GetActiveAuctionsForPerson(Person person);
 
         /// <summary>
         /// Retrieves auctions for a specific person.
         /// </summary>
         /// <param name="person">The person whose active auctions are to be retrieved.</param>
         /// <returns>A list of active auctions for the specified person.</returns>
-        List<IAuction> GetAuctionsForPerson(IPerson person);
+        List<Auction> GetAuctionsForPerson(Person person);
     }
 }

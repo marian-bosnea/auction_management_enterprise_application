@@ -11,7 +11,7 @@ namespace DomainModel
     /// <summary>
     /// Represents a person who can initiate and manage auctions, with a score reflecting their reliability.
     /// </summary>
-    public class Person : IPerson
+    public class Person
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.

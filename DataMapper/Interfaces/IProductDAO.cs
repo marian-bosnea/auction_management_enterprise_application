@@ -16,13 +16,13 @@ namespace DataMapper.Interfaces
         /// Adds a new product to the data store.
         /// </summary>
         /// <param name="product">The product to add.</param>
-        void Add(IProduct product);
+        void Add(Product product);
 
         /// <summary>
         /// Retrieves all products from the data store.
         /// </summary>
         /// <returns>A list of all products.</returns>
-        List<IProduct> GetAll();
+        List<Product> GetAll();
 
         /// <summary>
         /// Retrieves a specific product by its identifier.
@@ -35,7 +35,7 @@ namespace DataMapper.Interfaces
         /// Updates an existing product in the data store.
         /// </summary>
         /// <param name="product">The product to update.</param>
-        void Update(IProduct product);
+        void Update(Product product);
 
         /// <summary>
         /// Deletes a product from the data store by its identifier.

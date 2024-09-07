@@ -39,7 +39,7 @@ namespace Services
         /// </summary>
         /// <param name="personDAO">The data access object (DAO) responsible for managing person-related data. This DAO provides methods for retrieving and persisting person records.</param>
         /// <remarks>
-        /// The constructor initializes the <see cref="PersonService"/> with the specified DAOs, which are used to perform data operations related to persons, auctions, and bids.
+        /// The constructor initializes the <see cref="PersonService"/> with the specified DAOs, which are used to perform data operations related to persons, auctions, and Bids.
         /// It also reads the seriousness threshold from the application configuration. This threshold is used to determine the criteria for certain operations, such as starting auctions.
         /// If the configuration value is not available, a default value of 4.0 is used.
         /// </remarks>
@@ -53,7 +53,7 @@ namespace Services
         /// Creates and starts a new auction for a person.
         /// </summary>
         /// <param name="person">The person starting the auction.</param>
-        public void StartAuction(IPerson person)
+        public void StartAuction(Person person)
         {
             if (person.Score < this.seriousnessThreshold)
             {
@@ -62,26 +62,26 @@ namespace Services
         }
 
         /// <summary>
-        /// Adds a bid to the auction, provided the person meets the seriousness threshold required for bidding.
+        /// Adds a Bid to the auction, provided the person meets the seriousness threshold required for Bidding.
         /// </summary>
-        /// <param name="person">The person placing the bid.</param>
-        /// <param name="bid">The bid to be added to the auction.</param>
+        /// <param name="person">The person placing the Bid.</param>
+        /// <param name="Bid">The Bid to be added to the auction.</param>
         /// <exception cref="InvalidOperationException">
-        /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a bid.
+        /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a Bid.
         /// </exception>
         /// <remarks>
-        /// This method checks the seriousness score of the person attempting to place a bid. If the person's score is below
-        /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the bid cannot be placed.
-        /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place bids.
+        /// This method checks the seriousness score of the person attempting to place a Bid. If the person's score is below
+        /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the Bid cannot be placed.
+        /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place Bids.
         /// </remarks>
-        public void AddBid(IPerson person, IBid bid)
+        public void AddBid(Person person, Bid Bid)
         {
             if (person.Score < this.seriousnessThreshold)
             {
-                throw new InvalidOperationException($"Cannot place a bid. Seriousness score is below the required threshold of {this.seriousnessThreshold}.");
+                throw new InvalidOperationException($"Cannot place a Bid. Seriousness score is below the required threshold of {this.seriousnessThreshold}.");
             }
 
-            bid.Bidder = person;
+            Bid.Bidder = person;
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Services
         /// </summary>
         /// <param name="person">The person who owns the auction.</param>
         /// <param name="auction">The auction to finalize.</param>
-        public void FinalizeAuction(IPerson person, IAuction auction)
+        public void FinalizeAuction(Person person, Auction auction)
         {
             if (auction.Seller != person)
             {
@@ -109,7 +109,7 @@ namespace Services
         /// </summary>
         /// <param name="person">The person to receive feedback.</param>
         /// <param name="feedbackScore">The feedback score to adjust, between -0.1 and 0.1.</param>
-        public void ProvideFeedback(IPerson person, decimal feedbackScore)
+        public void ProvideFeedback(Person person, decimal feedbackScore)
         {
             person.AdjustScore(feedbackScore);
             this.personDAO.Update(person);

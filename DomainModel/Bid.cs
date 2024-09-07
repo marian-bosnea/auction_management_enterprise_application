@@ -8,17 +8,17 @@ namespace DomainModel
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Represents a bid made in an auction.
+    /// Represents a Bid made in an auction.
     /// </summary>;
-    public class Bid : IBid
+    public class Bid
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Bid"/> class.
         /// </summary>
-        /// <param name="amount">The amount of the bid.</param>
-        /// <param name="currency">The currency in which the bid is made.</param>
-        /// <param name="auction">The auction associated with this bid.</param>
-        /// <exception cref="ArgumentException">Thrown when the bid amount is less than or equal to zero.</exception>
+        /// <param name="amount">The amount of the Bid.</param>
+        /// <param name="currency">The currency in which the Bid is made.</param>
+        /// <param name="auction">The auction associated with this Bid.</param>
+        /// <exception cref="ArgumentException">Thrown when the Bid amount is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the currency or auction is null.</exception>
         public Bid(decimal amount, string currency, Auction auction)
         {
@@ -33,31 +33,31 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets or sets the unique identifier for the bid.
+        /// Gets or sets the unique identifier for the Bid.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the person who placed the bid.
+        /// Gets or sets the person who placed the Bid.
         /// </summary>
-        public IPerson Bidder { get; set; }
+        public Person Bidder { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount of the bid.
+        /// Gets or sets the amount of the Bid.
         /// </summary>
         [Required(ErrorMessage = "Bid amount is required.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Bid amount must be greater than zero.")]
         public decimal Amount { get;  set; }
 
         /// <summary>
-        /// Gets or sets the currency in which the bid is made.
+        /// Gets or sets the currency in which the Bid is made.
         /// </summary>
         [Required(ErrorMessage = "Currency is required.")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Currency must be a valid 3-letter ISO code.")]
         public string Currency { get;  set; }
 
         /// <summary>
-        /// Gets or sets the time when the bid was made.
+        /// Gets or sets the time when the Bid was made.
         /// </summary>
         [Required(ErrorMessage = "Bid time is required.")]
         [DataType(DataType.DateTime, ErrorMessage = "Bid time must be a valid date and time.")]
@@ -71,11 +71,11 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Validates that the bid time is not in the future.
+        /// Validates that the Bid time is not in the future.
         /// </summary>
-        /// <param name="bidTime">The bid time to validate.</param>
+        /// <param name="bidTime">The Bid time to validate.</param>
         /// <param name="validationContext">The validation context.</param>
-        /// <returns>A ValidationResult indicating whether the bid time is valid.</returns>
+        /// <returns>A ValidationResult indicating whether the Bid time is valid.</returns>
         private ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
         {
             if (bidTime > DateTime.Now)

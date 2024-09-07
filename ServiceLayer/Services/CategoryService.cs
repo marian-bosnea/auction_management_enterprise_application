@@ -22,7 +22,7 @@ namespace ServiceLayer.Services
         /// <summary>
         /// A dictionary for caching categories by their name.
         /// </summary>
-        private readonly Dictionary<string, ICategory> categories;
+        private readonly Dictionary<string, Category> categories;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CategoryService"/> class.
@@ -31,15 +31,15 @@ namespace ServiceLayer.Services
         public CategoryService(ICategoryDAO categoryDAO)
         {
             this.categoryDAO = categoryDAO;
-            this.categories = new Dictionary<string, ICategory>();
+            this.categories = new Dictionary<string, Category>();
         }
 
         /// <summary>
         /// Creates a new category with the specified name if it does not already exist.
         /// </summary>
         /// <param name="name">The name of the category to be created.</param>
-        /// <returns>The created or existing <see cref="ICategory"/> instance.</returns>
-        public ICategory CreateCategory(string name)
+        /// <returns>The created or existing <see cref="Category"/> instance.</returns>
+        public Category CreateCategory(string name)
         {
             if (!this.categories.TryGetValue(name, out var category))
             {
