@@ -18,7 +18,7 @@ namespace DomainModel
         /// <param name="name">The name of the person.</param>
         public Person(string name)
         {
-            this.Name = name ?? throw new ArgumentNullException(nameof(name));
+            this.Name = name ?? throw new ArgumentNullException("name");
             this.Score = 5.0m;
         }
 

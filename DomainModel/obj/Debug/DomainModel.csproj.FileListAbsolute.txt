@@ -8,3 +8,4 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainMo
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.AssemblyReference.cache

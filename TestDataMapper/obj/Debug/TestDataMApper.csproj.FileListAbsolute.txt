@@ -14,4 +14,3 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestData
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMapper.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMapper.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.AssemblyReference.cache

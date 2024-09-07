@@ -92,21 +92,17 @@ namespace Services
         }
 
         /// <summary>
-        /// Ends the specified auction by setting its status to completed if the person trying to end it is the owner.
+        /// Finalizes the specified auction by marking it as completed.
         /// </summary>
-        /// <param name="person">The person attempting to end the auction.</param>
-        /// <param name="auction">The auction to be ended.</param
-        /// <exception cref="UnauthorizedAccessException">
-        /// Thrown when the person attempting to end the auction is not the owner of the auction.
-        /// </exception>
+        /// <param name="person">The person attempting to finalize the auction. This parameter is currently not used in the method but may be used for authorization or logging in the future.</param>
+        /// <param name="auction">The auction to be finalized.</param>
         /// <exception cref="InvalidOperationException">
-        /// Thrown when the auction is already completed.
+        /// Thrown when the auction has already been completed.
         /// </exception>
         /// <remarks>
-        /// This method sets the <c>IsCompleted</c> field of the auction to <c>true</c> if the person
-        /// trying to end the auction is the owner. If the auction is already completed or if the person
-        /// is not the owner, appropriate exceptions are thrown. The method also updates the auction status
-        /// in the data store through the <c>auctionDAO</c> object.
+        /// This method sets the <c>IsCompleted</c> property of the auction to <c>true</c> if the auction is not already completed.
+        /// It then updates the auction record in the data store through the <c>auctionDAO</c> object. 
+        /// Note that currently, the <c>person</c> parameter is not used within the method, but it may be used for additional validation or logging in future implementations.
         /// </remarks>
         public void FinalizeAuction(Person person, Auction auction)
         {
