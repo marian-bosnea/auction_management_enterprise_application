@@ -10,7 +10,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestData
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.AssemblyReference.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.CoreCompileInputs.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMApper.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\obj\Debug\TestDataMapper.dll

@@ -1,0 +1,118 @@
+﻿namespace DataMapper.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class first_migration : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.Auctions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        StartDate = c.DateTime(nullable: false),
+                        EndDate = c.DateTime(nullable: false),
+                        StartingPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Currency = c.String(nullable: false, maxLength: 3),
+                        IsCompleted = c.Boolean(nullable: false),
+                        Product_Id = c.Int(nullable: false),
+                        Seller_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Products", t => t.Product_Id, cascadeDelete: true)
+                .ForeignKey("dbo.People", t => t.Seller_Id, cascadeDelete: true)
+                .Index(t => t.Product_Id)
+                .Index(t => t.Seller_Id);
+            
+            CreateTable(
+                "dbo.Bids",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Currency = c.String(nullable: false, maxLength: 3),
+                        BidTime = c.DateTime(nullable: false),
+                        Bidder_Id = c.Int(),
+                        Auction_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.People", t => t.Bidder_Id)
+                .ForeignKey("dbo.Auctions", t => t.Auction_Id)
+                .Index(t => t.Bidder_Id)
+                .Index(t => t.Auction_Id);
+            
+            CreateTable(
+                "dbo.People",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 100),
+                        Score = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Role = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Products",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 200),
+                        Description = c.String(nullable: false, maxLength: 1000),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 100),
+                        Product_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Products", t => t.Product_Id)
+                .Index(t => t.Product_Id);
+            
+            CreateTable(
+                "dbo.CategoryCategories",
+                c => new
+                    {
+                        Category_Id = c.Int(nullable: false),
+                        Category_Id1 = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Category_Id, t.Category_Id1 })
+                .ForeignKey("dbo.Categories", t => t.Category_Id)
+                .ForeignKey("dbo.Categories", t => t.Category_Id1)
+                .Index(t => t.Category_Id)
+                .Index(t => t.Category_Id1);
+            
+        }
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.Auctions", "Seller_Id", "dbo.People");
+            DropForeignKey("dbo.Auctions", "Product_Id", "dbo.Products");
+            DropForeignKey("dbo.Categories", "Product_Id", "dbo.Products");
+            DropForeignKey("dbo.CategoryCategories", "Category_Id1", "dbo.Categories");
+            DropForeignKey("dbo.CategoryCategories", "Category_Id", "dbo.Categories");
+            DropForeignKey("dbo.Bids", "Auction_Id", "dbo.Auctions");
+            DropForeignKey("dbo.Bids", "Bidder_Id", "dbo.People");
+            DropIndex("dbo.CategoryCategories", new[] { "Category_Id1" });
+            DropIndex("dbo.CategoryCategories", new[] { "Category_Id" });
+            DropIndex("dbo.Categories", new[] { "Product_Id" });
+            DropIndex("dbo.Bids", new[] { "Auction_Id" });
+            DropIndex("dbo.Bids", new[] { "Bidder_Id" });
+            DropIndex("dbo.Auctions", new[] { "Seller_Id" });
+            DropIndex("dbo.Auctions", new[] { "Product_Id" });
+            DropTable("dbo.CategoryCategories");
+            DropTable("dbo.Categories");
+            DropTable("dbo.Products");
+            DropTable("dbo.People");
+            DropTable("dbo.Bids");
+            DropTable("dbo.Auctions");
+        }
+    }
+}

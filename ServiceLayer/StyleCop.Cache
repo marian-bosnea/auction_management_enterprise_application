@@ -260,7 +260,7 @@
     <timestamps>
       <styleCop>2024/08/21 13:42:12.921</styleCop>
       <settingsFile>2024/08/21 13:48:36.978</settingsFile>
-      <sourceFile>2024/09/07 12:34:45.269</sourceFile>
+      <sourceFile>2024/09/07 12:52:37.670</sourceFile>
       <parser>2024/08/21 13:42:12.921</parser>
       <StyleCop.CSharp.DocumentationRules>2024/08/21 13:42:12.921</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>268198937</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -277,13 +277,7 @@
       <StyleCop.CSharp.SpacingRules>2024/08/21 13:42:12.921</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustBeginWithLowerCaseLetter" ruleCheckId="SA1306">
-        <context>Variable names and private field names must start with a lower-case letter: Bid.</context>
-        <line>77</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="ProductService.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>

@@ -65,7 +65,7 @@ namespace Services
         /// Adds a Bid to the auction, provided the person meets the seriousness threshold required for Bidding.
         /// </summary>
         /// <param name="person">The person placing the Bid.</param>
-        /// <param name="Bid">The Bid to be added to the auction.</param>
+        /// <param name="bid">The Bid to be added to the auction.</param>
         /// <exception cref="InvalidOperationException">
         /// Thrown when the person's seriousness score is below the required threshold, preventing them from placing a Bid.
         /// </exception>
@@ -74,14 +74,14 @@ namespace Services
         /// the predefined threshold (`seriousnessThreshold`), an exception is thrown, indicating that the Bid cannot be placed.
         /// This ensures that only individuals with a seriousness score meeting or exceeding the threshold are allowed to place Bids.
         /// </remarks>
-        public void AddBid(Person person, Bid Bid)
+        public void AddBid(Person person, Bid bid)
         {
             if (person.Score < this.seriousnessThreshold)
             {
                 throw new InvalidOperationException($"Cannot place a Bid. Seriousness score is below the required threshold of {this.seriousnessThreshold}.");
             }
 
-            Bid.Bidder = person;
+            bid.Bidder = person;
         }
 
         /// <summary>
