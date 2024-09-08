@@ -121,8 +121,7 @@ namespace Services.Tests
 
             // Act & Assert
             var ex = Assert.ThrowsException<InvalidOperationException>(() =>
-                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency)
-            );
+                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency));
             Assert.AreEqual($"Cannot start a new auction. Maximum of {this.auctionService.MaxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.", ex.Message);
         }
 
@@ -150,8 +149,7 @@ namespace Services.Tests
 
             // Act & Assert
             var ex = Assert.ThrowsException<InvalidOperationException>(() =>
-                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency)
-            );
+                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency));
             Assert.IsTrue(ex.Message.Contains("Maximum of"));
             Assert.IsTrue(ex.Message.Contains("active auctions in category 'Category1' reached") ||
                           ex.Message.Contains("active auctions in category 'Category2' reached"));
@@ -373,7 +371,7 @@ namespace Services.Tests
             var person = new Person();
             var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
             {
-                IsCompleted = false
+                IsCompleted = false,
             };
 
             this.auctionDAOMock.Setup(dao => dao.Update(auction)).Verifiable();
@@ -396,7 +394,7 @@ namespace Services.Tests
             var person = new Person();
             var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
             {
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             // Act & Assert
@@ -413,7 +411,7 @@ namespace Services.Tests
             var person = new Person();
             var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
             {
-                IsCompleted = false
+                IsCompleted = false,
             };
 
             this.auctionDAOMock.Setup(dao => dao.Update(auction)).Verifiable();
@@ -435,7 +433,7 @@ namespace Services.Tests
             var person = new Person();
             var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
             {
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             // Act & Assert

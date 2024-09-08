@@ -11,8 +11,6 @@ namespace TestServiceLayer
     using DomainModel;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using ServiceLayer.Interfaces;
-    using ServiceLayer.Services;
     using Services;
 
     /// <summary>
@@ -258,7 +256,7 @@ namespace TestServiceLayer
             var auction = new Auction
             {
                 Seller = person,
-                Bids = new List<Bid>() // Auction has no bids
+                Bids = new List<Bid>(), // Auction has no bids
             };
 
             // Act
@@ -281,7 +279,7 @@ namespace TestServiceLayer
             var auction = new Auction
             {
                 Seller = anotherPerson, // Auction was started by another person
-                Bids = new List<Bid> { new Bid() }
+                Bids = new List<Bid> { new Bid() },
             };
 
             // Act & Assert
@@ -299,7 +297,7 @@ namespace TestServiceLayer
             var auction = new Auction
             {
                 Seller = person,
-                Bids = new List<Bid> { new Bid() }
+                Bids = new List<Bid> { new Bid() },
             };
 
             // Act
@@ -322,7 +320,7 @@ namespace TestServiceLayer
             var auction = new Auction
             {
                 Seller = anotherPerson,
-                Bids = new List<Bid> { new Bid() }
+                Bids = new List<Bid> { new Bid() },
             };
 
             // Act & Assert

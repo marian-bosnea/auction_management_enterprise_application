@@ -56,7 +56,7 @@ namespace DomainModel.Tests
             var categories = new List<Category>
             {
                 new Category("Category1"),
-                new Category("Category2")
+                new Category("Category2"),
             };
 
             // Act

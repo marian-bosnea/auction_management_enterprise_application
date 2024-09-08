@@ -5,7 +5,6 @@
 namespace DomainModel.Tests
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

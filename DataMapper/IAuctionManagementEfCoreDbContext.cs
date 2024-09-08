@@ -44,9 +44,13 @@ namespace DataMapper
         /// <returns>The number of state entries written to the database.</returns>
         int SaveChanges();
 
-
-
+        /// <summary>
+        /// Gets the <see cref="DbEntityEntry"/> for the given entity, allowing for access to its state and metadata.
+        /// </summary>
+        /// <param name="entity">The entity for which to get the <see cref="DbEntityEntry"/>.</param>
+        /// <returns>
+        /// A <see cref="DbEntityEntry"/> instance that provides access to the state and metadata of the given entity.
+        /// </returns>
         DbEntityEntry Entry(object entity);
-
     }
 }

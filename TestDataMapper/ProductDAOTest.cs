@@ -1,32 +1,41 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using DataMapper.DAO;
-using DomainModel;
-
-namespace DataMapper.Tests
+﻿namespace DataMapper.Tests
 {
-    [TestClass]
-    public class ProductDAOTests
-    {
-        private DbContext _context;
-        private ProductDAO _productDAO;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using DataMapper.DAO;
+    using DomainModel;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    /// <summary>
+    /// Unit tests for the <see cref="ProductDAO"/> class.
+    /// </summary>
+    [TestClass]
+    public class ProductDAOTest
+    {
+        private DbContext context;
+        private ProductDAO productDAO;
+
+        /// <summary>
+        /// Initializes the test environment before each test method is run.
+        /// This includes setting up an in-memory database and initializing DAOs.
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
             // Create an in-memory database using Effort or any suitable provider
             var connection = Effort.DbConnectionFactory.CreateTransient();
-            _context = new AuctionManagementEfCoreDbContext(connection);
+            this.context = new AuctionManagementEfCoreDbContext(connection);
 
             // Initialize DAO with the in-memory context
-            _productDAO = new ProductDAO((AuctionManagementEfCoreDbContext)_context);
+            this.productDAO = new ProductDAO((AuctionManagementEfCoreDbContext)this.context);
 
             // Seed initial data
-            SeedDatabase();
+            this.SeedDatabase();
         }
 
+        /// <summary>
+        /// Tests that the <see cref="ProductDAO.Add"/> method correctly adds a new product to the database.
+        /// </summary>
         [TestMethod]
         public void AddProduct_ShouldAddProductToDatabase()
         {
@@ -34,40 +43,46 @@ namespace DataMapper.Tests
             var newProduct = new Product(1, "New Product", "Description of New Product", new List<Category>());
 
             // Act
-            _productDAO.Add(newProduct);
+            this.productDAO.Add(newProduct);
 
             // Assert
-            var addedProduct = _context.Set<Product>().Find(newProduct.Id);
+            var addedProduct = this.context.Set<Product>().Find(newProduct.Id);
             Assert.IsNotNull(addedProduct);
             Assert.AreEqual("New Product", addedProduct.Name);
             Assert.AreEqual("Description of New Product", addedProduct.Description);
             Assert.AreEqual(0, addedProduct.Categories.Count);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="ProductDAO.Delete"/> method correctly removes a product from the database.
+        /// </summary>
         [TestMethod]
         public void DeleteProduct_ShouldRemoveProductFromDatabase()
         {
             // Arrange
             var productToDelete = new Product(1, "Product to Delete", "Description", new List<Category>());
-            _productDAO.Add(productToDelete);
+            this.productDAO.Add(productToDelete);
 
             // Act
-            _productDAO.Delete(productToDelete.Id);
+            this.productDAO.Delete(productToDelete.Id);
 
             // Assert
-            var deletedProduct = _context.Set<Product>().Find(productToDelete.Id);
+            var deletedProduct = this.context.Set<Product>().Find(productToDelete.Id);
             Assert.IsNull(deletedProduct);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="ProductDAO.Get"/> method correctly retrieves a product by its ID from the database.
+        /// </summary>
         [TestMethod]
         public void GetProduct_ShouldReturnCorrectProduct()
         {
             // Arrange
             var expectedProduct = new Product(1, "Expected Product", "Description", new List<Category>());
-            _productDAO.Add(expectedProduct);
+            this.productDAO.Add(expectedProduct);
 
             // Act
-            var product = _productDAO.Get(expectedProduct.Id);
+            var product = this.productDAO.Get(expectedProduct.Id);
 
             // Assert
             Assert.IsNotNull(product);
@@ -75,17 +90,20 @@ namespace DataMapper.Tests
             Assert.AreEqual("Description", product.Description);
         }
 
+        /// <summary>
+        /// Seeds the in-memory database with initial product data required for testing.
+        /// </summary>
         private void SeedDatabase()
         {
             var initialProducts = new List<Product>
             {
                 new Product(1, "Seed Product 1", "Description of Seed Product 1", new List<Category>()),
-                new Product(2, "Seed Product 2", "Description of Seed Product 2", new List<Category>())
+                new Product(2, "Seed Product 2", "Description of Seed Product 2", new List<Category>()),
             };
 
             foreach (var product in initialProducts)
             {
-                _productDAO.Add(product);
+                this.productDAO.Add(product);
             }
         }
     }

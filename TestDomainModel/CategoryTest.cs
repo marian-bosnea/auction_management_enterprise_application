@@ -15,69 +15,6 @@ namespace DomainModel.Tests
     [TestClass]
     public class CategoryTest
     {
-        [TestMethod]
-        public void Constructor_ShouldInitializeEmptyListsForParentsAndSubcategories()
-        {
-            // Arrange & Act
-            var category = new Category();
-
-            // Assert
-            Assert.IsNotNull(category.Parents, "Parents list should not be null.");
-            Assert.IsNotNull(category.Subcategories, "Subcategories list should not be null.");
-            Assert.AreEqual(0, category.Parents.Count, "Parents list should be empty.");
-            Assert.AreEqual(0, category.Subcategories.Count, "Subcategories list should be empty.");
-        }
-
-        [TestMethod]
-        public void Constructor_WithParameters_ShouldInitializePropertiesCorrectly()
-        {
-            // Arrange
-            var name = "Test Category";
-            var category = new Category(name);
-
-            // Act
-            // Assert
-            Assert.AreEqual(name, category.Name, "Category name should be set correctly.");
-            Assert.IsNotNull(category.Parents, "Parents list should not be null.");
-            Assert.IsNotNull(category.Subcategories, "Subcategories list should not be null.");
-            Assert.AreEqual(0, category.Parents.Count, "Parents list should be empty.");
-            Assert.AreEqual(0, category.Subcategories.Count, "Subcategories list should be empty.");
-        }
-
-        [TestMethod]
-        public void AddParent_ShouldAddCategoryToParentsList()
-        {
-            // Arrange
-            var parentCategory = new Category("Parent");
-            var childCategory = new Category("Child");
-
-            // Act
-            childCategory.AddParent(parentCategory);
-
-            // Assert
-            Assert.AreEqual(1, childCategory.Parents.Count, "Child category should have one parent.");
-            Assert.AreEqual(parentCategory, childCategory.Parents[0], "Parent category should be correctly added to the child category.");
-            Assert.AreEqual(1, parentCategory.Subcategories.Count, "Parent category should have one subcategory.");
-            Assert.AreEqual(childCategory, parentCategory.Subcategories[0], "Child category should be correctly added to the parent category.");
-        }
-
-        [TestMethod]
-        public void AddSubcategory_ShouldAddCategoryToSubcategoriesList()
-        {
-            // Arrange
-            var parentCategory = new Category("Parent");
-            var subCategory = new Category("Subcategory");
-
-            // Act
-            parentCategory.AddSubcategory(subCategory);
-
-            // Assert
-            Assert.AreEqual(1, parentCategory.Subcategories.Count, "Parent category should have one subcategory.");
-            Assert.AreEqual(subCategory, parentCategory.Subcategories[0], "Subcategory should be correctly added to the parent category.");
-            Assert.AreEqual(1, subCategory.Parents.Count, "Subcategory should have one parent.");
-            Assert.AreEqual(parentCategory, subCategory.Parents[0], "Parent category should be correctly added to the subcategory.");
-        }
-
         /// <summary>
         /// Tests that the <see cref="Category"/> constructor correctly initializes a category with a valid name.
         /// </summary>
@@ -264,6 +201,90 @@ namespace DomainModel.Tests
 
             // Assert
             Assert.AreEqual(expectedName, result, "ToString did not return the expected category name.");
+        }
+
+        /// <summary>
+        /// Tests that the default constructor of the <see cref="Category"/> class initializes empty lists for parents and subcategories.
+        /// </summary>
+        [TestMethod]
+        public void Constructor_ShouldInitializeEmptyListsForParentsAndSubcategories()
+        {
+            // Arrange & Act
+            var category = new Category();
+
+            // Assert
+            Assert.IsNotNull(category.Parents, "Parents list should not be null.");
+            Assert.IsNotNull(category.Subcategories, "Subcategories list should not be null.");
+            Assert.AreEqual(0, category.Parents.Count, "Parents list should be empty.");
+            Assert.AreEqual(0, category.Subcategories.Count, "Subcategories list should be empty.");
+        }
+
+        /// <summary>
+        /// Tests that the constructor of the <see cref="Category"/> class, when provided with a name, initializes the properties correctly.
+        /// </summary>
+        /// <remarks>
+        /// Verifies that the Name property is set to the provided name and that the Parents and Subcategories lists are not null and empty.
+        /// </remarks>
+        [TestMethod]
+        public void Constructor_WithParameters_ShouldInitializePropertiesCorrectly()
+        {
+            // Arrange
+            var name = "Test Category";
+            var category = new Category(name);
+
+            // Act
+            // Assert
+            Assert.AreEqual(name, category.Name, "Category name should be set correctly.");
+            Assert.IsNotNull(category.Parents, "Parents list should not be null.");
+            Assert.IsNotNull(category.Subcategories, "Subcategories list should not be null.");
+            Assert.AreEqual(0, category.Parents.Count, "Parents list should be empty.");
+            Assert.AreEqual(0, category.Subcategories.Count, "Subcategories list should be empty.");
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AddParent"/> method correctly adds a parent category to the child's Parents list and updates the parent's Subcategories list.
+        /// </summary>
+        /// <remarks>
+        /// Verifies that the child category has one parent and the parent category has one subcategory after calling the AddParent method.
+        /// </remarks>
+        [TestMethod]
+        public void AddParent_ShouldAddCategoryToParentsList()
+        {
+            // Arrange
+            var parentCategory = new Category("Parent");
+            var childCategory = new Category("Child");
+
+            // Act
+            childCategory.AddParent(parentCategory);
+
+            // Assert
+            Assert.AreEqual(1, childCategory.Parents.Count, "Child category should have one parent.");
+            Assert.AreEqual(parentCategory, childCategory.Parents[0], "Parent category should be correctly added to the child category.");
+            Assert.AreEqual(1, parentCategory.Subcategories.Count, "Parent category should have one subcategory.");
+            Assert.AreEqual(childCategory, parentCategory.Subcategories[0], "Child category should be correctly added to the parent category.");
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AddSubcategory"/> method correctly adds a subcategory to the parent's Subcategories list and updates the subcategory's Parents list.
+        /// </summary>
+        /// <remarks>
+        /// Verifies that the parent category has one subcategory and the subcategory has one parent after calling the AddSubcategory method.
+        /// </remarks>
+        [TestMethod]
+        public void AddSubcategory_ShouldAddCategoryToSubcategoriesList()
+        {
+            // Arrange
+            var parentCategory = new Category("Parent");
+            var subCategory = new Category("Subcategory");
+
+            // Act
+            parentCategory.AddSubcategory(subCategory);
+
+            // Assert
+            Assert.AreEqual(1, parentCategory.Subcategories.Count, "Parent category should have one subcategory.");
+            Assert.AreEqual(subCategory, parentCategory.Subcategories[0], "Subcategory should be correctly added to the parent category.");
+            Assert.AreEqual(1, subCategory.Parents.Count, "Subcategory should have one parent.");
+            Assert.AreEqual(parentCategory, subCategory.Parents[0], "Parent category should be correctly added to the subcategory.");
         }
     }
 }

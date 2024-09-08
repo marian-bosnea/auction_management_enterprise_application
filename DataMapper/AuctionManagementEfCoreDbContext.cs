@@ -2,7 +2,6 @@
 {
     using System.Data.Common;
     using System.Data.Entity;
-    using DataMapper.Interfaces;
     using DomainModel;
 
     /// <summary>

@@ -13,7 +13,6 @@ namespace TestServiceLayer
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using ServiceLayer.Interfaces;
-    using ServiceLayer.Services;
 
     /// <summary>
     /// Unit tests for the <see cref="ProductService"/> class.

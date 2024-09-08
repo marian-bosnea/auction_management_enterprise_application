@@ -796,7 +796,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:28:54.187</settingsFile>
-      <sourceFile>2024/09/08 16:35:52.719</sourceFile>
+      <sourceFile>2024/09/08 18:34:41.924</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -821,7 +821,7 @@
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The constructor must have a documentation header.</context>
-        <line>13</line>
+        <line>12</line>
         <warning>False</warning>
       </violation>
     </violations>
@@ -945,7 +945,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:28:54.187</settingsFile>
-      <sourceFile>2024/09/08 17:47:22.028</sourceFile>
+      <sourceFile>2024/09/08 18:39:53.237</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -971,26 +971,6 @@
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileHeaderFileNameDocumentationMustMatchTypeName" ruleCheckId="SA1649">
         <context>The file attribute in the file header's copyright tag must contain the name of the first type in the file and can be any of these: "IAuctionManagementEfCoreDbContext"</context>
         <line>1</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
-        <context>The code must not contain multiple blank lines in a row.</context>
-        <line>47</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
-        <context>The code must not contain multiple blank lines in a row.</context>
-        <line>48</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
-        <context>A closing curly bracket must not be preceded by a blank line.</context>
-        <line>51</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
-        <context>The method must have a documentation header.</context>
-        <line>49</line>
         <warning>False</warning>
       </violation>
     </violations>
