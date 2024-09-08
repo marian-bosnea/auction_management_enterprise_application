@@ -362,5 +362,249 @@ namespace Services.Tests
             // Assert
             this.auctionDAOMock.Verify(dao => dao.Delete(It.IsAny<int>()), Times.Never);
         }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method successfully marks an auction as completed.
+        /// </summary>
+        [TestMethod]
+        public void FinalizeAuction_ShouldCompleteAuction_WhenAuctionIsNotCompleted()
+        {
+            // Arrange
+            var person = new Person();
+            var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
+            {
+                IsCompleted = false
+            };
+
+            this.auctionDAOMock.Setup(dao => dao.Update(auction)).Verifiable();
+
+            // Act
+            this.auctionService.FinalizeAuction(person, auction);
+
+            // Assert
+            Assert.IsTrue(auction.IsCompleted);
+            this.auctionDAOMock.Verify(dao => dao.Update(auction), Times.Once);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method throws an exception when attempting to finalize an already completed auction.
+        /// </summary>
+        [TestMethod]
+        public void FinalizeAuction_ShouldThrowException_WhenAuctionAlreadyCompleted()
+        {
+            // Arrange
+            var person = new Person();
+            var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
+            {
+                IsCompleted = true
+            };
+
+            // Act & Assert
+            Assert.ThrowsException<InvalidOperationException>(() => this.auctionService.FinalizeAuction(person, auction));
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method correctly interacts with the DAO when finalizing an auction.
+        /// </summary>
+        [TestMethod]
+        public void FinalizeAuction_ShouldCallUpdateOnDAO_WhenAuctionIsFinalized()
+        {
+            // Arrange
+            var person = new Person();
+            var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
+            {
+                IsCompleted = false
+            };
+
+            this.auctionDAOMock.Setup(dao => dao.Update(auction)).Verifiable();
+
+            // Act
+            this.auctionService.FinalizeAuction(person, auction);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Update(auction), Times.Once);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method does not call the DAO update if the auction is already completed.
+        /// </summary>
+        [TestMethod]
+        public void FinalizeAuction_ShouldNotCallUpdateOnDAO_WhenAuctionAlreadyCompleted()
+        {
+            // Arrange
+            var person = new Person();
+            var auction = new Auction(person, new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD")
+            {
+                IsCompleted = true
+            };
+
+            // Act & Assert
+            Assert.ThrowsException<InvalidOperationException>(() => this.auctionService.FinalizeAuction(person, auction));
+            this.auctionDAOMock.Verify(dao => dao.Update(It.IsAny<Auction>()), Times.Never);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.DeleteAuction"/> method successfully deletes an existing auction.
+        /// </summary>
+        [TestMethod]
+        public void DeleteAuction_ShouldDeleteAuction_WhenAuctionExists()
+        {
+            // Arrange
+            int auctionId = 1;
+            var auction = new Auction(new Person(), new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
+
+            this.auctionDAOMock.Setup(dao => dao.Get(auctionId)).Returns(auction);
+            this.auctionDAOMock.Setup(dao => dao.Delete(auctionId)).Verifiable();
+
+            // Act
+            this.auctionService.DeleteAuction(auctionId);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Delete(auctionId), Times.Once);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.DeleteAuction"/> method does nothing when the auction does not exist.
+        /// </summary>
+        [TestMethod]
+        public void DeleteAuction_ShouldNotDeleteAuction_WhenAuctionDoesNotExist()
+        {
+            // Arrange
+            int auctionId = 2;
+
+            this.auctionDAOMock.Setup(dao => dao.Get(auctionId)).Returns((Auction)null);
+            this.auctionDAOMock.Setup(dao => dao.Delete(auctionId)).Verifiable();
+
+            // Act
+            this.auctionService.DeleteAuction(auctionId);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Delete(auctionId), Times.Never);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.DeleteAuction"/> method correctly interacts with the DAO to delete an auction.
+        /// </summary>
+        [TestMethod]
+        public void DeleteAuction_ShouldCallDeleteOnDAO_WhenAuctionExists()
+        {
+            // Arrange
+            int auctionId = 3;
+            var auction = new Auction(new Person(), new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
+
+            this.auctionDAOMock.Setup(dao => dao.Get(auctionId)).Returns(auction);
+            this.auctionDAOMock.Setup(dao => dao.Delete(auctionId)).Verifiable();
+
+            // Act
+            this.auctionService.DeleteAuction(auctionId);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Delete(auctionId), Times.Once);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.DeleteAuction"/> method does not call Delete on DAO if the auction is null.
+        /// </summary>
+        [TestMethod]
+        public void DeleteAuction_ShouldNotCallDeleteOnDAO_WhenAuctionDoesNotExist()
+        {
+            // Arrange
+            int auctionId = 4;
+
+            this.auctionDAOMock.Setup(dao => dao.Get(auctionId)).Returns((Auction)null);
+            this.auctionDAOMock.Setup(dao => dao.Delete(auctionId)).Verifiable();
+
+            // Act
+            this.auctionService.DeleteAuction(auctionId);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Delete(auctionId), Times.Never);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.UpdateAuction"/> method throws an <see cref="ArgumentNullException"/> when the auction is null.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UpdateAuction_ShouldThrowArgumentNullException_WhenAuctionIsNull()
+        {
+            // Act
+            this.auctionService.UpdateAuction(null);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.UpdateAuction"/> method correctly interacts with the DAO to update an auction.
+        /// </summary>
+        [TestMethod]
+        public void UpdateAuction_ShouldCallUpdateOnDAO_WhenAuctionIsNotNull()
+        {
+            // Arrange
+            var auction = new Auction(new Person(), new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
+
+            this.auctionDAOMock.Setup(dao => dao.Update(auction)).Verifiable();
+
+            // Act
+            this.auctionService.UpdateAuction(auction);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Update(auction), Times.Once);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.UpdateAuction"/> method handles the case where the DAO's Update method is called with valid data.
+        /// </summary>
+        [TestMethod]
+        public void UpdateAuction_ShouldUpdateAuction_WhenAuctionIsValid()
+        {
+            // Arrange
+            var auction = new Auction(new Person(), new Product(), DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
+
+            this.auctionDAOMock.Setup(dao => dao.Update(It.IsAny<Auction>())).Verifiable();
+
+            // Act
+            this.auctionService.UpdateAuction(auction);
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Update(auction), Times.Once);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.UpdateAuction"/> method does not update if the DAO is not called (by checking for no updates).
+        /// </summary>
+        [TestMethod]
+        public void UpdateAuction_ShouldNotCallUpdateOnDAO_WhenAuctionIsNull()
+        {
+            // Act
+            try
+            {
+                this.auctionService.UpdateAuction(null);
+            }
+            catch (ArgumentNullException)
+            {
+                // Expected exception
+            }
+
+            // Assert
+            this.auctionDAOMock.Verify(dao => dao.Update(It.IsAny<Auction>()), Times.Never);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.AddBid"/> method throws an exception when the bid currency does not match the auction currency.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddBid_ShouldThrowArgumentException_WhenBidCurrencyDoesNotMatchAuctionCurrency()
+        {
+            // Arrange
+            var person = new Person();
+            var product = new Product();
+            var auction = new Auction(person, product, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
+            var bid = new Bid( 110, "EUR");
+
+            this.auctionDAOMock.Setup(dao => dao.Get(auction.Id)).Returns(auction);
+
+            // Act
+            this.auctionService.AddBid(auction, bid);
+        }
     }
 }

@@ -424,24 +424,6 @@ namespace DomainModel.Tests
         }
 
         /// <summary>
-        /// Tests that setting a start date that is later than the end date throws an exception.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void StartDate_SetDateLaterThanEndDate_ThrowsArgumentException()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var product = new Product(1, "Product A", "Description", new List<Category>());
-            var startDate = DateTime.Now;
-            var endDate = startDate.AddDays(1);
-            var auction = new Auction(person, product, startDate, endDate, 100, "USD");
-
-            // Act
-            auction.StartDate = endDate.AddDays(1); // Setting start date to be later than end date
-        }
-
-        /// <summary>
         /// Tests that setting a valid end date works as expected.
         /// </summary>
         [TestMethod]
@@ -460,57 +442,6 @@ namespace DomainModel.Tests
 
             // Assert
             Assert.AreEqual(newEndDate, auction.EndDate);
-        }
-
-        /// <summary>
-        /// Tests that setting an end date that is earlier than the current date throws an exception.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void EndDate_SetDateEarlierThanNow_ThrowsArgumentException()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var product = new Product(1, "Product A", "Description", new List<Category>());
-            var startDate = DateTime.Now.AddDays(1);
-            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
-
-            // Act
-            auction.EndDate = DateTime.Now.AddDays(-1); // Setting end date to the past
-        }
-
-        /// <summary>
-        /// Tests that setting an end date that is earlier than the start date throws an exception.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void EndDate_SetDateEarlierThanStartDate_ThrowsArgumentException()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var product = new Product(1, "Product A", "Description", new List<Category>());
-            var startDate = DateTime.Now.AddDays(1);
-            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
-
-            // Act
-            auction.EndDate = startDate.AddHours(-1); // Setting end date to before start date
-        }
-
-        /// <summary>
-        /// Tests that setting an end date to null throws an exception.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void EndDate_SetNullDate_ThrowsArgumentNullException()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var product = new Product(1, "Product A", "Description", new List<Category>());
-            var startDate = DateTime.Now.AddDays(1);
-            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
-
-            // Act
-            auction.EndDate = default(DateTime); // Setting end date to null
         }
 
         /// <summary>

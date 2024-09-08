@@ -248,5 +248,22 @@ namespace DomainModel.Tests
             Assert.AreEqual(0, category.Parents.Count);
             Assert.AreEqual(0, category.Subcategories.Count);
         }
+
+        /// <summary>
+        /// Tests that the ToString method returns the expected category name.
+        /// </summary>
+        [TestMethod]
+        public void ToString_ReturnsCategoryName()
+        {
+            // Arrange
+            var expectedName = "Electronics";
+            var category = new Category(expectedName);
+
+            // Act
+            var result = category.ToString();
+
+            // Assert
+            Assert.AreEqual(expectedName, result, "ToString did not return the expected category name.");
+        }
     }
 }

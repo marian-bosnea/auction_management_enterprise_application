@@ -62,6 +62,11 @@ namespace DomainModel
         /// <param name="category">The category to add.</param>
         public void AddCategory(Category category)
         {
+            if (category == null)
+            {
+                return;
+            }
+
             if (!this.Categories.Contains(category))
             {
                 this.Categories.Add(category);

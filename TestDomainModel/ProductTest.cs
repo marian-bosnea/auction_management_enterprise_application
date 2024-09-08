@@ -214,5 +214,63 @@ namespace DomainModel.Tests
             // Assert
             Assert.AreEqual("Laptop", result);
         }
+
+        /// <summary>
+        /// Tests that a new category is added to the product's categories list.
+        /// </summary>
+        [TestMethod]
+        public void AddCategory_NewCategory_CategoryAdded()
+        {
+            // Arrange
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var newCategory = new Category("New Category");
+
+            // Act
+            product.AddCategory(newCategory);
+
+            // Assert
+            Assert.IsTrue(product.Categories.Contains(newCategory));
+        }
+
+        /// <summary>
+        /// Tests that an existing category is not added again to the product's categories list.
+        /// </summary>
+        [TestMethod]
+        public void AddCategory_ExistingCategory_CategoryNotAddedAgain()
+        {
+            // Arrange
+            var existingCategory = new Category("Existing Category");
+            var product = new Product(1, "Product A", "Description", new List<Category> { existingCategory });
+
+            // Act
+            product.AddCategory(existingCategory);
+
+            // Assert
+            var categories = product.Categories;
+            Assert.AreEqual(1, categories.Count); // Should still have only one category
+        }
+
+        /// <summary>
+        /// Tests that adding a null category does not throw an exception and does not modify the categories list.
+        /// </summary>
+        [TestMethod]
+        public void AddCategory_NullCategory_DoesNotThrowException()
+        {
+            // Arrange
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+
+            // Act
+            try
+            {
+                product.AddCategory(null);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"Exception was thrown: {ex.Message}");
+            }
+
+            // Assert
+            Assert.AreEqual(0, product.Categories.Count); // The list should still be empty
+        }
     }
 }

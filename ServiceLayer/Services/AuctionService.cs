@@ -200,6 +200,11 @@ namespace Services
         /// <param name="auction">The auction to update.</param>
         public void UpdateAuction(Auction auction)
         {
+            if (auction == null)
+            {
+                throw new ArgumentNullException("Auction must not be null");
+            }
+
             this.auctionDAO.Update(auction);
         }
 

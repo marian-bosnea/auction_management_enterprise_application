@@ -4,6 +4,7 @@
 
 namespace ServiceLayer.Services
 {
+    using System;
     using System.Collections.Generic;
     using DataMapper.Interfaces;
     using DomainModel;
@@ -49,6 +50,11 @@ namespace ServiceLayer.Services
         /// <returns>The created or existing <see cref="Category"/> instance.</returns>
         public Category CreateCategory(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Category name must not be null or empty.", nameof(name));
+            }
+
             if (!this.categories.TryGetValue(name, out var category))
             {
                 category = this.categoryDAO.GetByName(name);
@@ -67,5 +73,6 @@ namespace ServiceLayer.Services
 
             return category;
         }
+
     }
 }

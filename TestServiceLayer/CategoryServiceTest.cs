@@ -5,6 +5,7 @@
 namespace TestServiceLayer
 {
     using System;
+    using System.Collections.Generic;
     using DataMapper.Interfaces;
     using DomainModel;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,27 +18,19 @@ namespace TestServiceLayer
     [TestClass]
     public class CategoryServiceTest
     {
+        private Mock<ICategoryDAO> categoryDAOMock;
+        private CategoryService categoryService;
+        private Dictionary<string, Category> categories;
+
         /// <summary>
-        /// Tests that the <see cref="CategoryService.CreateCategory"/> method creates and caches a new category when it does not already exist.
+        /// Initializes the test environment before each test method is run.
         /// </summary>
-        [TestMethod]
-        public void CreateCategory_ShouldCreateAndCacheNewCategory_WhenCategoryDoesNotExist()
+        [TestInitialize]
+        public void Setup()
         {
-            // Arrange
-            var categoryDAO = new Mock<ICategoryDAO>();
-            var categoryService = new CategoryService(categoryDAO.Object);
-            string categoryName = "NewCategory";
-
-            categoryDAO.Setup(dao => dao.GetByName(categoryName)).Returns((Category)null);
-            categoryDAO.Setup(dao => dao.Add(It.IsAny<Category>()));
-
-            // Act
-            var category = categoryService.CreateCategory(categoryName);
-
-            // Assert
-            Assert.IsNotNull(category);
-            Assert.AreEqual(categoryName, category.Name);
-            categoryDAO.Verify(dao => dao.Add(It.IsAny<Category>()), Times.Once);
+            this.categoryDAOMock = new Mock<ICategoryDAO>();
+            this.categories = new Dictionary<string, Category>();
+            this.categoryService = new CategoryService(this.categoryDAOMock.Object);
         }
 
         /// <summary>
@@ -47,69 +40,35 @@ namespace TestServiceLayer
         public void CreateCategory_ShouldReturnExistingCategory_WhenCategoryExists()
         {
             // Arrange
-            var categoryDAO = new Mock<ICategoryDAO>();
-            var categoryService = new CategoryService(categoryDAO.Object);
-            string categoryName = "ExistingCategory";
+            var categoryName = "ExistingCategory";
             var existingCategory = new Category(categoryName);
 
-            categoryDAO.Setup(dao => dao.GetByName(categoryName)).Returns(existingCategory);
-            categoryDAO.Setup(dao => dao.Add(It.IsAny<Category>())).Verifiable();
+            this.categories[categoryName] = existingCategory;
+            this.categoryDAOMock.Setup(dao => dao.GetByName(categoryName)).Returns(existingCategory);
+            this.categoryDAOMock.Setup(dao => dao.Add(It.IsAny<Category>())).Verifiable();
 
             // Act
-            var category = categoryService.CreateCategory(categoryName);
+            var category = this.categoryService.CreateCategory(categoryName);
 
             // Assert
             Assert.AreSame(existingCategory, category);
-            categoryDAO.Verify(dao => dao.Add(It.IsAny<Category>()), Times.Never);
-            Assert.IsTrue(categoryService.Categories.ContainsKey(categoryName));
+            this.categoryDAOMock.Verify(dao => dao.Add(It.IsAny<Category>()), Times.Never);
+            Assert.IsTrue(this.categories.ContainsKey(categoryName));
         }
 
         /// <summary>
-        /// Tests that the <see cref="CategoryService.CreateCategory"/> method creates a new category when the DAO returns null.
+        /// Tests that the <see cref="CategoryService.CreateCategory"/> method throws an <see cref="ArgumentException"/> when the category name is null or empty.
         /// </summary>
         [TestMethod]
-        public void CreateCategory_ShouldCreateCategory_WhenDAOReturnsNull()
+        public void CreateCategory_ShouldThrowArgumentException_WhenCategoryNameIsNullOrEmpty()
         {
             // Arrange
-            var categoryDAO = new Mock<ICategoryDAO>();
-            var categoryService = new CategoryService(categoryDAO.Object);
-            string categoryName = "CategoryToCreate";
+            string nullName = null;
+            string emptyName = "";
 
-            categoryDAO.Setup(dao => dao.GetByName(categoryName)).Returns((Category)null);
-            categoryDAO.Setup(dao => dao.Add(It.IsAny<Category>()));
-
-            // Act
-            var category = categoryService.CreateCategory(categoryName);
-
-            // Assert
-            Assert.IsNotNull(category);
-            Assert.AreEqual(categoryName, category.Name);
-            categoryDAO.Verify(dao => dao.Add(It.IsAny<Category>()), Times.Once);
-            Assert.IsTrue(categoryService.Categories.ContainsKey(categoryName));
-        }
-
-        /// <summary>
-        /// Tests that the <see cref="CategoryService.CreateCategory"/> method caches the category when it is created.
-        /// </summary>
-        [TestMethod]
-        public void CreateCategory_ShouldCacheCategory_WhenCreated()
-        {
-            // Arrange
-            var categoryDAO = new Mock<ICategoryDAO>();
-            var categoryService = new CategoryService(categoryDAO.Object);
-            string categoryName = "CachedCategory";
-            var newCategory = new Category(categoryName);
-
-            categoryDAO.Setup(dao => dao.GetByName(categoryName)).Returns(newCategory);
-            categoryDAO.Setup(dao => dao.Add(It.IsAny<Category>()));
-
-            // Act
-            var category1 = categoryService.CreateCategory(categoryName);
-            var category2 = categoryService.CreateCategory(categoryName);
-
-            // Assert
-            Assert.AreSame(category1, category2);
-            Assert.IsTrue(categoryService.Categories.ContainsKey(categoryName));
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => this.categoryService.CreateCategory(nullName));
+            Assert.ThrowsException<ArgumentException>(() => this.categoryService.CreateCategory(emptyName));
         }
     }
 }

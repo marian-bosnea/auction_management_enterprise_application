@@ -129,7 +129,7 @@ namespace DomainModel
         /// <param name="amount">The amount to adjust the score by, between -0.1 and 0.1.</param>
         public void AdjustScore(double amount)
         {
-            this.Score = Math.Max(0, Math.Min(10, this.Score + amount));
+            this.score = Math.Max(0, Math.Min(10, this.Score + amount));
         }
 
         /// <summary>
