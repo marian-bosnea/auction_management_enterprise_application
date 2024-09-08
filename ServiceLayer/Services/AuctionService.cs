@@ -36,7 +36,7 @@ namespace Services
         /// <summary>
         /// The maximum number of active auctions a person can have within a single category.
         /// </summary>
-        private readonly int maxActiveAuctionsPerCategory;
+        private int maxActiveAuctionsPerCategory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionService"/> class.

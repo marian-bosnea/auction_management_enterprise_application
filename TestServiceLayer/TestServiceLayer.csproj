@@ -139,6 +139,7 @@
     <Compile Include="CategoryServiceTest.cs" />
     <Compile Include="ProductServiceTest.cs" />
     <Compile Include="PersonServiceTest.cs" />
+    <Compile Include="StringUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json">

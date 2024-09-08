@@ -68,6 +68,96 @@ namespace Services.Tests
         }
 
         /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method does not throw an exception when no category exceeds the maximum number of active auctions.
+        /// </summary>
+        [TestMethod]
+        public void StartAuction_ShouldNotThrowException_WhenNoCategoryExceedsMaxAuctionsPerCategory()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var category1 = new Category("Category1");
+            var category2 = new Category("Category2");
+            var product = new Product(1, "Product", "Description", new List<Category> { category1, category2 });
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = startDate.AddDays(2);
+            var startingPrice = 100.0;
+            var currency = "USD";
+
+            // Mocking the DAO methods
+            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
+            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category1)).Returns(new List<Auction>());
+            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category2)).Returns(new List<Auction>());
+
+            // Act
+            try
+            {
+                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"Exception was thrown: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method throws an exception when a category exceeds the maximum number of active auctions.
+        /// </summary>
+        [TestMethod]
+        public void StartAuction_ShouldThrowException_WhenCategoryExceedsMaxAuctionsPerCategory()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var category = new Category("Category1");
+            var product = new Product(1, "Product", "Description", new List<Category> { category });
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = startDate.AddDays(2);
+            var startingPrice = 100.0;
+            var currency = "USD";
+
+            var auction = new Auction(person, new Product(1, "Product A", "Description", new List<Category> { category }), startDate, endDate, startingPrice, currency);
+
+            this.auctionDAOMock.Setup(a => a.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
+            this.auctionDAOMock.Setup(a => a.GetActiveAuctionsForPersonInCategory(person, category)).Returns(new List<Auction> { auction });
+
+            // Act & Assert
+            var ex = Assert.ThrowsException<InvalidOperationException>(() =>
+                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency)
+            );
+            Assert.AreEqual($"Cannot start a new auction. Maximum of {this.auctionService.MaxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.", ex.Message);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="AuctionService.StartAuction"/> method throws an exception when multiple categories exceed the maximum number of active auctions.
+        /// </summary>
+        [TestMethod]
+        public void StartAuction_ShouldThrowException_WhenMultipleCategoriesExceedMaxAuctionsPerCategory()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var category1 = new Category("Category1");
+            var category2 = new Category("Category2");
+            var product = new Product(1, "Product", "Description", new List<Category> { category1, category2 });
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = startDate.AddDays(2);
+            var startingPrice = 100.0;
+            var currency = "USD";
+
+            var auction = new Auction(person, new Product(1, "Product A", "Description", new List<Category> { category1 }), startDate, endDate, startingPrice, currency);
+
+            this.auctionDAOMock.Setup(a => a.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
+            this.auctionDAOMock.Setup(a => a.GetActiveAuctionsForPersonInCategory(person, category1)).Returns(new List<Auction> { auction });
+            this.auctionDAOMock.Setup(a => a.GetActiveAuctionsForPersonInCategory(person, category2)).Returns(new List<Auction> { auction });
+
+            // Act & Assert
+            var ex = Assert.ThrowsException<InvalidOperationException>(() =>
+                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency)
+            );
+            Assert.IsTrue(ex.Message.Contains("Maximum of"));
+            Assert.IsTrue(ex.Message.Contains("active auctions in category 'Category1' reached") ||
+                          ex.Message.Contains("active auctions in category 'Category2' reached"));
+        }
+
+        /// <summary>
         /// Tests that the <see cref="AuctionService.FinalizeAuction"/> method finalizes an auction if it is not already completed.
         /// </summary>
         [TestMethod]
@@ -271,87 +361,6 @@ namespace Services.Tests
 
             // Assert
             this.auctionDAOMock.Verify(dao => dao.Delete(It.IsAny<int>()), Times.Never);
-        }
-
-        /// <summary>
-        /// Tests that the <see cref="AuctionService.StartAuction"/> method does not throw an exception when no category exceeds the maximum number of active auctions.
-        /// </summary>
-        [TestMethod]
-        public void StartAuction_ShouldNotThrowException_WhenNoCategoryExceedsMaxAuctionsPerCategory()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var product = new Product(1, "Product", "Description", new List<Category>
-            {
-            new Category("Category1"),
-            new Category("Category2"),
-            });
-
-            // Mocking the DAO methods
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, It.IsAny<Category>())).Returns(new List<Auction>());
-
-            // Act
-            try
-            {
-                this.auctionService.StartAuction(person, product, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail($"Exception was thrown: {ex.Message}");
-            }
-        }
-
-        /// <summary>
-        /// Tests that the <see cref="AuctionService.StartAuction"/> method throws an exception when a category exceeds the maximum number of active auctions.
-        /// </summary>
-        [TestMethod]
-        public void StartAuction_ShouldThrowException_WhenCategoryExceedsMaxAuctionsPerCategory()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var category = new Category("Category1");
-            var product = new Product(1, "Product", "Description", new List<Category> { category });
-            var auction = new Auction(new Person("John Doe"), new Product(1, "Product A", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 100, "USD");
-
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category))
-                          .Returns(new List<Auction> { auction });
-
-            // Act & Assert
-            var ex = Assert.ThrowsException<InvalidOperationException>(() =>
-                this.auctionService.StartAuction(person, product, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD"));
-
-            Assert.AreEqual($"Cannot start a new auction. Maximum of {this.auctionService.MaxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.", ex.Message);
-        }
-
-        /// <summary>
-        /// Tests that the <see cref="AuctionService.StartAuction"/> method throws an exception when multiple categories exceed the maximum number of active auctions.
-        /// </summary>
-        [TestMethod]
-        public void StartAuction_ShouldThrowException_WhenMultipleCategoriesExceedMaxAuctionsPerCategory()
-        {
-            // Arrange
-            var person = new Person("John Doe");
-            var category1 = new Category("Category1");
-            var category2 = new Category("Category2");
-            var product = new Product(1, "Product", "Description", new List<Category> { category1, category2 });
-            var auction = new Auction(new Person("John Doe"), new Product(1, "Product A", "Description", new List<Category>()), DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 100, "USD");
-
-            // Mocking the DAO methods
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPerson(person)).Returns(new List<Auction>());
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category1))
-                          .Returns(new List<Auction> { auction });
-            this.auctionDAOMock.Setup(dao => dao.GetActiveAuctionsForPersonInCategory(person, category2))
-                          .Returns(new List<Auction> { auction });
-
-            // Act & Assert
-            var ex = Assert.ThrowsException<InvalidOperationException>(() =>
-                this.auctionService.StartAuction(person, product, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD"));
-
-            Assert.IsTrue(ex.Message.Contains("Maximum of"));
-            Assert.IsTrue(ex.Message.Contains("active auctions in category 'Category1' reached") ||
-                          ex.Message.Contains("active auctions in category 'Category2' reached"));
         }
     }
 }

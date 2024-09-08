@@ -1690,9 +1690,6 @@
       </violation>
     </violations>
   </sourcecode>
-  <project key="818102567">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ProductDAOTest.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
@@ -1939,4 +1936,7 @@
       </violation>
     </violations>
   </sourcecode>
+  <project key="818102567">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

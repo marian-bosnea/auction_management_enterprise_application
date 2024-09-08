@@ -301,8 +301,8 @@ namespace DomainModel.Tests
             // Arrange
             var seller = this.CreateValidPerson();
             var product = this.CreateValidProduct();
-            var startDate = DateTime.Now; // Start date is today
-            var endDate = startDate.AddDays(1); // End date is tomorrow
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = startDate.AddDays(2);
             double startingPrice = 10.00;
             string currency = "USD";
 
@@ -400,6 +400,117 @@ namespace DomainModel.Tests
             // Assert
             Assert.AreEqual(1, auction.Bids.Count);
             Assert.AreEqual(bid, auction.Bids[0]);
+        }
+
+        /// <summary>
+        /// Tests that setting a valid start date works as expected.
+        /// </summary>
+        [TestMethod]
+        public void StartDate_SetValidDate_UpdatesStartDate()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var endDate = DateTime.Now.AddDays(1);
+            var auction = new Auction(person, product, DateTime.Now, endDate, 100, "USD");
+
+            var newStartDate = DateTime.Now.AddHours(-1); // 1 hour ago
+
+            // Act
+            auction.StartDate = newStartDate;
+
+            // Assert
+            Assert.AreEqual(newStartDate, auction.StartDate);
+        }
+
+        /// <summary>
+        /// Tests that setting a start date that is later than the end date throws an exception.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void StartDate_SetDateLaterThanEndDate_ThrowsArgumentException()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var startDate = DateTime.Now;
+            var endDate = startDate.AddDays(1);
+            var auction = new Auction(person, product, startDate, endDate, 100, "USD");
+
+            // Act
+            auction.StartDate = endDate.AddDays(1); // Setting start date to be later than end date
+        }
+
+        /// <summary>
+        /// Tests that setting a valid end date works as expected.
+        /// </summary>
+        [TestMethod]
+        public void EndDate_SetValidDate_UpdatesEndDate()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var startDate = DateTime.Now.AddDays(1);
+            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
+
+            var newEndDate = DateTime.Now.AddDays(3); // 1 day later
+
+            // Act
+            auction.EndDate = newEndDate;
+
+            // Assert
+            Assert.AreEqual(newEndDate, auction.EndDate);
+        }
+
+        /// <summary>
+        /// Tests that setting an end date that is earlier than the current date throws an exception.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EndDate_SetDateEarlierThanNow_ThrowsArgumentException()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var startDate = DateTime.Now.AddDays(1);
+            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
+
+            // Act
+            auction.EndDate = DateTime.Now.AddDays(-1); // Setting end date to the past
+        }
+
+        /// <summary>
+        /// Tests that setting an end date that is earlier than the start date throws an exception.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EndDate_SetDateEarlierThanStartDate_ThrowsArgumentException()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var startDate = DateTime.Now.AddDays(1);
+            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
+
+            // Act
+            auction.EndDate = startDate.AddHours(-1); // Setting end date to before start date
+        }
+
+        /// <summary>
+        /// Tests that setting an end date to null throws an exception.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EndDate_SetNullDate_ThrowsArgumentNullException()
+        {
+            // Arrange
+            var person = new Person("John Doe");
+            var product = new Product(1, "Product A", "Description", new List<Category>());
+            var startDate = DateTime.Now.AddDays(1);
+            var auction = new Auction(person, product, startDate, DateTime.Now.AddDays(2), 100, "USD");
+
+            // Act
+            auction.EndDate = default(DateTime); // Setting end date to null
         }
 
         /// <summary>

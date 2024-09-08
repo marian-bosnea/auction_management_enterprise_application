@@ -239,6 +239,57 @@ namespace DomainModel.Tests
         }
 
         /// <summary>
+        /// Tests that the <see cref="ValidateBidTime"/> method returns success for a bid time that is now.
+        /// </summary>
+        [TestMethod]
+        public void ValidateBidTime_BidTimeIsNow_ReturnsSuccess()
+        {
+            // Arrange
+            var bidTime = DateTime.Now;
+            var validationContext = new ValidationContext(new object());
+
+            // Act
+            var result = Bid.ValidateBidTime(bidTime, validationContext);
+
+            // Assert
+            Assert.AreEqual(ValidationResult.Success, result);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="ValidateBidTime"/> method returns success for a bid time in the past.
+        /// </summary>
+        [TestMethod]
+        public void ValidateBidTime_BidTimeInPast_ReturnsSuccess()
+        {
+            // Arrange
+            var bidTime = DateTime.Now.AddMinutes(-10); // 10 minutes ago
+            var validationContext = new ValidationContext(new object());
+
+            // Act
+            var result = Bid.ValidateBidTime(bidTime, validationContext);
+
+            // Assert
+            Assert.AreEqual(ValidationResult.Success, result);
+        }
+
+        /// <summary>
+        /// Tests that the <see cref="ValidateBidTime"/> method returns an error for a bid time in the future.
+        /// </summary>
+        [TestMethod]
+        public void ValidateBidTime_BidTimeInFuture_ReturnsError()
+        {
+            // Arrange
+            var bidTime = DateTime.Now.AddMinutes(10); // 10 minutes in the future
+            var validationContext = new ValidationContext(new object());
+
+            // Act
+            var result = Bid.ValidateBidTime(bidTime, validationContext);
+
+            // Assert
+            Assert.AreEqual("Bid time cannot be in the future.", result.ErrorMessage);
+        }
+
+        /// <summary>
         /// Creates a valid <see cref="Auction"/> instance for testing purposes.
         /// </summary>
         /// <returns>A <see cref="Auction"/> instance with valid parameters.</returns>

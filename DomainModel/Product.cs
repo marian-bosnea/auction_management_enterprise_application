@@ -11,8 +11,10 @@ namespace DomainModel
     /// Represents a product that can be associated with one or more categories.
     /// </summary>
     public class Product
-    {    
-        public Product() { }
+    {
+        public Product()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.

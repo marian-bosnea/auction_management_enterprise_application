@@ -12,8 +12,9 @@ namespace DomainModel
     /// Represents a category that can be part of a hierarchy, with parent and subcategory relationships.
     /// </summary>
     public class Category
-    {  
-        public Category() {
+    {
+        public Category()
+        {
             this.Parents = new List<Category>();
             this.Subcategories = new List<Category>();
         }
