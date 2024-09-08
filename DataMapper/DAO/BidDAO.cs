@@ -63,9 +63,8 @@ namespace DataMapper.DAO
         public Bid Get(int id)
         {
             return this.databaseContext.Bids
-                            .Include(b => b)
-                            .Include(b => b.Bidder)
-                            .FirstOrDefault(b => b.Id == id);
+                     .Include(b => b.Bidder)
+                     .FirstOrDefault(b => b.Id == id);
         }
 
         /// <summary>

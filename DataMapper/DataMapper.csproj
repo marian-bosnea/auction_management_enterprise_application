@@ -204,6 +204,7 @@
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\PersonDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
+    <Compile Include="IAuctionManagementEfCoreDbContext.cs" />
     <Compile Include="Interfaces\IAuctionDAO.cs" />
     <Compile Include="Interfaces\IBidDAO.cs" />
     <Compile Include="Interfaces\ICategoryDAO.cs" />

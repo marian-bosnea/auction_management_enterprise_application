@@ -13,8 +13,10 @@ namespace DomainModel
     /// </summary>
     public class Auction
     {
+        public Auction() { }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Auction"/> class.
+         /// Initializes a new instance of the <see cref="Auction"/> class.
         /// </summary>
         /// <param name="seller">The seller that initiates this auction.</param>
         /// <param name="product">The product associated with this auction.</param>

@@ -21,13 +21,13 @@ namespace DataMapper.DAO
         /// on the auction management entities. It provides access to the database and
         /// manages tracking of changes to entity objects.
         /// </summary>
-        private readonly AuctionManagementEfCoreDbContext databaseContext;
+        private readonly IAuctionManagementEfCoreDbContext databaseContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionDAO"/> class.
         /// </summary>
         /// <param name="databaseContext">The EF6 database context to use.</param>
-        public AuctionDAO(AuctionManagementEfCoreDbContext databaseContext)
+        public AuctionDAO(IAuctionManagementEfCoreDbContext databaseContext)
         {
             this.databaseContext = databaseContext;
         }
@@ -118,7 +118,7 @@ namespace DataMapper.DAO
         public List<Auction> GetAuctionsForPerson(Person person)
         {
             return this.databaseContext.Auctions
-                            .Where(a => a.Id == person.Id)
+                            .Where(a => a.Seller.Id == person.Id)
                             .Include(a => a.Product)
                             .Include(a => a.Bids)
                             .ToList();
@@ -130,8 +130,12 @@ namespace DataMapper.DAO
         /// <param name="auction">The auction to update.</param>
         public void Update(Auction auction)
         {
-            this.databaseContext.Entry(auction).State = EntityState.Modified;
-            this.databaseContext.SaveChanges();
+            var existingAuction = this.databaseContext.Auctions.Find(auction.Id);
+            if (existingAuction != null)
+            {
+                this.databaseContext.Entry(existingAuction).CurrentValues.SetValues(auction);
+                this.databaseContext.SaveChanges();
+            }
         }
     }
 }

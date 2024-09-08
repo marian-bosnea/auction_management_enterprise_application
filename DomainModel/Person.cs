@@ -27,6 +27,8 @@ namespace DomainModel
         /// </summary>
         private PersonRole role;
 
+        public Person() { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.
         /// </summary>

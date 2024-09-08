@@ -22,6 +22,8 @@ namespace DomainModel
         /// </summary>
         private string currency;
 
+        public Bid() { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bid"/> class.
         /// </summary>
@@ -117,7 +119,7 @@ namespace DomainModel
         /// <param name="bidTime">The Bid time to validate.</param>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>A ValidationResult indicating whether the Bid time is valid.</returns>
-        public ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
+        public static ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
         {
             if (bidTime > DateTime.Now)
             {

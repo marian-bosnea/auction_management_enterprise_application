@@ -12,7 +12,12 @@ namespace DomainModel
     /// Represents a category that can be part of a hierarchy, with parent and subcategory relationships.
     /// </summary>
     public class Category
-    {
+    {  
+        public Category() {
+            this.Parents = new List<Category>();
+            this.Subcategories = new List<Category>();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Category"/> class.
         /// </summary>
@@ -50,14 +55,12 @@ namespace DomainModel
         /// Gets or sets the list of parent categories to which this category belongs.
         /// </summary>
         [Required(ErrorMessage = "Parents list is required.")]
-        [MinLength(1, ErrorMessage = "Category must have at least one parent category.")]
         public List<Category> Parents { get; set; }
 
         /// <summary>
         /// Gets or sets the list of subcategories that belong to this category.
         /// </summary>
         [Required(ErrorMessage = "Subcategories list is required.")]
-        [MinLength(1, ErrorMessage = "Category must have at least one subcategory.")]
         public List<Category> Subcategories { get; set; }
 
         /// <summary>
