@@ -1,4 +1,8 @@
-﻿namespace DataMapper.Tests
+﻿// <copyright file="PersonDAOTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DataMapper.Tests
 {
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -12,7 +16,22 @@
     [TestClass]
     public class PersonDAOTest
     {
+        /// <summary>
+        /// Represents the database context used for interacting with the database in the tests.
+        /// </summary>
+        /// <remarks>
+        /// This field is typically initialized with an instance of <see cref="DbContext"/> and is used to manage the database connection
+        /// and perform CRUD operations in the tests.
+        /// </remarks>
         private DbContext context;
+
+        /// <summary>
+        /// Represents the data access object (DAO) for managing operations related to <see cref="Person"/> entities in the tests.
+        /// </summary>
+        /// <remarks>
+        /// This field is typically initialized with an instance of <see cref="PersonDAO"/> and is used to perform database operations such as
+        /// adding, updating, deleting, and retrieving <see cref="Person"/> entities.
+        /// </remarks>
         private PersonDAO personDAO;
 
         /// <summary>

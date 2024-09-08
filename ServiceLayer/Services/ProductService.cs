@@ -187,10 +187,9 @@ namespace DomainModel
         /// <returns>The similarity threshold.</returns>
         public int GetSimilarityThresholdFromConfig()
         {
-            int threshold;
             string configValue = ConfigurationManager.AppSettings["SimilarityThreshold"];
 
-            if (int.TryParse(configValue, out threshold))
+            if (int.TryParse(configValue, out int threshold))
             {
                 return threshold;
             }

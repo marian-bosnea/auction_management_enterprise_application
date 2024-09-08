@@ -59,7 +59,7 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
+            new Auction(seller, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
+            _ = new Auction(seller, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
+            _ = new Auction(seller, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
+            _ = new Auction(seller, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
+            _ = new Auction(seller, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace DomainModel.Tests
             double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
-            var bid = this.CreateValidBid(auction);
+            var bid = this.CreateValidBid();
 
             // Act
             auction.AddBid(bid);
@@ -218,10 +218,11 @@ namespace DomainModel.Tests
             var endDate = startDate.AddDays(1);
             double startingPrice = 10.00;
             string currency = "USD";
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
-
-            // Act
-            auction.IsCompleted = true;
+            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency)
+            {
+                // Act
+                IsCompleted = true,
+            };
 
             // Assert
             Assert.IsTrue(auction.IsCompleted);
@@ -240,9 +241,11 @@ namespace DomainModel.Tests
             var endDate = startDate.AddDays(1);
             double startingPrice = 10.00;
             string currency = "USD";
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
-            auction.IsCompleted = true;
-            var bid = this.CreateValidBid(auction);
+            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency)
+            {
+                IsCompleted = true,
+            };
+            var bid = this.CreateValidBid();
 
             // Act
             auction.AddBid(bid);
@@ -289,7 +292,7 @@ namespace DomainModel.Tests
             string invalidCurrency = "US";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, invalidCurrency);
+            _ = new Auction(seller, product, startDate, endDate, startingPrice, invalidCurrency);
         }
 
         /// <summary>
@@ -330,7 +333,7 @@ namespace DomainModel.Tests
             string currency = "USD";
 
             // Act
-            var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
+            _ = new Auction(seller, product, startDate, endDate, startingPrice, currency);
         }
 
         /// <summary>
@@ -392,7 +395,7 @@ namespace DomainModel.Tests
             double startingPrice = 10.00;
             string currency = "USD";
             var auction = new Auction(seller, product, startDate, endDate, startingPrice, currency);
-            var bid = this.CreateValidBid(auction);
+            var bid = this.CreateValidBid();
 
             // Act
             auction.AddBid(bid);
@@ -465,9 +468,8 @@ namespace DomainModel.Tests
         /// <summary>
         /// Creates a valid <see cref="Bid"/> instance for a given <see cref="Auction"/>.
         /// </summary>
-        /// <param name="auction">The auction to associate with the bid.</param>
         /// <returns>A valid <see cref="Bid"/> instance.</returns>
-        private Bid CreateValidBid(Auction auction)
+        private Bid CreateValidBid()
         {
             return new Bid(15.00, "USD")
             {

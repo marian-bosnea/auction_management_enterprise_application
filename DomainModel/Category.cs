@@ -13,6 +13,14 @@ namespace DomainModel
     /// </summary>
     public class Category
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Category"/> class with empty lists for parents and subcategories.
+        /// </summary>
+        /// <remarks>
+        /// The default constructor sets up the <see cref="Parents"/> and <see cref="Subcategories"/> properties as new, empty lists. This ensures
+        /// that each new instance of <see cref="Category"/> starts with these properties initialized and ready to be used, preventing potential
+        /// null reference issues and allowing for easy management of category relationships from the moment the instance is created.
+        /// </remarks>
         public Category()
         {
             this.Parents = new List<Category>();

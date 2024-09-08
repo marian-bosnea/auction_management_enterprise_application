@@ -1,4 +1,8 @@
-﻿namespace DataMapper.Tests
+﻿// <copyright file="BidDAOTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DataMapper.Tests
 {
     using System;
     using System.Data.Entity;
@@ -31,7 +35,6 @@
         /// Provides methods for interacting with person-related data in the database.
         /// </summary>
         private PersonDAO personDAO;
-
 
         /// <summary>
         /// Initializes the test environment before each test method is run.

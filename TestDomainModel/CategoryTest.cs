@@ -137,7 +137,7 @@ namespace DomainModel.Tests
         public void Constructor_NullName_ShouldThrowArgumentNullException()
         {
             // Act
-            var category = new Category(null);
+            _ = new Category(null);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace DomainModel.Tests
         public void Constructor_EmptyName_ShouldThrowArgumentException()
         {
             // Act
-            var category = new Category(string.Empty);
+            _ = new Category(string.Empty);
         }
 
         /// <summary>

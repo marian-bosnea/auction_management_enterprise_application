@@ -14,7 +14,7 @@ namespace DomainModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
-        /// This parameterless constructor is used for creating a default instance of the <see cref="Product"/> class.
+        /// This empty constructor is used for creating a default instance of the <see cref="Product"/> class.
         /// </summary>
         public Product()
         {

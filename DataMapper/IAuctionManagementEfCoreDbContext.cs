@@ -1,4 +1,4 @@
-﻿// <copyright file="IAuctionManagementDbContext.cs" company="Transilvania University of Brasov">
+﻿// <copyright file="IAuctionManagementEfCoreDbContext.cs" company="Transilvania University of Brasov">
 // Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
 // </copyright>
 

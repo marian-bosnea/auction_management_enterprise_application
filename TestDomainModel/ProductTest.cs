@@ -16,63 +16,6 @@ namespace DomainModel.Tests
     [TestClass]
     public class ProductTest
     {
-        [TestMethod]
-        public void DefaultConstructor_ShouldInitializePropertiesToDefaultValues()
-        {
-            // Arrange & Act
-            var product = new Product();
-
-            // Assert
-            Assert.AreEqual(0, product.Id, "Product Id should default to 0.");
-            Assert.IsNull(product.Name, "Product Name should default to null.");
-            Assert.IsNull(product.Description, "Product Description should default to null.");
-        }
-
-        [TestMethod]
-        public void DefaultConstructor_ShouldNotThrowExceptions()
-        {
-            // Arrange & Act
-            // No parameters are needed for this test.
-
-            // Assert
-            try
-            {
-                var product = new Product();
-                Assert.IsNotNull(product, "Product instance should be created successfully.");
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail($"Default constructor threw an exception: {ex.Message}");
-            }
-        }
-
-        [TestMethod]
-        public void Constructor_WithParameters_ShouldInitializePropertiesCorrectly()
-        {
-            // Arrange
-            var id = 1;
-            var name = "Test Product";
-            var description = "Test Description";
-            var categories = new List<Category>
-            {
-                new Category("Category1"),
-                new Category("Category2"),
-            };
-
-            // Act
-            var product = new Product(id, name, description, categories);
-
-            // Assert
-            Assert.AreEqual(id, product.Id, "Product Id should be initialized correctly.");
-            Assert.AreEqual(name, product.Name, "Product Name should be initialized correctly.");
-            Assert.AreEqual(description, product.Description, "Product Description should be initialized correctly.");
-            Assert.AreEqual(categories.Count, product.Categories.Count, "Product Categories should be initialized correctly.");
-            for (int i = 0; i < categories.Count; i++)
-            {
-                Assert.AreEqual(categories[i], product.Categories[i], "Product Categories should match the initialized categories.");
-            }
-        }
-
         /// <summary>
         /// Tests that the constructor correctly initializes a product with valid parameters.
         /// </summary>
@@ -271,6 +214,95 @@ namespace DomainModel.Tests
 
             // Assert
             Assert.AreEqual(0, product.Categories.Count); // The list should still be empty
+        }
+
+        /// <summary>
+        /// Tests that the default constructor of the <see cref="Product"/> class initializes properties to their default values.
+        /// </summary>
+        /// <remarks>
+        /// This test method verifies that when a new instance of the <see cref="Product"/> class is created using the default constructor,
+        /// the properties are initialized to their expected default values:
+        /// <list type="bullet">
+        ///     <item><description><see cref="Product.Id"/> should be initialized to 0.</description></item>
+        ///     <item><description><see cref="Product.Name"/> should be initialized to null.</description></item>
+        ///     <item><description><see cref="Product.Description"/> should be initialized to null.</description></item>
+        /// </list>
+        /// </remarks>
+        [TestMethod]
+        public void DefaultConstructor_ShouldInitializePropertiesToDefaultValues()
+        {
+            // Arrange & Act
+            var product = new Product();
+
+            // Assert
+            Assert.AreEqual(0, product.Id, "Product Id should default to 0.");
+            Assert.IsNull(product.Name, "Product Name should default to null.");
+            Assert.IsNull(product.Description, "Product Description should default to null.");
+        }
+
+        /// <summary>
+        /// Tests that the default constructor of the <see cref="Product"/> class does not throw any exceptions.
+        /// </summary>
+        /// <remarks>
+        /// This test method verifies that creating a new instance of the <see cref="Product"/> class using the default constructor
+        /// does not result in any exceptions. It ensures that the constructor executes successfully and the object is instantiated.
+        /// </remarks>
+        [TestMethod]
+        public void DefaultConstructor_ShouldNotThrowExceptions()
+        {
+            // Arrange & Act
+            // No parameters are needed for this test.
+
+            // Assert
+            try
+            {
+                var product = new Product();
+                Assert.IsNotNull(product, "Product instance should be created successfully.");
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"Default constructor threw an exception: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Tests that the parameterized constructor of the <see cref="Product"/> class correctly initializes its properties.
+        /// </summary>
+        /// <remarks>
+        /// This test method verifies that when a new instance of the <see cref="Product"/> class is created using the parameterized constructor,
+        /// the properties are initialized to the provided values:
+        /// <list type="bullet">
+        ///     <item><description><see cref="Product.Id"/> should be initialized to the provided <paramref name="id"/> value.</description></item>
+        ///     <item><description><see cref="Product.Name"/> should be initialized to the provided <paramref name="name"/> value.</description></item>
+        ///     <item><description><see cref="Product.Description"/> should be initialized to the provided <paramref name="description"/> value.</description></item>
+        ///     <item><description><see cref="Product.Categories"/> should be initialized to the provided <paramref name="categories"/> list and match the provided values.</description></item>
+        /// </list>
+        /// </remarks>
+        [TestMethod]
+        public void Constructor_WithParameters_ShouldInitializePropertiesCorrectly()
+        {
+            // Arrange
+            var id = 1;
+            var name = "Test Product";
+            var description = "Test Description";
+            var categories = new List<Category>
+    {
+        new Category("Category1"),
+        new Category("Category2"),
+    };
+
+            // Act
+            var product = new Product(id, name, description, categories);
+
+            // Assert
+            Assert.AreEqual(id, product.Id, "Product Id should be initialized correctly.");
+            Assert.AreEqual(name, product.Name, "Product Name should be initialized correctly.");
+            Assert.AreEqual(description, product.Description, "Product Description should be initialized correctly.");
+            Assert.AreEqual(categories.Count, product.Categories.Count, "Product Categories should be initialized correctly.");
+            for (int i = 0; i < categories.Count; i++)
+            {
+                Assert.AreEqual(categories[i], product.Categories[i], "Product Categories should match the initialized categories.");
+            }
         }
     }
 }

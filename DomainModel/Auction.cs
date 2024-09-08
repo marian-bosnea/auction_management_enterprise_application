@@ -13,10 +13,19 @@ namespace DomainModel
     /// </summary>
     public class Auction
     {
-        public Auction() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Auction"/> class using the default constructor.
+        /// </summary>
+        /// <remarks>
+        /// This constructor initializes a new instance of the <see cref="Auction"/> class with default values.
+        /// It is typically used when no specific initialization values are required or when default behavior is acceptable.
+        /// </remarks>
+        public Auction()
+        {
+        }
 
         /// <summary>
-         /// Initializes a new instance of the <see cref="Auction"/> class.
+        /// Initializes a new instance of the <see cref="Auction"/> class.
         /// </summary>
         /// <param name="seller">The seller that initiates this auction.</param>
         /// <param name="product">The product associated with this auction.</param>

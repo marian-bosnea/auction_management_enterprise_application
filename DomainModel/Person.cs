@@ -27,7 +27,18 @@ namespace DomainModel
         /// </summary>
         private PersonRole role;
 
-        public Person() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Person"/> class using the default constructor.
+        /// </summary>
+        /// <remarks>
+        /// This constructor initializes a new instance of the <see cref="Person"/> class with default values.
+        /// It is used when creating a <see cref="Person"/> object without providing any initial property values.
+        /// The default constructor sets properties to their default values and is typically used in scenarios
+        /// where specific initialization is not required or when default behavior is acceptable.
+        /// </remarks>
+        public Person()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.

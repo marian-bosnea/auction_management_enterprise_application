@@ -1,4 +1,8 @@
-﻿namespace ServiceLayer.Tests
+﻿// <copyright file="StringUtilsTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace ServiceLayer.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

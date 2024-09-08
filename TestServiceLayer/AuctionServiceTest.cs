@@ -597,7 +597,7 @@ namespace Services.Tests
             var person = new Person();
             var product = new Product();
             var auction = new Auction(person, product, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 100, "USD");
-            var bid = new Bid( 110, "EUR");
+            var bid = new Bid(110, "EUR");
 
             this.auctionDAOMock.Setup(dao => dao.Get(auction.Id)).Returns(auction);
 

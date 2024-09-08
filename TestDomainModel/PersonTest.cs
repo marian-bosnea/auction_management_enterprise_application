@@ -40,7 +40,7 @@ namespace DomainModel.Tests
         public void Constructor_NullName_ShouldThrowArgumentNullException()
         {
             // Arrange & Act
-            var person = new Person(null);
+            _ = new Person(null);
         }
 
         /// <summary>

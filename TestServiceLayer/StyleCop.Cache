@@ -112,6 +112,9 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="330008441">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="AuctionMediatorTest.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
@@ -162,7 +165,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2016/11/10 20:44:50.000</settingsFile>
-      <sourceFile>2024/09/08 18:38:25.824</sourceFile>
+      <sourceFile>2024/09/08 18:59:38.022</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -179,25 +182,13 @@
       <StyleCop.CSharp.SpacingRules>2016/11/10 20:44:50.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.SpacingRules" rule="OpeningParenthesisMustBeSpacedCorrectly" ruleCheckId="SA1008">
-        <context>Invalid spacing around the opening parenthesis.</context>
-        <line>600</line>
-        <index>26875</index>
-        <endIndex>26875</endIndex>
-        <startLine>600</startLine>
-        <startColumn>31</startColumn>
-        <endLine>600</endLine>
-        <endColumn>31</endColumn>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="CategoryServiceTest.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2016/11/10 20:44:50.000</settingsFile>
-      <sourceFile>2024/09/08 18:12:14.647</sourceFile>
+      <sourceFile>2024/09/08 18:50:52.353</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -214,28 +205,7 @@
       <StyleCop.CSharp.SpacingRules>2016/11/10 20:44:50.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
-        <context>The field must have a documentation header.</context>
-        <line>21</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
-        <context>The field must have a documentation header.</context>
-        <line>22</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
-        <context>The field must have a documentation header.</context>
-        <line>23</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="UseStringEmptyForEmptyStrings" ruleCheckId="SA1122">
-        <context>Use string.Empty rather than "".</context>
-        <line>67</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="ProductServiceTest.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
@@ -287,7 +257,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2016/11/10 20:44:50.000</settingsFile>
-      <sourceFile>2024/09/08 18:37:48.047</sourceFile>
+      <sourceFile>2024/09/08 18:50:14.592</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -304,15 +274,6 @@
       <StyleCop.CSharp.SpacingRules>2016/11/10 20:44:50.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
-        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
-        <line>1</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
-  <project key="330008441">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
 </stylecopresultscache>

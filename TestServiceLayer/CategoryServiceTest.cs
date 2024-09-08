@@ -18,8 +18,32 @@ namespace TestServiceLayer
     [TestClass]
     public class CategoryServiceTest
     {
+        /// <summary>
+        /// Represents a mock of the <see cref="ICategoryDAO"/> interface used for testing purposes.
+        /// </summary>
+        /// <remarks>
+        /// This field is initialized with an instance of <see cref="Mock{ICategoryDAO}"/> to simulate the behavior of the <see cref="ICategoryDAO"/>
+        /// interface. It is used to test the interaction of the <see cref="CategoryService"/> with the data access layer without requiring a real
+        /// database.
+        /// </remarks>
         private Mock<ICategoryDAO> categoryDAOMock;
+
+        /// <summary>
+        /// Represents the service for managing operations related to <see cref="Category"/> entities in the tests.
+        /// </summary>
+        /// <remarks>
+        /// This field is initialized with an instance of <see cref="CategoryService"/> and is used to perform business logic operations related to
+        /// <see cref="Category"/> entities. It interacts with the <see cref="categoryDAOMock"/> to perform various actions and operations.
+        /// </remarks>
         private CategoryService categoryService;
+
+        /// <summary>
+        /// Represents a dictionary of <see cref="Category"/> objects used for test data management.
+        /// </summary>
+        /// <remarks>
+        /// This field is a dictionary where the keys are category names and the values are instances of <see cref="Category"/>. It is used to
+        /// easily manage and access categories for testing purposes, allowing quick setup and retrieval of test data.
+        /// </remarks>
         private Dictionary<string, Category> categories;
 
         /// <summary>
@@ -64,7 +88,7 @@ namespace TestServiceLayer
         {
             // Arrange
             string nullName = null;
-            string emptyName = "";
+            string emptyName = string.Empty;
 
             // Act & Assert
             Assert.ThrowsException<ArgumentException>(() => this.categoryService.CreateCategory(nullName));

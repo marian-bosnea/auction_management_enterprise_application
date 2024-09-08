@@ -248,11 +248,14 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="-253689570">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="Auction.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:29:02.345</settingsFile>
-      <sourceFile>2024/09/08 17:58:56.089</sourceFile>
+      <sourceFile>2024/09/08 18:57:26.052</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -271,8 +274,8 @@
     </timestamps>
     <violations>
       <violation namespace="StyleCop.CSharp.CsParser" rule="SyntaxException" ruleCheckId="SA0102">
-        <context>A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Auction.cs on line 57.</context>
-        <line>57</line>
+        <context>A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Auction.cs on line 66.</context>
+        <line>66</line>
         <warning>False</warning>
       </violation>
     </violations>
@@ -281,7 +284,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:29:02.345</settingsFile>
-      <sourceFile>2024/09/08 17:08:19.916</sourceFile>
+      <sourceFile>2024/09/08 19:02:01.268</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -300,8 +303,8 @@
     </timestamps>
     <violations>
       <violation namespace="StyleCop.CSharp.CsParser" rule="SyntaxException" ruleCheckId="SA0102">
-        <context>A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Bid.cs on line 42.</context>
-        <line>42</line>
+        <context>A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Bid.cs on line 52.</context>
+        <line>52</line>
         <warning>False</warning>
       </violation>
     </violations>
@@ -310,7 +313,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:29:02.345</settingsFile>
-      <sourceFile>2024/09/08 17:47:22.066</sourceFile>
+      <sourceFile>2024/09/08 18:47:57.175</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -327,13 +330,7 @@
       <StyleCop.CSharp.SpacingRules>2016/11/10 20:44:50.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
-        <context>The constructor must have a documentation header.</context>
-        <line>16</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="CurrentOrFutureDateAttribute.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
@@ -368,7 +365,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:29:02.345</settingsFile>
-      <sourceFile>2024/09/08 18:18:26.069</sourceFile>
+      <sourceFile>2024/09/08 18:58:09.732</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -387,8 +384,8 @@
     </timestamps>
     <violations>
       <violation namespace="StyleCop.CSharp.CsParser" rule="SyntaxException" ruleCheckId="SA0102">
-        <context>A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Person.cs on line 38.</context>
-        <line>38</line>
+        <context>A syntax error has been discovered in file D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\Person.cs on line 49.</context>
+        <line>49</line>
         <warning>False</warning>
       </violation>
     </violations>
@@ -420,7 +417,7 @@
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
       <settingsFile>2024/09/07 15:29:02.345</settingsFile>
-      <sourceFile>2024/09/08 18:38:46.952</sourceFile>
+      <sourceFile>2024/09/08 18:56:09.964</sourceFile>
       <parser>2016/11/10 20:44:50.000</parser>
       <StyleCop.CSharp.DocumentationRules>2016/11/10 20:44:50.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1288877106</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -437,15 +434,6 @@
       <StyleCop.CSharp.SpacingRules>2016/11/10 20:44:50.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
-        <context>The documentation text within the summary tag contains incorrectly spelled words: 'parameterless'</context>
-        <line>19</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
-  <project key="-253689570">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
 </stylecopresultscache>

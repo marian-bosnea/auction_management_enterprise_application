@@ -22,7 +22,17 @@ namespace DomainModel
         /// </summary>
         private string currency;
 
-        public Bid() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bid"/> class using the empty constructor.
+        /// </summary>
+        /// <remarks>
+        /// This constructor initializes a new <see cref="Bid"/> object with default values. It is used to create a new instance of the
+        /// <see cref="Bid"/> class without providing any initial data. This can be useful in scenarios where the properties of the <see cref="Bid"/>
+        /// object are set or modified later in the code.
+        /// </remarks>
+        public Bid()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Bid"/> class.
@@ -107,19 +117,12 @@ namespace DomainModel
         [CustomValidation(typeof(Bid), nameof(ValidateBidTime))]
         public DateTime BidTime { get; set; }
 
-        /// <inheritdoc/>
-        public override string ToString()
-        {
-            return $"{this.Amount} {this.Currency} at {this.BidTime}";
-        }
-
         /// <summary>
         /// Validates that the Bid time is not in the future.
         /// </summary>
         /// <param name="bidTime">The Bid time to validate.</param>
-        /// <param name="validationContext">The validation context.</param>
         /// <returns>A ValidationResult indicating whether the Bid time is valid.</returns>
-        public static ValidationResult ValidateBidTime(DateTime bidTime, ValidationContext validationContext)
+        public static ValidationResult ValidateBidTime(DateTime bidTime)
         {
             if (bidTime > DateTime.Now)
             {
@@ -127,6 +130,12 @@ namespace DomainModel
             }
 
             return ValidationResult.Success;
+        }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"{this.Amount} {this.Currency} at {this.BidTime}";
         }
     }
 }

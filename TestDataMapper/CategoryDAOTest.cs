@@ -1,4 +1,8 @@
-﻿namespace DataMapper.Tests
+﻿// <copyright file="CategoryDAOTest.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DataMapper.Tests
 {
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -22,7 +26,6 @@
         /// Provides methods for interacting with category-related data in the database.
         /// </summary>
         private CategoryDAO categoryDAO;
-
 
         /// <summary>
         /// Initializes the test environment before each test method is run.

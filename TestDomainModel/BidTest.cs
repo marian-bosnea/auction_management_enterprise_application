@@ -25,7 +25,7 @@ namespace DomainModel.Tests
             // Arrange
             double amount = 100.0;
             string currency = "USD";
-            var auction = new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD");
+            new Auction(new Person("John Doe"), new Product(1, "Product", "Description", new List<Category>()), DateTime.Now.AddDays(1), DateTime.Now.AddDays(10), 10.0, "USD");
 
             // Act
             var bid = new Bid(amount, currency);
@@ -229,10 +229,11 @@ namespace DomainModel.Tests
         public void BidderProperty_SetToNull_ShouldNotThrowException()
         {
             // Arrange
-            var bid = new Bid(100.0, "USD");
-
-            // Act
-            bid.Bidder = null;
+            var bid = new Bid(100.0, "USD")
+            {
+                // Act
+                Bidder = null,
+            };
 
             // Assert
             Assert.IsNull(bid.Bidder);
@@ -246,10 +247,9 @@ namespace DomainModel.Tests
         {
             // Arrange
             var bidTime = DateTime.Now;
-            var validationContext = new ValidationContext(new object());
 
             // Act
-            var result = Bid.ValidateBidTime(bidTime, validationContext);
+            var result = Bid.ValidateBidTime(bidTime);
 
             // Assert
             Assert.AreEqual(ValidationResult.Success, result);
@@ -262,11 +262,10 @@ namespace DomainModel.Tests
         public void ValidateBidTime_BidTimeInPast_ReturnsSuccess()
         {
             // Arrange
-            var bidTime = DateTime.Now.AddMinutes(-10); // 10 minutes ago
-            var validationContext = new ValidationContext(new object());
+            var bidTime = DateTime.Now.AddMinutes(-10);
 
             // Act
-            var result = Bid.ValidateBidTime(bidTime, validationContext);
+            var result = Bid.ValidateBidTime(bidTime);
 
             // Assert
             Assert.AreEqual(ValidationResult.Success, result);
@@ -279,29 +278,13 @@ namespace DomainModel.Tests
         public void ValidateBidTime_BidTimeInFuture_ReturnsError()
         {
             // Arrange
-            var bidTime = DateTime.Now.AddMinutes(10); // 10 minutes in the future
-            var validationContext = new ValidationContext(new object());
+            var bidTime = DateTime.Now.AddMinutes(10);
 
             // Act
-            var result = Bid.ValidateBidTime(bidTime, validationContext);
+            var result = Bid.ValidateBidTime(bidTime);
 
             // Assert
             Assert.AreEqual("Bid time cannot be in the future.", result.ErrorMessage);
-        }
-
-        /// <summary>
-        /// Creates a valid <see cref="Auction"/> instance for testing purposes.
-        /// </summary>
-        /// <returns>A <see cref="Auction"/> instance with valid parameters.</returns>
-        private Auction CreateValidAuction()
-        {
-            return new Auction(
-                new Person("John Doe"),
-                new Product(1, "Product", "Description", new List<Category>()),
-                DateTime.Now.AddDays(1),
-                DateTime.Now.AddDays(10),
-                10.0,
-                "USD");
         }
     }
 }

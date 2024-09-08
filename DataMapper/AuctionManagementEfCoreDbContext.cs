@@ -1,4 +1,8 @@
-﻿namespace DataMapper
+﻿// <copyright file="AuctionManagementEfCoreDbContext.cs" company="Transilvania University of Brasov">
+// Copyright © 2024 Bosnea Marian-Daniel. All rights reserved.
+// </copyright>
+
+namespace DataMapper
 {
     using System.Data.Common;
     using System.Data.Entity;
@@ -9,8 +13,18 @@
     /// </summary>
     public class AuctionManagementEfCoreDbContext : DbContext, IAuctionManagementEfCoreDbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuctionManagementEfCoreDbContext"/> class using the specified database connection.
+        /// </summary>
+        /// <param name="connection">The <see cref="DbConnection"/> object representing the database connection to use for the context.</param>
+        /// <remarks>
+        /// This constructor initializes the <see cref="AuctionManagementEfCoreDbContext"/> with a provided <paramref name="connection"/>. The
+        /// <paramref name="connection"/> parameter allows the context to be connected to a specific database, which can be useful for testing or
+        /// connecting to a database instance with a known state. The <paramref name="contextOwnsConnection"/> parameter is set to <c>false</c> in
+        /// this constructor, meaning the context will not manage the lifecycle of the connection; it will be managed externally.
+        /// </remarks>
         public AuctionManagementEfCoreDbContext(DbConnection connection)
-        : base(connection, contextOwnsConnection: false) // Set contextOwnsConnection to false if you don't want the context to own the connection
+            : base(connection, contextOwnsConnection: false) // Set contextOwnsConnection to false if you don't want the context to own the connection
         {
         }
 
