@@ -7,12 +7,15 @@ namespace ServiceLayer
     using System;
     using DomainModel;
     using ServiceLayer.Interfaces;
+    using log4net;
 
     /// <summary>
     /// Mediates interactions between auction and person services, providing a unified interface for managing auctions and Bids.
     /// </summary>
     public class AuctionMediator
     {
+        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// The service that manages auction business logic.
         /// </summary>
@@ -30,8 +33,12 @@ namespace ServiceLayer
         /// <param name="personService">The service used to manage person-related operations.</param>
         public AuctionMediator(IAuctionService auctionService, IPersonService personService)
         {
+            logger.Info("Initializing AuctionMediator.");
+
             this.auctionService = auctionService ?? throw new ArgumentNullException(nameof(auctionService));
             this.personService = personService ?? throw new ArgumentNullException(nameof(personService));
+
+            logger.Info("AuctionMediator initialized successfully.");
         }
 
         /// <summary>
@@ -46,8 +53,20 @@ namespace ServiceLayer
         /// <exception cref="ArgumentException">Thrown if the parameters are invalid.</exception>
         public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, double startingPrice, string currency)
         {
-            this.personService.StartAuction(person);
-            this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency);
+            logger.Info($"Starting auction for person with ID: {person.Id}, product with ID: {product.Id}");
+
+            try
+            {
+                this.personService.StartAuction(person);
+                this.auctionService.StartAuction(person, product, startDate, endDate, startingPrice, currency);
+
+                logger.Info("Auction started successfully.");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Failed to start auction.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -59,8 +78,20 @@ namespace ServiceLayer
         /// <exception cref="ArgumentException">Thrown if the Bid is invalid or the auction does not accept it.</exception>
         public void AddBid(Person person, Auction auction, Bid bid)
         {
-            this.personService.AddBid(person, bid);
-            this.auctionService.AddBid(auction, bid);
+            logger.Info($"Adding bid for person with ID: {person.Id} to auction with ID: {auction.Id}");
+
+            try
+            {
+                this.personService.AddBid(person, bid);
+                this.auctionService.AddBid(auction, bid);
+
+                logger.Info("Bid added successfully.");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Failed to add bid.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -71,8 +102,20 @@ namespace ServiceLayer
         /// <exception cref="InvalidOperationException">Thrown if the auction cannot be finalized.</exception>
         public void FinalizeAuction(Person person, Auction auction)
         {
-            this.personService.FinalizeAuction(person, auction);
-            this.auctionService.FinalizeAuction(person, auction);
+            logger.Info($"Finalizing auction with ID: {auction.Id} for person with ID: {person.Id}");
+
+            try
+            {
+                this.personService.FinalizeAuction(person, auction);
+                this.auctionService.FinalizeAuction(person, auction);
+
+                logger.Info("Auction finalized successfully.");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Failed to finalize auction.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -83,7 +126,19 @@ namespace ServiceLayer
         /// <exception cref="ArgumentException">Thrown if the feedback score is invalid.</exception>
         public void ProvideFeedback(Person person, double feedbackScore)
         {
-            this.personService.ProvideFeedback(person, feedbackScore);
+            logger.Info($"Providing feedback to person with ID: {person.Id}. Feedback score: {feedbackScore}");
+
+            try
+            {
+                this.personService.ProvideFeedback(person, feedbackScore);
+
+                logger.Info("Feedback provided successfully.");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Failed to provide feedback.", ex);
+                throw;
+            }
         }
     }
 }

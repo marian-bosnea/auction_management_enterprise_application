@@ -57,9 +57,6 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="818102567">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="AssemblyInfo.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
@@ -198,4 +195,7 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="818102567">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

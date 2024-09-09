@@ -5,12 +5,18 @@
 namespace ServiceLayer
 {
     using System;
+    using log4net;
 
     /// <summary>
     /// Provides utility methods for string manipulation.
     /// </summary>
     public static class StringUtils
     {
+        /// <summary>
+        /// Logger for logging actions in the class.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(StringUtils));
+
         /// <summary>
         /// Calculates the distance between two strings.
         /// </summary>
@@ -28,14 +34,20 @@ namespace ServiceLayer
         /// </remarks>
         public static int CalculateLevenshteinDistance(string source, string target)
         {
+            Logger.Debug($"Calculating Levenshtein distance between '{source}' and '{target}'");
+
             if (string.IsNullOrEmpty(source))
             {
-                return string.IsNullOrEmpty(target) ? 0 : target.Length;
+                int distance = string.IsNullOrEmpty(target) ? 0 : target.Length;
+                Logger.Debug($"Source is null or empty. Distance is {distance}");
+                return distance;
             }
 
             if (string.IsNullOrEmpty(target))
             {
-                return source.Length;
+                int distance = source.Length;
+                Logger.Debug($"Target is null or empty. Distance is {distance}");
+                return distance;
             }
 
             int[,] d = new int[source.Length + 1, target.Length + 1];
@@ -62,7 +74,9 @@ namespace ServiceLayer
                 }
             }
 
-            return d[source.Length, target.Length];
+            int result = d[source.Length, target.Length];
+            Logger.Debug($"Levenshtein distance calculated: {result}");
+            return result;
         }
     }
 }

@@ -166,9 +166,6 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="-1622606925">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="BidTest.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2016/11/10 20:44:50.000</styleCop>
@@ -330,4 +327,7 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="-1622606925">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

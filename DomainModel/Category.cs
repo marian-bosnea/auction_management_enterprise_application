@@ -7,22 +7,21 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using log4net;
 
     /// <summary>
     /// Represents a category that can be part of a hierarchy, with parent and subcategory relationships.
     /// </summary>
     public class Category
     {
+        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Category"/> class with empty lists for parents and subcategories.
         /// </summary>
-        /// <remarks>
-        /// The default constructor sets up the <see cref="Parents"/> and <see cref="Subcategories"/> properties as new, empty lists. This ensures
-        /// that each new instance of <see cref="Category"/> starts with these properties initialized and ready to be used, preventing potential
-        /// null reference issues and allowing for easy management of category relationships from the moment the instance is created.
-        /// </remarks>
         public Category()
         {
+            logger.Info("Initializing Category with empty parents and subcategories lists.");
             this.Parents = new List<Category>();
             this.Subcategories = new List<Category>();
         }
@@ -33,19 +32,24 @@ namespace DomainModel
         /// <param name="name">The name of the category.</param>
         public Category(string name)
         {
+            logger.Info($"Initializing Category with name: {name}");
+
             if (name == null)
             {
+                logger.Error("Category name is null.");
                 throw new ArgumentNullException("Name must not be null.");
             }
 
             if (name.Length == 0)
             {
+                logger.Error("Category name is an empty string.");
                 throw new ArgumentException("Name must be a non-empty string");
             }
 
             this.Name = name;
             this.Parents = new List<Category>();
             this.Subcategories = new List<Category>();
+            logger.Info($"Category '{name}' initialized successfully.");
         }
 
         /// <summary>
@@ -78,10 +82,12 @@ namespace DomainModel
         /// <param name="parentCategory">The parent category to add.</param>
         public void AddParent(Category parentCategory)
         {
+            logger.Info($"Adding parent category: {parentCategory.Name} to category: {this.Name}");
             if (!this.Parents.Contains(parentCategory))
             {
                 this.Parents.Add(parentCategory);
                 parentCategory.AddSubcategory(this);
+                logger.Info($"Parent category: {parentCategory.Name} added to category: {this.Name}");
             }
         }
 
@@ -91,10 +97,12 @@ namespace DomainModel
         /// <param name="subcategory">The subcategory to add.</param>
         public void AddSubcategory(Category subcategory)
         {
+            logger.Info($"Adding subcategory: {subcategory.Name} to category: {this.Name}");
             if (!this.Subcategories.Contains(subcategory))
             {
                 this.Subcategories.Add(subcategory);
                 subcategory.AddParent(this);
+                logger.Info($"Subcategory: {subcategory.Name} added to category: {this.Name}");
             }
         }
 
@@ -104,12 +112,9 @@ namespace DomainModel
         /// <returns>
         /// A string that contains the name of the current object.
         /// </returns>
-        /// <remarks>
-        /// This method overrides the default <see cref="object.ToString"/> method to provide a meaningful representation of the object.
-        /// In this implementation, it returns the <see cref="Name"/> property of the object.
-        /// </remarks>
         public override string ToString()
         {
+            logger.Info($"Converting Category to string: {this.Name}");
             return this.Name;
         }
     }

@@ -6,12 +6,15 @@ namespace DomainModel
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using log4net;
 
     /// <summary>
     /// Represents a Bid made in an auction.
-    /// </summary>;
+    /// </summary>
     public class Bid
     {
+        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// The amount of the transaction or financial value, represented as a double.
         /// </summary>
@@ -25,13 +28,9 @@ namespace DomainModel
         /// <summary>
         /// Initializes a new instance of the <see cref="Bid"/> class using the empty constructor.
         /// </summary>
-        /// <remarks>
-        /// This constructor initializes a new <see cref="Bid"/> object with default values. It is used to create a new instance of the
-        /// <see cref="Bid"/> class without providing any initial data. This can be useful in scenarios where the properties of the <see cref="Bid"/>
-        /// object are set or modified later in the code.
-        /// </remarks>
         public Bid()
         {
+            logger.Info("Bid object initialized using the empty constructor.");
         }
 
         /// <summary>
@@ -40,17 +39,22 @@ namespace DomainModel
         /// <param name="amount">The amount of the Bid.</param>
         /// <param name="currency">The currency in which the Bid is made.</param>
         /// <exception cref="ArgumentException">Thrown when the Bid amount is less than or equal to zero.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when the currency or auction is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the currency is null.</exception>
         public Bid(double amount, string currency)
         {
+            logger.Info($"Initializing Bid with amount: {amount}, currency: {currency}");
+
             if (amount <= 0)
             {
+                logger.Error("Bid amount is less than or equal to zero.");
                 throw new ArgumentException("Bid amount must be greater than zero.");
             }
 
             this.amount = amount;
             this.currency = currency ?? throw new ArgumentNullException(nameof(currency));
+
             this.BidTime = DateTime.Now;
+            logger.Info("Bid initialized successfully.");
         }
 
         /// <summary>
@@ -77,12 +81,15 @@ namespace DomainModel
 
             set
             {
+                logger.Info($"Setting Bid amount to: {value}");
                 if (value < 0)
                 {
+                    logger.Error("Bid amount must be greater than zero.");
                     throw new ArgumentException("Bid amount must be greater than zero.");
                 }
 
                 this.amount = value;
+                logger.Info($"Bid amount set successfully to: {value}");
             }
         }
 
@@ -100,12 +107,15 @@ namespace DomainModel
 
             set
             {
+                logger.Info($"Setting Bid currency to: {value}");
                 if (value.Length != 3)
                 {
+                    logger.Error("Currency must be a valid 3-letter ISO code.");
                     throw new ArgumentException("Currency must be a valid 3-letter ISO code.");
                 }
 
                 this.currency = value;
+                logger.Info($"Bid currency set successfully to: {value}");
             }
         }
 
@@ -126,6 +136,7 @@ namespace DomainModel
         {
             if (bidTime > DateTime.Now)
             {
+                logger.Warn("Bid time is in the future.");
                 return new ValidationResult("Bid time cannot be in the future.");
             }
 
@@ -135,6 +146,7 @@ namespace DomainModel
         /// <inheritdoc/>
         public override string ToString()
         {
+            logger.Info($"Converting Bid to string: {this.Amount} {this.Currency} at {this.BidTime}");
             return $"{this.Amount} {this.Currency} at {this.BidTime}";
         }
     }

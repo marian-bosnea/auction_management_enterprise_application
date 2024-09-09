@@ -10,6 +10,7 @@ namespace Services
     using DataMapper.Interfaces;
     using DomainModel;
     using ServiceLayer.Interfaces;
+    using log4net;
 
     /// <summary>
     /// The AuctionService class provides business logic for managing auctions, including operations
@@ -18,6 +19,11 @@ namespace Services
     /// </summary>
     public class AuctionService : IAuctionService
     {
+        /// <summary>
+        /// The logger for logging actions in the class.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(AuctionService));
+
         /// <summary>
         /// The DAO interface for managing auction-related data.
         /// </summary>
@@ -50,6 +56,8 @@ namespace Services
 
             this.maxActiveAuctions = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctions"] ?? "5");
             this.maxActiveAuctionsPerCategory = int.Parse(ConfigurationManager.AppSettings["MaxActiveAuctionsPerCategory"] ?? "1");
+
+            Logger.Info($"AuctionService initialized with maxActiveAuctions: {this.maxActiveAuctions} and maxActiveAuctionsPerCategory: {this.maxActiveAuctionsPerCategory}.");
         }
 
         /// <summary>
@@ -74,10 +82,13 @@ namespace Services
         /// <param name="currency">The currency for the auction.</param>
         public void StartAuction(Person person, Product product, DateTime startDate, DateTime endDate, double startingPrice, string currency)
         {
+            Logger.Info($"Attempting to start auction for person {person.Name}, product {product.Name}, from {startDate} to {endDate}.");
+
             int maxItemsBasedOnScore = this.CalculateMaxItemsBasedOnScore(person.Score);
 
             if (this.auctionDAO.GetActiveAuctionsForPerson(person).Count >= maxItemsBasedOnScore)
             {
+                Logger.Warn($"Cannot start auction for {person.Name}. Maximum of {maxItemsBasedOnScore} active auctions allowed based on seriousness score.");
                 throw new InvalidOperationException($"Cannot start a new auction. Maximum of {maxItemsBasedOnScore} active auctions allowed based on seriousness score.");
             }
 
@@ -85,6 +96,7 @@ namespace Services
 
             if (activeAuctions >= this.maxActiveAuctions)
             {
+                Logger.Warn($"Cannot start auction for {person.Name}. Maximum of {this.maxActiveAuctions} active auctions reached.");
                 throw new InvalidOperationException($"Cannot start a new auction. Maximum of {this.maxActiveAuctions} active auctions.");
             }
 
@@ -93,13 +105,15 @@ namespace Services
                 int activeAuctionsInCategory = this.auctionDAO.GetActiveAuctionsForPersonInCategory(person, category).Count;
                 if (activeAuctionsInCategory >= this.maxActiveAuctionsPerCategory)
                 {
+                    Logger.Warn($"Cannot start auction for {person.Name}. Maximum of {this.maxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.");
                     throw new InvalidOperationException($"Cannot start a new auction. Maximum of {this.maxActiveAuctionsPerCategory} active auctions in category '{category.Name}' reached.");
                 }
             }
 
             var auction = new Auction(person, product, startDate, endDate, startingPrice, currency);
-
             this.auctionDAO.Add(auction);
+
+            Logger.Info($"Auction started successfully for product {product.Name}. Auction ID: {auction.Id}");
         }
 
         /// <summary>
@@ -110,27 +124,24 @@ namespace Services
         /// <exception cref="InvalidOperationException">
         /// Thrown when the auction has already been completed.
         /// </exception>
-        /// <remarks>
-        /// This method sets the <c>IsCompleted</c> property of the auction to <c>true</c> if the auction is not already completed.
-        /// It then updates the auction record in the data store through the <c>auctionDAO</c> object.
-        /// Note that currently, the <c>person</c> parameter is not used within the method, but it may be used for additional validation or logging in future implementations.
-        /// </remarks>
         public void FinalizeAuction(Person person, Auction auction)
         {
+            Logger.Info($"Attempting to finalize auction ID: {auction.Id}");
+
             if (auction.IsCompleted)
             {
+                Logger.Warn("Cannot finalize auction. The auction has already been completed.");
                 throw new InvalidOperationException("The auction has already been completed.");
             }
 
             auction.IsCompleted = true;
-
             this.auctionDAO.Update(auction);
+
+            Logger.Info($"Auction ID: {auction.Id} finalized successfully.");
         }
 
         /// <summary>
         /// Adds a new Bid to an auction after validating the Bid's currency and amount.
-        /// The Bid must match the auction's currency, and the Bid amount must be at least 10% higher
-        /// than the previous highest Bid or the starting price if no Bids exist.
         /// </summary>
         /// <param name="auction">The auction to which the Bid is being added.</param>
         /// <param name="bid">The Bid to be added to the auction.</param>
@@ -140,13 +151,17 @@ namespace Services
         /// </exception>
         public void AddBid(Auction auction, Bid bid)
         {
+            Logger.Info($"Attempting to add bid to auction ID: {auction.Id}. Bid amount: {bid.Amount}, currency: {bid.Currency}.");
+
             if (DateTime.Now >= auction.EndDate)
             {
+                Logger.Warn("Cannot add bid. The auction has ended.");
                 throw new InvalidOperationException("The auction has ended. No more Bids can be placed.");
             }
 
             if (bid.Currency != auction.Currency)
             {
+                Logger.Error("Bid currency does not match auction currency.");
                 throw new ArgumentException("Bid currency must match auction currency.");
             }
 
@@ -156,14 +171,15 @@ namespace Services
 
             if (bid.Amount < minPrice)
             {
+                Logger.Error("Bid amount is less than required minimum.");
                 throw new ArgumentException("Bid amount must be at least 10% higher than the previous Bid.");
             }
 
             auction.AddBid(bid);
-
             this.bidDAO.Add(bid);
-
             this.auctionDAO.Update(auction);
+
+            Logger.Info($"Bid added successfully to auction ID: {auction.Id}. New highest bid amount: {bid.Amount}");
         }
 
         /// <summary>
@@ -172,6 +188,7 @@ namespace Services
         /// <param name="auction">The auction to add.</param>
         public void AddAuction(Auction auction)
         {
+            Logger.Info($"Adding new auction with ID: {auction.Id}.");
             this.auctionDAO.Add(auction);
         }
 
@@ -182,6 +199,7 @@ namespace Services
         /// <returns>The auction with the specified ID, or null if not found.</returns>
         public Auction GetAuctionById(int id)
         {
+            Logger.Info($"Retrieving auction with ID: {id}.");
             return this.auctionDAO.Get(id);
         }
 
@@ -191,6 +209,7 @@ namespace Services
         /// <returns>A list of all auctions.</returns>
         public List<Auction> GetAllAuctions()
         {
+            Logger.Info("Retrieving all auctions.");
             return this.auctionDAO.GetAll();
         }
 
@@ -202,9 +221,11 @@ namespace Services
         {
             if (auction == null)
             {
+                Logger.Error("Auction update failed. Auction cannot be null.");
                 throw new ArgumentNullException("Auction must not be null");
             }
 
+            Logger.Info($"Updating auction ID: {auction.Id}.");
             this.auctionDAO.Update(auction);
         }
 
@@ -214,10 +235,16 @@ namespace Services
         /// <param name="id">The ID of the auction to delete.</param>
         public void DeleteAuction(int id)
         {
+            Logger.Info($"Attempting to delete auction with ID: {id}.");
             var auction = this.auctionDAO.Get(id);
             if (auction != null)
             {
                 this.auctionDAO.Delete(id);
+                Logger.Info($"Auction ID: {id} deleted successfully.");
+            }
+            else
+            {
+                Logger.Warn($"Auction ID: {id} not found for deletion.");
             }
         }
 
@@ -229,14 +256,11 @@ namespace Services
         /// An integer representing the maximum number of items that can be listed for auction.
         /// The value is calculated such that a higher score allows more items to be listed, with a minimum of 1 item.
         /// </returns>
-        /// <remarks>
-        /// The formula used for the calculation is:
-        /// <c>Max(1, 10 - ((10 - score) * 0.5m))</c>
-        /// This ensures that the number of items decreases as the score decreases, with a minimum of 1 item.
-        /// </remarks>
         private int CalculateMaxItemsBasedOnScore(double score)
         {
-            return (int)Math.Max(1, 10 - ((10 - score) * 0.5));
+            int maxItems = (int)Math.Max(1, 10 - ((10 - score) * 0.5));
+            Logger.Debug($"Calculated max items based on score {score}: {maxItems}");
+            return maxItems;
         }
     }
 }

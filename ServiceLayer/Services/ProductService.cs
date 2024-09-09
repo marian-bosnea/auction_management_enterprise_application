@@ -8,6 +8,7 @@ namespace DomainModel
     using System.Collections.Generic;
     using System.Configuration;
     using DataMapper.Interfaces;
+    using log4net;
     using ServiceLayer;
     using ServiceLayer.Interfaces;
 
@@ -33,14 +34,20 @@ namespace DomainModel
         private readonly ICategoryService categoryService;
 
         /// <summary>
+        /// The similarity threshold for checking product description similarity.
+        /// </summary>
+        private int SimilarityThreshold { get; set; }
+
+        /// <summary>
+        /// Logger for logging actions in the class.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(ProductService));
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ProductService"/> class.
         /// </summary>
-        /// <param name="productDAO">The DAO interface for managing product-related data. This is used to perform CRUD operations on products.</param>
-        /// <param name="categoryService">The service for managing categories. This is used to create and retrieve categories associated with products.</param>
-        /// <remarks>
-        /// The constructor initializes the internal collections for storing categories and products. It also configures the similarity threshold
-        /// for product description comparisons, which is obtained from the configuration settings.
-        /// </remarks>
+        /// <param name="productDAO">The DAO interface for managing product-related data.</param>
+        /// <param name="categoryService">The service for managing categories.</param>
         public ProductService(IProductDAO productDAO, ICategoryService categoryService)
         {
             this.Categories = new Dictionary<string, Category>();
@@ -50,6 +57,8 @@ namespace DomainModel
             this.categoryService = categoryService;
 
             this.SimilarityThreshold = this.GetSimilarityThresholdFromConfig();
+
+            Logger.Info($"ProductService initialized with similarity threshold: {this.SimilarityThreshold}");
         }
 
         /// <summary>
@@ -63,13 +72,6 @@ namespace DomainModel
         public List<Product> Products { get; private set; }
 
         /// <summary>
-        /// Gets or sets the similarity threshold for determining if a new product's description is too similar
-        /// to the descriptions of existing products. This value is read from the configuration file.
-        /// If the value is not specified or is invalid, the default threshold is used.
-        /// </summary>
-        private int SimilarityThreshold { get; set; }
-
-        /// <summary>
         /// Creates a new product with the specified name, description, and categories.
         /// </summary>
         /// <param name="name">The name of the product.</param>
@@ -79,11 +81,14 @@ namespace DomainModel
         /// <exception cref="InvalidOperationException">Thrown if a product with a similar description already exists.</exception>
         public Product CreateProduct(string name, string description, List<string> categoryNames)
         {
+            Logger.Info($"Creating product with name: {name}");
+
             foreach (var existingProduct in this.Products)
             {
                 int distance = StringUtils.CalculateLevenshteinDistance(existingProduct.Description, description);
                 if (distance <= this.SimilarityThreshold)
                 {
+                    Logger.Warn($"A similar product with description '{description}' already exists.");
                     throw new InvalidOperationException("A similar product already exists.");
                 }
             }
@@ -99,6 +104,7 @@ namespace DomainModel
             this.productDAO.Add(product);
             this.Products.Add(product);
 
+            Logger.Info($"Product '{name}' created successfully with ID: {product.Id}");
             return product;
         }
 
@@ -106,15 +112,12 @@ namespace DomainModel
         /// Adds a new product to the internal collection and persists it in the data store.
         /// </summary>
         /// <param name="product">The product to be added. This should be a fully initialized <see cref="Product"/> instance.</param>
-        /// <remarks>
-        /// The method performs two key actions:
-        /// 1. Adds the product to the internal list of products managed by this service.
-        /// 2. Uses the <see cref="ProductDAO"/> to add the product to the data store, ensuring it is persisted across sessions.
-        /// </remarks>
         public void AddProduct(Product product)
         {
+            Logger.Info($"Adding product with ID: {product.Id}");
             this.Products.Add(product);
             this.productDAO.Add(product);
+            Logger.Info($"Product with ID: {product.Id} added successfully.");
         }
 
         /// <summary>
@@ -124,6 +127,7 @@ namespace DomainModel
         /// <returns>The product with the specified ID, or null if not found.</returns>
         public Product GetProductById(int id)
         {
+            Logger.Info($"Retrieving product with ID: {id}");
             return this.Products.Find(p => p.Id == id);
         }
 
@@ -133,8 +137,9 @@ namespace DomainModel
         /// <returns>A list of all products.</returns>
         public List<Product> GetAllProducts()
         {
+            Logger.Info("Retrieving all products.");
             this.Products = this.productDAO.GetAll();
-
+            Logger.Info($"Retrieved {this.Products.Count} products.");
             return this.Products;
         }
 
@@ -142,32 +147,29 @@ namespace DomainModel
         /// Updates an existing product in the internal collection and persists the changes in the data store.
         /// </summary>
         /// <param name="product">The product to be updated. This should be a fully initialized <see cref="Product"/> instance with the updated details.</param>
-        /// <remarks>
-        /// The method performs two key actions:
-        /// 1. Replaces the existing product in the internal list of products with the updated product.
-        /// 2. Uses the <see cref="ProductDAO"/> to update the product in the data store, ensuring that the changes are persisted across sessions.
-        /// </remarks>
         public void UpdateProduct(Product product)
         {
+            Logger.Info($"Updating product with ID: {product.Id}");
+
             var newProduct = new Product(product.Id, product.Name, product.Description, product.Categories);
 
-            this.Products.Remove(product);
+            this.Products.Remove(this.Products.Find(p => p.Id == product.Id));
             this.Products.Add(newProduct);
 
             this.productDAO.Update(product);
+
+            Logger.Info($"Product with ID: {product.Id} updated successfully.");
         }
 
         /// <summary>
         /// Removes a product from the internal collection of products.
         /// </summary>
         /// <param name="product">The product to be deleted. This should be an instance of <see cref="Product"/> that exists in the internal collection.</param>
-        /// <remarks>
-        /// This method removes the specified product from the internal list of products. It does not interact with the data store or perform any other operations.
-        /// To ensure consistency, any additional persistence or cleanup operations should be handled separately.
-        /// </remarks>
         public void DeleteProduct(Product product)
         {
+            Logger.Info($"Deleting product with ID: {product.Id}");
             this.Products.Remove(product);
+            Logger.Info($"Product with ID: {product.Id} removed from internal collection.");
         }
 
         /// <summary>
@@ -187,14 +189,18 @@ namespace DomainModel
         /// <returns>The similarity threshold.</returns>
         public int GetSimilarityThresholdFromConfig()
         {
+            Logger.Info("Retrieving similarity threshold from configuration.");
+
             string configValue = ConfigurationManager.AppSettings["SimilarityThreshold"];
 
             if (int.TryParse(configValue, out int threshold))
             {
+                Logger.Info($"Similarity threshold retrieved from configuration: {threshold}");
                 return threshold;
             }
             else
             {
+                Logger.Warn("Invalid or missing similarity threshold in configuration. Using default value.");
                 return DefaultSimilarityThreshold;
             }
         }
