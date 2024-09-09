@@ -9,8 +9,8 @@ namespace Services
     using System.Configuration;
     using DataMapper.Interfaces;
     using DomainModel;
-    using ServiceLayer.Interfaces;
     using log4net;
+    using ServiceLayer.Interfaces;
 
     /// <summary>
     /// The AuctionService class provides business logic for managing auctions, including operations
@@ -42,7 +42,7 @@ namespace Services
         /// <summary>
         /// The maximum number of active auctions a person can have within a single category.
         /// </summary>
-        private int maxActiveAuctionsPerCategory;
+        private readonly int maxActiveAuctionsPerCategory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionService"/> class.

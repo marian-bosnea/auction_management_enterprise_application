@@ -9,8 +9,8 @@ namespace Services
     using System.Linq;
     using DataMapper.Interfaces;
     using DomainModel;
-    using ServiceLayer.Interfaces;
     using log4net;
+    using ServiceLayer.Interfaces;
 
     /// <summary>
     /// Provides business logic for managing persons, including operations such as starting auctions,
@@ -18,7 +18,14 @@ namespace Services
     /// </summary>
     public class PersonService : IPersonService
     {
-        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Logger instance for logging operations within the <see cref="StringUtils"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This static readonly field is used to log information, warnings, errors, and other messages related to string operations.
+        /// It utilizes the log4net library for logging, and the logger is configured to log messages based on the class's namespace and type.
+        /// </remarks>
+        private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// The data access object (DAO) responsible for managing person-related data.
@@ -36,12 +43,12 @@ namespace Services
         /// <param name="personDAO">The data access object (DAO) responsible for managing person-related data. This DAO provides methods for retrieving and persisting person records.</param>
         public PersonService(IPersonDAO personDAO)
         {
-            logger.Info("Initializing PersonService.");
+            Logger.Info("Initializing PersonService.");
 
             this.personDAO = personDAO;
             this.seriousnessThreshold = double.Parse(ConfigurationManager.AppSettings["SeriousnessThreshold"] ?? "4.0");
 
-            logger.Info($"PersonService initialized with seriousness threshold: {this.seriousnessThreshold}");
+            Logger.Info($"PersonService initialized with seriousness threshold: {this.seriousnessThreshold}");
         }
 
         /// <summary>
@@ -50,16 +57,16 @@ namespace Services
         /// <param name="person">The person starting the auction.</param>
         public void StartAuction(Person person)
         {
-            logger.Info($"Attempting to start auction for person with ID: {person.Id}");
+            Logger.Info($"Attempting to start auction for person with ID: {person.Id}");
 
             if (person.Score < this.seriousnessThreshold)
             {
                 var errorMessage = $"Cannot start a new auction. Seriousness score is below the required threshold of {this.seriousnessThreshold}.";
-                logger.Error(errorMessage);
+                Logger.Error(errorMessage);
                 throw new InvalidOperationException(errorMessage);
             }
 
-            logger.Info($"Auction started successfully for person with ID: {person.Id}");
+            Logger.Info($"Auction started successfully for person with ID: {person.Id}");
         }
 
         /// <summary>
@@ -69,17 +76,17 @@ namespace Services
         /// <param name="bid">The Bid to be added to the auction.</param>
         public void AddBid(Person person, Bid bid)
         {
-            logger.Info($"Attempting to add bid for person with ID: {person.Id}");
+            Logger.Info($"Attempting to add bid for person with ID: {person.Id}");
 
             if (person.Score < this.seriousnessThreshold)
             {
                 var errorMessage = $"Cannot place a Bid. Seriousness score is below the required threshold of {this.seriousnessThreshold}.";
-                logger.Error(errorMessage);
+                Logger.Error(errorMessage);
                 throw new InvalidOperationException(errorMessage);
             }
 
             bid.Bidder = person;
-            logger.Info($"Bid added for person with ID: {person.Id}");
+            Logger.Info($"Bid added for person with ID: {person.Id}");
         }
 
         /// <summary>
@@ -89,23 +96,23 @@ namespace Services
         /// <param name="auction">The auction to finalize.</param>
         public void FinalizeAuction(Person person, Auction auction)
         {
-            logger.Info($"Attempting to finalize auction with ID: {auction.Id} for person with ID: {person.Id}");
+            Logger.Info($"Attempting to finalize auction with ID: {auction.Id} for person with ID: {person.Id}");
 
             if (auction.Seller != person)
             {
                 var errorMessage = "Cannot finalize an auction that is not active or was not initiated by this person.";
-                logger.Error(errorMessage);
+                Logger.Error(errorMessage);
                 throw new InvalidOperationException(errorMessage);
             }
 
             if (auction.Bids.Any())
             {
                 person.AdjustScore(0.1);
-                logger.Info($"Auction with ID: {auction.Id} finalized. Person's score adjusted.");
+                Logger.Info($"Auction with ID: {auction.Id} finalized. Person's score adjusted.");
             }
 
             this.personDAO.Update(person);
-            logger.Info($"Person with ID: {person.Id} updated successfully.");
+            Logger.Info($"Person with ID: {person.Id} updated successfully.");
         }
 
         /// <summary>
@@ -115,12 +122,12 @@ namespace Services
         /// <param name="feedbackScore">The feedback score to adjust, between -0.1 and 0.1.</param>
         public void ProvideFeedback(Person person, double feedbackScore)
         {
-            logger.Info($"Providing feedback to person with ID: {person.Id}. Feedback score: {feedbackScore}");
+            Logger.Info($"Providing feedback to person with ID: {person.Id}. Feedback score: {feedbackScore}");
 
             person.AdjustScore(feedbackScore);
             this.personDAO.Update(person);
 
-            logger.Info($"Feedback provided to person with ID: {person.Id}. Person's score adjusted.");
+            Logger.Info($"Feedback provided to person with ID: {person.Id}. Person's score adjusted.");
         }
     }
 }

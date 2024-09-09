@@ -17,6 +17,13 @@ namespace DataMapper.DAO
     /// </summary>
     public class PersonDAO : IPersonDAO
     {
+        /// <summary>
+        /// Logger instance for logging operations within the <see cref="StringUtils"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This static readonly field is used to log information, warnings, errors, and other messages related to string operations.
+        /// It utilizes the log4net library for logging, and the logger is configured to log messages based on the class's namespace and type.
+        /// </remarks>
         private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
@@ -103,6 +110,7 @@ namespace DataMapper.DAO
                 {
                     Logger.Warn($"Person with ID: {id} not found.");
                 }
+
                 return person;
             }
             catch (Exception ex)

@@ -138,7 +138,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainMo
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.AssemblyReference.cache
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.Ext.Json.dll

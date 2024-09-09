@@ -14,14 +14,21 @@ namespace DomainModel
     /// </summary>
     public class Category
     {
-        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Logger instance for logging operations within the <see cref="StringUtils"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This static readonly field is used to log information, warnings, errors, and other messages related to string operations.
+        /// It utilizes the log4net library for logging, and the logger is configured to log messages based on the class's namespace and type.
+        /// </remarks>
+        private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Category"/> class with empty lists for parents and subcategories.
         /// </summary>
         public Category()
         {
-            logger.Info("Initializing Category with empty parents and subcategories lists.");
+            Logger.Info("Initializing Category with empty parents and subcategories lists.");
             this.Parents = new List<Category>();
             this.Subcategories = new List<Category>();
         }
@@ -32,24 +39,24 @@ namespace DomainModel
         /// <param name="name">The name of the category.</param>
         public Category(string name)
         {
-            logger.Info($"Initializing Category with name: {name}");
+            Logger.Info($"Initializing Category with name: {name}");
 
             if (name == null)
             {
-                logger.Error("Category name is null.");
+                Logger.Error("Category name is null.");
                 throw new ArgumentNullException("Name must not be null.");
             }
 
             if (name.Length == 0)
             {
-                logger.Error("Category name is an empty string.");
+                Logger.Error("Category name is an empty string.");
                 throw new ArgumentException("Name must be a non-empty string");
             }
 
             this.Name = name;
             this.Parents = new List<Category>();
             this.Subcategories = new List<Category>();
-            logger.Info($"Category '{name}' initialized successfully.");
+            Logger.Info($"Category '{name}' initialized successfully.");
         }
 
         /// <summary>
@@ -82,12 +89,12 @@ namespace DomainModel
         /// <param name="parentCategory">The parent category to add.</param>
         public void AddParent(Category parentCategory)
         {
-            logger.Info($"Adding parent category: {parentCategory.Name} to category: {this.Name}");
+            Logger.Info($"Adding parent category: {parentCategory.Name} to category: {this.Name}");
             if (!this.Parents.Contains(parentCategory))
             {
                 this.Parents.Add(parentCategory);
                 parentCategory.AddSubcategory(this);
-                logger.Info($"Parent category: {parentCategory.Name} added to category: {this.Name}");
+                Logger.Info($"Parent category: {parentCategory.Name} added to category: {this.Name}");
             }
         }
 
@@ -97,12 +104,12 @@ namespace DomainModel
         /// <param name="subcategory">The subcategory to add.</param>
         public void AddSubcategory(Category subcategory)
         {
-            logger.Info($"Adding subcategory: {subcategory.Name} to category: {this.Name}");
+            Logger.Info($"Adding subcategory: {subcategory.Name} to category: {this.Name}");
             if (!this.Subcategories.Contains(subcategory))
             {
                 this.Subcategories.Add(subcategory);
                 subcategory.AddParent(this);
-                logger.Info($"Subcategory: {subcategory.Name} added to category: {this.Name}");
+                Logger.Info($"Subcategory: {subcategory.Name} added to category: {this.Name}");
             }
         }
 
@@ -114,7 +121,7 @@ namespace DomainModel
         /// </returns>
         public override string ToString()
         {
-            logger.Info($"Converting Category to string: {this.Name}");
+            Logger.Info($"Converting Category to string: {this.Name}");
             return this.Name;
         }
     }

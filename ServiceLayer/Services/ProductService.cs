@@ -18,10 +18,9 @@ namespace DomainModel
     public class ProductService : IProductService
     {
         /// <summary>
-        /// The default similarity threshold used for checking product description similarity.
-        /// This value is used if no valid threshold is provided in the configuration file.
+        /// Logger for logging actions in the class.
         /// </summary>
-        public const int DefaultSimilarityThreshold = 5;
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(ProductService));
 
         /// <summary>
         /// The DAO interface for managing product-related data.
@@ -34,14 +33,15 @@ namespace DomainModel
         private readonly ICategoryService categoryService;
 
         /// <summary>
-        /// The similarity threshold for checking product description similarity.
+        /// Gets or sets the similarity threshold for checking product description similarity.
         /// </summary>
         private int SimilarityThreshold { get; set; }
 
         /// <summary>
-        /// Logger for logging actions in the class.
+        /// The default similarity threshold used for checking product description similarity.
+        /// This value is used if no valid threshold is provided in the configuration file.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(ProductService));
+        public const int DefaultSimilarityThreshold = 5;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductService"/> class.
@@ -62,14 +62,14 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets the dictionary of categories, keyed by their name.
+        /// Gets or sets the dictionary of categories, keyed by their name.
         /// </summary>
-        public Dictionary<string, Category> Categories { get; private set; }
+        public Dictionary<string, Category> Categories { get; set; }
 
         /// <summary>
-        /// Gets the list of products managed by this ProductService.
+        /// Gets or sets the list of products managed by this ProductService.
         /// </summary>
-        public List<Product> Products { get; private set; }
+        public List<Product> Products { get; set; }
 
         /// <summary>
         /// Creates a new product with the specified name, description, and categories.

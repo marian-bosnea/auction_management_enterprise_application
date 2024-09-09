@@ -8,15 +8,22 @@ namespace ServiceLayer.Services
     using System.Collections.Generic;
     using DataMapper.Interfaces;
     using DomainModel;
-    using ServiceLayer.Interfaces;
     using log4net;
+    using ServiceLayer.Interfaces;
 
     /// <summary>
     /// Provides services for managing categories.
     /// </summary>
     public class CategoryService : ICategoryService
     {
-        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Logger instance for logging operations within the <see cref="StringUtils"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This static readonly field is used to log information, warnings, errors, and other messages related to string operations.
+        /// It utilizes the log4net library for logging, and the logger is configured to log messages based on the class's namespace and type.
+        /// </remarks>
+        private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// The DAO interface for managing category-related data.
@@ -34,12 +41,12 @@ namespace ServiceLayer.Services
         /// <param name="categoryDAO">The DAO which manages categories.</param>
         public CategoryService(ICategoryDAO categoryDAO)
         {
-            logger.Info("Initializing CategoryService.");
+            Logger.Info("Initializing CategoryService.");
 
             this.categoryDAO = categoryDAO;
             this.categories = new Dictionary<string, Category>();
 
-            logger.Info("CategoryService initialized successfully.");
+            Logger.Info("CategoryService initialized successfully.");
         }
 
         /// <summary>
@@ -57,37 +64,37 @@ namespace ServiceLayer.Services
         /// <returns>The created or existing <see cref="Category"/> instance.</returns>
         public Category CreateCategory(string name)
         {
-            logger.Info($"Attempting to create or retrieve category with name: {name}");
+            Logger.Info($"Attempting to create or retrieve category with name: {name}");
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                logger.Warn("Category name is null or empty.");
+                Logger.Warn("Category name is null or empty.");
                 throw new ArgumentException("Category name must not be null or empty.", nameof(name));
             }
 
             if (!this.categories.TryGetValue(name, out var category))
             {
-                logger.Info($"Category {name} not found in cache. Querying DAO.");
+                Logger.Info($"Category {name} not found in cache. Querying DAO.");
 
                 category = this.categoryDAO.GetByName(name);
 
                 if (category == null)
                 {
-                    logger.Info($"Category {name} does not exist in DAO. Creating new category.");
+                    Logger.Info($"Category {name} does not exist in DAO. Creating new category.");
                     category = new Category(name);
                     this.categoryDAO.Add(category);
                     this.categories[name] = category;
-                    logger.Info($"Category {name} created and added to DAO.");
+                    Logger.Info($"Category {name} created and added to DAO.");
                 }
                 else
                 {
                     this.categories[name] = category;
-                    logger.Info($"Category {name} retrieved from DAO and added to cache.");
+                    Logger.Info($"Category {name} retrieved from DAO and added to cache.");
                 }
             }
             else
             {
-                logger.Info($"Category {name} retrieved from cache.");
+                Logger.Info($"Category {name} retrieved from cache.");
             }
 
             return category;

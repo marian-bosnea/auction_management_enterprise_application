@@ -13,7 +13,14 @@ namespace DomainModel
     /// </summary>
     public class Product
     {
-        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Logger instance for logging operations within the <see cref="StringUtils"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This static readonly field is used to log information, warnings, errors, and other messages related to string operations.
+        /// It utilizes the log4net library for logging, and the logger is configured to log messages based on the class's namespace and type.
+        /// </remarks>
+        private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
@@ -21,7 +28,7 @@ namespace DomainModel
         /// </summary>
         public Product()
         {
-            logger.Info("Initialized a new Product instance with default values.");
+            Logger.Info("Initialized a new Product instance with default values.");
             this.Categories = new List<Category>(); // Initialize the Categories list to avoid null reference issues.
         }
 
@@ -34,14 +41,14 @@ namespace DomainModel
         /// <param name="categories">The categories of the product.</param>
         public Product(int id, string name, string description, List<Category> categories)
         {
-            logger.Info($"Creating Product with ID: {id}, Name: {name}");
+            Logger.Info($"Creating Product with ID: {id}, Name: {name}");
 
             this.Id = id;
             this.Name = name;
             this.Description = description;
             this.Categories = categories ?? new List<Category>(); // Ensure Categories is initialized.
 
-            logger.Info("Product created successfully.");
+            Logger.Info("Product created successfully.");
         }
 
         /// <summary>
@@ -75,22 +82,22 @@ namespace DomainModel
         /// <param name="category">The category to add.</param>
         public void AddCategory(Category category)
         {
-            logger.Info($"Attempting to add category: {category?.Name} to product: {this.Name}");
+            Logger.Info($"Attempting to add category: {category?.Name} to product: {this.Name}");
 
             if (category == null)
             {
-                logger.Warn("Category is null, cannot add to the product.");
+                Logger.Warn("Category is null, cannot add to the product.");
                 return;
             }
 
             if (!this.Categories.Contains(category))
             {
                 this.Categories.Add(category);
-                logger.Info($"Category: {category.Name} added to product: {this.Name}");
+                Logger.Info($"Category: {category.Name} added to product: {this.Name}");
             }
             else
             {
-                logger.Info($"Category: {category.Name} is already associated with product: {this.Name}");
+                Logger.Info($"Category: {category.Name} is already associated with product: {this.Name}");
             }
         }
 
@@ -100,7 +107,7 @@ namespace DomainModel
         /// <returns>A string that represents the current product.</returns>
         public override string ToString()
         {
-            logger.Info($"Converting Product to string: {this.Name}");
+            Logger.Info($"Converting Product to string: {this.Name}");
             return this.Name;
         }
     }
