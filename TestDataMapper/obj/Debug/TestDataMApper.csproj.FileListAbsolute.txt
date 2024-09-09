@@ -175,3 +175,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestData
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\NMemory.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\Effort.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\NMemory.xml
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\log4net.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\log4net.Ext.Json.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\TestDataMApper\bin\Debug\log4net.xml

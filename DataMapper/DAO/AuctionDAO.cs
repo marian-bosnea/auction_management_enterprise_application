@@ -10,12 +10,15 @@ namespace DataMapper.DAO
     using System.Linq;
     using DataMapper.Interfaces;
     using DomainModel;
+    using log4net;
 
     /// <summary>
     /// Provides data access functionality for auctions using EF6.
     /// </summary>
     public class AuctionDAO : IAuctionDAO
     {
+        private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Represents the EF Core database context used for performing data operations
         /// on the auction management entities. It provides access to the database and
@@ -30,6 +33,7 @@ namespace DataMapper.DAO
         public AuctionDAO(IAuctionManagementEfCoreDbContext databaseContext)
         {
             this.databaseContext = databaseContext;
+            Logger.Info("AuctionDAO initialized.");
         }
 
         /// <summary>
@@ -38,8 +42,18 @@ namespace DataMapper.DAO
         /// <param name="auction">The auction to add.</param>
         public void Add(Auction auction)
         {
-            this.databaseContext.Auctions.Add(auction);
-            this.databaseContext.SaveChanges();
+            Logger.Info($"Adding auction with ID: {auction.Id}");
+            try
+            {
+                this.databaseContext.Auctions.Add(auction);
+                this.databaseContext.SaveChanges();
+                Logger.Info($"Auction with ID: {auction.Id} added successfully.");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while adding auction with ID: {auction.Id}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -48,11 +62,25 @@ namespace DataMapper.DAO
         /// <param name="id">The auction ID.</param>
         public void Delete(int id)
         {
-            var auction = this.databaseContext.Auctions.Find(id);
-            if (auction != null)
+            Logger.Info($"Deleting auction with ID: {id}");
+            try
             {
-                this.databaseContext.Auctions.Remove(auction);
-                this.databaseContext.SaveChanges();
+                var auction = this.databaseContext.Auctions.Find(id);
+                if (auction != null)
+                {
+                    this.databaseContext.Auctions.Remove(auction);
+                    this.databaseContext.SaveChanges();
+                    Logger.Info($"Auction with ID: {id} deleted successfully.");
+                }
+                else
+                {
+                    Logger.Warn($"Auction with ID: {id} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while deleting auction with ID: {id}", ex);
+                throw;
             }
         }
 
@@ -63,10 +91,28 @@ namespace DataMapper.DAO
         /// <returns>The auction object or null if not found.</returns>
         public Auction Get(int id)
         {
-            return this.databaseContext.Auctions
-                            .Include(a => a.Product)
-                            .Include(a => a.Bids)
-                            .FirstOrDefault(a => a.Id == id);
+            Logger.Info($"Retrieving auction with ID: {id}");
+            try
+            {
+                var auction = this.databaseContext.Auctions
+                                .Include(a => a.Product)
+                                .Include(a => a.Bids)
+                                .FirstOrDefault(a => a.Id == id);
+                if (auction != null)
+                {
+                    Logger.Info($"Auction with ID: {id} retrieved successfully.");
+                }
+                else
+                {
+                    Logger.Warn($"Auction with ID: {id} not found.");
+                }
+                return auction;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while retrieving auction with ID: {id}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -75,10 +121,21 @@ namespace DataMapper.DAO
         /// <returns>A list of all auctions.</returns>
         public List<Auction> GetAll()
         {
-            return this.databaseContext.Auctions
-                            .Include(a => a.Product)
-                            .Include(a => a.Bids)
-                            .ToList();
+            Logger.Info("Retrieving all auctions.");
+            try
+            {
+                var auctions = this.databaseContext.Auctions
+                                .Include(a => a.Product)
+                                .Include(a => a.Bids)
+                                .ToList();
+                Logger.Info($"Retrieved {auctions.Count} auctions.");
+                return auctions;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error while retrieving all auctions.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -88,11 +145,22 @@ namespace DataMapper.DAO
         /// <returns>A list of active auctions for the person.</returns>
         public List<Auction> GetActiveAuctionsForPerson(Person person)
         {
-            return this.databaseContext.Auctions
-                            .Where(a => a.Id == person.Id && a.EndDate > DateTime.Now)
-                            .Include(a => a.Product)
-                            .Include(a => a.Bids)
-                            .ToList();
+            Logger.Info($"Retrieving active auctions for person ID: {person.Id}");
+            try
+            {
+                var auctions = this.databaseContext.Auctions
+                                .Where(a => a.Id == person.Id && a.EndDate > DateTime.Now)
+                                .Include(a => a.Product)
+                                .Include(a => a.Bids)
+                                .ToList();
+                Logger.Info($"Retrieved {auctions.Count} active auctions for person ID: {person.Id}");
+                return auctions;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while retrieving active auctions for person ID: {person.Id}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -103,11 +171,22 @@ namespace DataMapper.DAO
         /// <returns>A list of active auctions for the person in the given category.</returns>
         public List<Auction> GetActiveAuctionsForPersonInCategory(Person person, Category category)
         {
-            return this.databaseContext.Auctions
-                            .Where(a => a.Id == person.Id && a.EndDate > DateTime.Now && a.Product.Categories.Contains(category))
-                            .Include(a => a.Product)
-                            .Include(a => a.Bids)
-                            .ToList();
+            Logger.Info($"Retrieving active auctions for person ID: {person.Id} in category: {category.Name}");
+            try
+            {
+                var auctions = this.databaseContext.Auctions
+                                .Where(a => a.Id == person.Id && a.EndDate > DateTime.Now && a.Product.Categories.Contains(category))
+                                .Include(a => a.Product)
+                                .Include(a => a.Bids)
+                                .ToList();
+                Logger.Info($"Retrieved {auctions.Count} active auctions for person ID: {person.Id} in category: {category.Name}");
+                return auctions;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while retrieving active auctions for person ID: {person.Id} in category: {category.Name}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -117,11 +196,22 @@ namespace DataMapper.DAO
         /// <returns>A list of auctions for the person.</returns>
         public List<Auction> GetAuctionsForPerson(Person person)
         {
-            return this.databaseContext.Auctions
-                            .Where(a => a.Seller.Id == person.Id)
-                            .Include(a => a.Product)
-                            .Include(a => a.Bids)
-                            .ToList();
+            Logger.Info($"Retrieving auctions for person ID: {person.Id}");
+            try
+            {
+                var auctions = this.databaseContext.Auctions
+                                .Where(a => a.Seller.Id == person.Id)
+                                .Include(a => a.Product)
+                                .Include(a => a.Bids)
+                                .ToList();
+                Logger.Info($"Retrieved {auctions.Count} auctions for person ID: {person.Id}");
+                return auctions;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while retrieving auctions for person ID: {person.Id}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -130,11 +220,25 @@ namespace DataMapper.DAO
         /// <param name="auction">The auction to update.</param>
         public void Update(Auction auction)
         {
-            var existingAuction = this.databaseContext.Auctions.Find(auction.Id);
-            if (existingAuction != null)
+            Logger.Info($"Updating auction with ID: {auction.Id}");
+            try
             {
-                this.databaseContext.Entry(existingAuction).CurrentValues.SetValues(auction);
-                this.databaseContext.SaveChanges();
+                var existingAuction = this.databaseContext.Auctions.Find(auction.Id);
+                if (existingAuction != null)
+                {
+                    this.databaseContext.Entry(existingAuction).CurrentValues.SetValues(auction);
+                    this.databaseContext.SaveChanges();
+                    Logger.Info($"Auction with ID: {auction.Id} updated successfully.");
+                }
+                else
+                {
+                    Logger.Warn($"Auction with ID: {auction.Id} not found for update.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error while updating auction with ID: {auction.Id}", ex);
+                throw;
             }
         }
     }

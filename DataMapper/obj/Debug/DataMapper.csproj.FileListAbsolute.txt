@@ -4,7 +4,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapp
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DataMapper.dll.config
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DataMapper.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DataMapper.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\AuctionManagementApplication.exe
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DomainModel.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\EntityFramework.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\EntityFramework.SqlServer.dll
@@ -49,8 +48,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapp
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\Microsoft.Build.Framework.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\Microsoft.NET.StringTools.dll
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\AuctionManagementApplication.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\AuctionManagementApplication.exe.config
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DomainModel.pdb
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\DomainModel.dll.config
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\EntityFramework.xml
@@ -196,3 +193,6 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapp
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\obj\Debug\DataMapper.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\log4net.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\log4net.xml
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DataMapper\bin\Debug\log4net.Ext.Json.dll
