@@ -72,8 +72,8 @@ namespace DomainModel
                     throw new ArgumentException("Currency ISO code must be 3 characters long.");
                 }
 
-                this.Seller = seller ?? throw new ArgumentNullException(nameof(seller));
-                this.Product = product ?? throw new ArgumentNullException(nameof(product));
+                this.Seller = seller ?? throw new ArgumentNullException("Seller must not be null.");
+                this.Product = product ?? throw new ArgumentNullException("Product must not be null");
                 this.StartDate = startDate;
                 this.EndDate = endDate;
                 this.StartingPrice = startingPrice;

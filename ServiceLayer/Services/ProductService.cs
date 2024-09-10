@@ -18,6 +18,12 @@ namespace DomainModel
     public class ProductService : IProductService
     {
         /// <summary>
+        /// The default similarity threshold used for checking product description similarity.
+        /// This value is used if no valid threshold is provided in the configuration file.
+        /// </summary>
+        public const int DefaultSimilarityThreshold = 5;
+
+        /// <summary>
         /// Logger for logging actions in the class.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(typeof(ProductService));
@@ -31,17 +37,6 @@ namespace DomainModel
         /// The service interface for managing category-related data.
         /// </summary>
         private readonly ICategoryService categoryService;
-
-        /// <summary>
-        /// Gets or sets the similarity threshold for checking product description similarity.
-        /// </summary>
-        private int SimilarityThreshold { get; set; }
-
-        /// <summary>
-        /// The default similarity threshold used for checking product description similarity.
-        /// This value is used if no valid threshold is provided in the configuration file.
-        /// </summary>
-        public const int DefaultSimilarityThreshold = 5;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductService"/> class.
@@ -70,6 +65,11 @@ namespace DomainModel
         /// Gets or sets the list of products managed by this ProductService.
         /// </summary>
         public List<Product> Products { get; set; }
+
+        /// <summary>
+        /// Gets or sets the similarity threshold for checking product description similarity.
+        /// </summary>
+        private int SimilarityThreshold { get; set; }
 
         /// <summary>
         /// Creates a new product with the specified name, description, and categories.

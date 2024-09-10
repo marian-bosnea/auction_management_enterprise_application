@@ -13,6 +13,9 @@ namespace DomainModel
     /// </summary>
     public class Bid
     {
+        /// <summary>
+        /// The logger for logging actions in the class.
+        /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>

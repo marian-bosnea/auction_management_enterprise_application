@@ -4,6 +4,8 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainMo
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\DomainModel.dll.config
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\DomainModel.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\DomainModel.pdb
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.Ext.Json.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.ApplicationInsights.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.Testing.Extensions.Telemetry.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
@@ -27,6 +29,7 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainMo
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.Build.Framework.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.NET.StringTools.dll
+D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.ApplicationInsights.pdb
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.ApplicationInsights.xml
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\Microsoft.Testing.Extensions.Telemetry.xml
@@ -138,6 +141,3 @@ D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainMo
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.csproj.CopyComplete
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.dll
 D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\obj\Debug\DomainModel.pdb
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.dll
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.xml
-D:\University Documents\Master\Anul1\Semestrul1\ASSE\auction-management\DomainModel\bin\Debug\log4net.Ext.Json.dll

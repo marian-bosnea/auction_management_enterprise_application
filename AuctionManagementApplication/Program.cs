@@ -28,8 +28,7 @@ namespace AuctionManagementApplication
         /// <summary>
         /// The main entry point of the application.
         /// </summary>
-        /// <param name="args">Array of command-line arguments passed to the application.</param>
-        private static void Main(string[] args)
+        private static void Main()
         {
             log4net.Config.XmlConfigurator.Configure();
 
@@ -39,7 +38,6 @@ namespace AuctionManagementApplication
 
             DbConnection connection = new SqlConnection(connectionString);
             IAuctionManagementEfCoreDbContext databaseContext = new AuctionManagementEfCoreDbContext(connection);
-            IAuctionDAO auctionDAO = new AuctionDAO(databaseContext);
             IBidDAO bidDAO = new BidDAO(databaseContext);
 
             bidDAO.Add(new DomainModel.Bid());
